@@ -8,19 +8,48 @@
 <body>
     
 <div class="">
-    <div class=""><h1>Days until Idea Week</h1></div>
+    <div class=""><h2>Days until Idea Week 2024</h2></div>
+    <div class="">January 10, 2024</div>
     <div class="days_until_idea_week"></div>
-    <div class=""></div>
-    <div class=""></div>
+    <div class="">Days to Go!</div>
 </div>
+
+<div class="">
+    <div class=""><h2>Days until Last Day of 2023</h2></div>
+    <div class="">December 31, 2023</div>
+    <div class="last_days"></div>
+    <div class="">Days to Go!</div>
+</div>
+
+<div class="">
+    <div class=""><h2>Last Day of Invisalign</h2></div>
+    <div class="">January 10, 2024</div>
+    <div class="last_invisalign"></div>
+    <div class="">Days to Go!</div>
+</div>
+
+
 
 
 <script>
     let dateNow = new Date();
+
+    function calculateDays(specialDate, currentDate){
+        days =  Math.round((specialDate - currentDate) / (24 * 60 * 60 * 1000));
+        return days; 
+    }
+
     let ideaWeek = new Date(2024, 0, 10); //months are 0-indexed
     let days_until_idea_week = document.querySelector(".days_until_idea_week");
+    days_until_idea_week.textContent = calculateDays(ideaWeek, dateNow);
 
-    days_until_idea_week.textContent =  Math.round((ideaWeek - dateNow) / (24 * 60 * 60 * 1000));
+    let lastDayOf2023 = new Date(2023, 11, 31);
+    let last_days = document.querySelector(".last_days");
+    last_days.textContent = calculateDays(lastDayOf2023, dateNow);
+    
+    let lastDayOfInvisalign = new Date(2024, 0, 29);
+    let last_invisalign = document.querySelector(".last_invisalign");
+    last_invisalign.textContent = calculateDays(lastDayOfInvisalign, dateNow);
 
 </script>
 
