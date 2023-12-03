@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to Goals and Important Days</title>
+</head>
+<body>
+    
+<div class="">
+    <div class=""><h1>Days until Idea Week</h1></div>
+    <div class="days_until_idea_week"></div>
+    <div class=""></div>
+    <div class=""></div>
+</div>
+
+
+<script>
+    let dateNow = new Date();
+    let ideaWeek = new Date(2024, 0, 10); //months are 0-indexed
+    let days_until_idea_week = document.querySelector(".days_until_idea_week");
+
+    days_until_idea_week.textContent =  Math.round((ideaWeek - dateNow) / (24 * 60 * 60 * 1000));
+
+</script>
+
+
+</body>
+</html>
