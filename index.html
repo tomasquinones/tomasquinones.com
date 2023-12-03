@@ -10,38 +10,56 @@
 </head>
 
 <body>
-    <h2>Social Media</h2>
-    <ul>
-        <li><i class="fa-brands fa-instagram fa-bounce"></i> <a href="https://www.instagram.com/tomas_quinones/" target="_new">Instagram</a>- My Art</li>
-        <li><i class="fa-brands fa-instagram fa-bounce"></i> <a href="https://www.instagram.com/adventuring.bike/" target="_new">Instagram</a> - Adventuring.bike</li>
-        <li><i class="fa-brands fa-deviantart fa-spin-pulse"></i> <a href="https://www.deviantart.com/tomas-quinones" target="_new">DeviantArt</a> - Another place for my artwork</li>
-        <li><i class="fa-brands fa-github"></i> <a href="https://github.com/tomasquinones" target="_new">GitHub</a> - Stuff I'm working on like this website!</li>
-        <li><i class="fa-solid fa-chess"></i> <a href="https://lichess.org/@/tomasquinones" target="_new">LiChess.org</a> - Play a game of chess with me</li>
-    </ul>
 
-    <div class="container-fluid">
-        <div class="col-mid-4">
-            <p>I've declared blog bankruptcy and have decided to restart from scratch.<br> More stuff to come soon.</p>
-    <h2>Who am I?</h2>
-    <p>Residing in Portland, Oregon I make art, go on cycling adventures, and just generally love travel.</p>
-    <p>I write about my bicycle trips over at my other blog <a href="https://adventuring.bike" target="_new">Adventuring.Bike</a> <i class="fa fa-bicycle fa-lg" aria-hidden="true"></i></p>
-        </div>
-        <div class="col-mid-4">
-            <img src="images/selfie-red-cap.jpg" alt="Tomas wearing a home-made cycling cap." width="500px">
-        </div>
+    <style>
+        body {
+            background-color: gray;
+        }
+        .contentcard {
+            background-color: whitesmoke;
+        }
+    </style>
 
-        <div class="col-mid-4">Third Colum Goes Here</div>
+<div class="container">
+    <div class="row">
+        <div class="col contentcard">
+            <h2>Who am I?</h2>
+            <p>Residing in Portland, Oregon I make art, go on cycling adventures, and just generally love travel.</p>
+            <p>I write about my bicycle trips over at my other blog <a href="https://adventuring.bike" target="_new">Adventuring.Bike</a> <i class="fa fa-bicycle fa-lg" aria-hidden="true"></i></p>
+            <div style="text-align: center;"><img src="images/selfie-red-cap.jpg" style="border-radius: 10px" alt="Tomas wearing a home-made cycling cap." width="500px"></div>
+        </div>
     </div>
+    <div class="row contentcard">
+        <div class="col">
+        <h2>Social Media</h2>
+            <ul>
+                <li><i class="fa-brands fa-instagram fa-bounce"></i> <a href="https://www.instagram.com/tomas_quinones/" target="_new">Instagram</a>- My Art</li>
+                <li><i class="fa-brands fa-instagram fa-bounce"></i> <a href="https://www.instagram.com/adventuring.bike/" target="_new">Instagram</a> - Adventuring.bike</li>
+                <li><i class="fa-brands fa-deviantart fa-spin-pulse"></i> <a href="https://www.deviantart.com/tomas-quinones" target="_new">DeviantArt</a> - Another place for my artwork</li>
+                <li><i class="fa-brands fa-github"></i> <a href="https://github.com/tomasquinones" target="_new">GitHub</a> - Stuff I'm working on like this website!</li>
+                <li><i class="fa-solid fa-chess"></i> <a href="https://lichess.org/@/tomasquinones" target="_new">LiChess.org</a> - Play a game of chess with me</li>
+            </ul>
+        </div>
+        <div class="col">
+            <h3>Programming Projects</h3>
+            <ul>
+                <li><a href="https://github.com/tomasquinones/chess-capture-map" target="_blank">Chess Capture Map</a>: Using my games on Lichess.org, I wanted to see the squares where captures are most frequented. It was a good learning experience for combining Python and using the Plotly graphing library.</li>
+                <li><a href="https://github.com/tomasquinones/ride-density-map" target="_blank">Ride Density Map</a>: Before ridewithgps.com had its heatmaps, I wanted to create my own using Python.</li>
+                <li><a href="https://github.com/tomasquinones/adventuring.world" target="_blank">Adventuring.world</a>: Using Mapbox to show different places I have been and where I really want to go in the next few years. It was too good of a domain name to pass up.</li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-    <h3>Programming Projects</h3>
-    <ul>
-        <li><a href="https://github.com/tomasquinones/chess-capture-map" target="_blank">Chess Capture Map</a>: Using my games on Lichess.org, I wanted to see the squares where captures are most frequented. It was a good learning experience for combining Python and using the Plotly graphing library.</li>
-        <li><a href="https://github.com/tomasquinones/ride-density-map" target="_blank">Ride Density Map</a>: Before ridewithgps.com had its heatmaps, I wanted to create my own using Python.</li>
-        <li><a href="https://github.com/tomasquinones/adventuring.world" target="_blank">Adventuring.world</a>: Using Mapbox to show different places I have been and where I really want to go in the next few years. It was too good of a domain name to pass up.</li>
-    </ul>
-    <p>Last Update: 2023-11-26</p>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+<p>Last Update: 2023-12-03</p>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
 
 
 </body>
 </html>
+
+<!--This used to be a wordpress site, but I hate the direction that Wordpress has gone in the last few years. I've really wanted to work on my front end developer skills so I wiped my site completely clean and now I'm starting from scratch. 
+All photos are copyright Tomas Quinones. 
+-->

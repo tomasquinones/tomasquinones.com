@@ -4,28 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown to Goals and Important Days</title>
+    <script src="https://kit.fontawesome.com/9d89c78646.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
+
+<style>
+    body {
+        background-color: gray;
+    }
+    .contentcard {
+        background-color:silver;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col card center">
+            <h1>Goals and Important Dates: <i class="fa-regular fa-calendar-days fa-xl"></i></h1>
+        </div>
+    </div>
     
-<div class="">
-    <div class=""><h2>Days until Idea Week 2024</h2></div>
-    <div class="">January 10, 2024</div>
-    <div class="days_until_idea_week"></div>
-    <div class="">Days to Go!</div>
+    <div class="row">
+        <div class="col card p-3">
+            <div class=""><h2>Idea Week 2024 </h2></div>
+            <div class="">January 10, 2024</div>
+            <div><span class="days_until_idea_week"></span> Days to Go.</div>
+        </div>
+        <div class="col card p-3">
+            <div class=""><h2>New Year's Eve 2023</h2></div>
+            <div class="">December 31, 2023</div>
+            <div><span class="last_days"></span> Days to Go!</div>
+        </div>
+        <div class="col card p-3">
+            <div class=""><h2>Last Day of Invisalign</h2></div>
+            <div class="">January 10, 2024</div>
+            <div><span class="last_invisalign"></span> Days to Go.</div>
+        
+        </div>
+    </div>
 </div>
 
-<div class="">
-    <div class=""><h2>Days until Last Day of 2023</h2></div>
-    <div class="">December 31, 2023</div>
-    <div class="last_days"></div>
-    <div class="">Days to Go!</div>
-</div>
 
-<div class="">
-    <div class=""><h2>Last Day of Invisalign</h2></div>
-    <div class="">January 10, 2024</div>
-    <div class="last_invisalign"></div>
-    <div class="">Days to Go!</div>
+
+
+<div class="contentcard">
 </div>
 
 
@@ -33,21 +57,28 @@
 
 <script>
     let dateNow = new Date();
+    const FULLDAY = (24 * 60 * 60 * 1000);
+
 
     function calculateDays(specialDate, currentDate){
-        days =  Math.round((specialDate - currentDate) / (24 * 60 * 60 * 1000));
+        days =  Math.ceil((specialDate - currentDate) / (24 * 60 * 60 * 1000));
+        console.log("Ceiling " + Math.ceil((specialDate - currentDate) / FULLDAY));
+        console.log("Floor " + Math.floor((specialDate - currentDate) / FULLDAY));
+        console.log("Round " + Math.round((specialDate - currentDate) / FULLDAY));
+        console.log("No rounding " + ((specialDate - currentDate) / FULLDAY));
+        
         return days; 
     }
 
-    let ideaWeek = new Date(2024, 0, 10); //months are 0-indexed
+    let ideaWeek = new Date("2024-01-10");
     let days_until_idea_week = document.querySelector(".days_until_idea_week");
     days_until_idea_week.textContent = calculateDays(ideaWeek, dateNow);
 
-    let lastDayOf2023 = new Date(2023, 11, 31);
+    let lastDayOf2023 = new Date("2023-12-31");
     let last_days = document.querySelector(".last_days");
     last_days.textContent = calculateDays(lastDayOf2023, dateNow);
     
-    let lastDayOfInvisalign = new Date(2024, 0, 29);
+    let lastDayOfInvisalign = new Date("2024-01-29");
     let last_invisalign = document.querySelector(".last_invisalign");
     last_invisalign.textContent = calculateDays(lastDayOfInvisalign, dateNow);
 
