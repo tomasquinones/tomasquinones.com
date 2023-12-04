@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <h1>Goal: 250 Miles in the Month of December:</h1>
+</div>
+<canvas id="myChart"></canvas>
+
+<h2>Rides:</h2>
+<ul>
+    <li>April 12</li>
+    <li>April 11</li>
+    <li>April 10</li>
+    <li>April 9</li>
+    <li>April 8</li>
+    <li>April 7</li>
+    <li>April 6</li>
+    <li>April 5</li>
+    <li>April 4</li>
+    <li>April 3</li>
+    <li>April 2, 2024, </li>
+    <li>April Fool's Ride 5 miles 1,200 ft elevation </li>
+</ul>
+
+</div>
+
+<div style="width: 50%">
+    <canvas id='gearChart' ></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('myChart');
+
+let goal = [];
+for (let g = 1; g < 32; g++){
+    goal.push(250);
+}
+
+let stayOnTrack = [];
+for (let i = 8; i < 250; i = i + 8.0){
+    stayOnTrack.push(i);
+}
+
+let daysOfMonth = [];
+for (let d = 1; d < 32; d++) {
+    daysOfMonth.push(d);
+}
+
+
+
+const mixedChart = new Chart(ctx, {
+    data: {
+        datasets: [{
+            type: 'line',
+            label: 'Stay On Track!',
+            data: stayOnTrack,
+            pointRadius: 0,
+
+        }, {
+            type: 'line',
+            label: 'Cumulative Miles',
+            data: [5, 8, 12, 16, 24, 36, 36, 44, 60, 84, 95, 108 ],
+            fill: true,
+            pointRadius: 5,
+        }, {
+            type: 'line',
+            label: '250 mile Goal',
+            data: goal,
+            pointRadius: 0,
+        }
+        ],
+        labels: daysOfMonth
+    }
+});
+
+
+const GEAR = document.getElementById('gearChart');
+
+const gearConfig = {
+    type: 'polarArea',
+    data: {
+        labels: ["Gravel Bike", "Road Bike", "Folding Bike", "Touring Bike", "Running", "Full Squish"],
+        datasets: [{
+            // label: "online tutorial subjects",
+            data: [20, 40, 15, 35, 8, 38],
+            backgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
+        }],
+    },
+    options: {
+        responsive: true,
+    },
+};
+
+const pieChart = new Chart(GEAR, gearConfig);
+
+</script>
+          
+
+
+
+</body>
+</html>
