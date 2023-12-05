@@ -69,6 +69,7 @@ const mixedChart = new Chart(ctx, {
             data: [5, 8, 12, 16, 24, 36, 36, 44, 60, 84, 95, 108 ],
             fill: true,
             pointRadius: 5,
+            hoverBorderWidth: 10,
         }, {
             type: 'line',
             label: '250 mile Goal',
@@ -82,17 +83,18 @@ const mixedChart = new Chart(ctx, {
 
 
 const GEAR = document.getElementById('gearChart');
-
+const GEARDATA = [20, 40, 15, 35, 8, 38];
 const gearConfig = {
     type: 'polarArea',
     data: {
         labels: ["Gravel Bike", "Road Bike", "Folding Bike", "Touring Bike", "Running", "Full Squish"],
         datasets: [{
             // label: "online tutorial subjects",
-            data: [20, 40, 15, 35, 8, 38],
+            data: GEARDATA,
             backgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
         }],
     },
+    hoverBorderWidth: 10,
     options: {
         responsive: true,
     },
