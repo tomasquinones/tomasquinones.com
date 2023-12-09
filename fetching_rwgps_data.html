@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 class="">Your user_id is:</h2>
+    <h1 class="user_id"></h1>
+    <ul id="userInfoList">
+    </ul>
+
+
+<script>
+const testParam = window.location.search;
+const searchParams = new URLSearchParams(testParam);
+let user_id = searchParams.get("user_id");
+
+let printUserID = document.querySelector(".user_id");
+
+
+if (isNaN(user_id)) {
+    printUserID.textContent = "Not a valid user_id parameter";
+} else {
+    printUserID.textContent = user_id;
+}
+
+
+// Get the user_id.json
+// API key aa49d17b
+//
+
+const userInfoList = document.querySelector("#userInfoList");
+const myRequest = new Request(`https://ridewithgps.com/users/${user_id}.json`);
+
+const myPromise = fetch(myRequest)
+const json = myPromise.then((response) => response.json())
+json.then((data) => {
+        const listItem = document.createElement("li");
+        listItem.textContent= data.name; //data.last_name;
+        console.log(data);
+
+        // listItem.appendChild().textContent = user_info.last_name;
+        userInfoList.appendChild(listItem);
+    })
+
+</script>
+</body>
+</html>
