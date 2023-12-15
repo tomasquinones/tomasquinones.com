@@ -25,14 +25,19 @@ const currentUserRequest = new Request(`https://ridewithgps.com/users/current.js
         .then((response) => response.json())
         .then((userData) => {
             console.log(userData);
-            const listItemName = document.createElement("li");
-            listItemName.textContent = userData.user.name; //data.last_name;
-            // listItem.appendChild().textContent = user_info.last_name;
-            userInfoList.appendChild(listItemName);
+            const userName = document.querySelector(".userName");
+            userName.textContent = "Name: " + userData.user.name;
 
-            const listItemId = document.createElement("li");
-            listItemId.textContent = userData.user.id;
-            userInfoList.appendChild(listItemId);
+            // const listItemId = document.createElement("li");
+            // listItemId.textContent = userData.user.id;
+            // userInfoList.appendChild(listItemId);
+
+            const gearList = document.querySelector(".gearList");
+            for (const bike of userData.user.gear) {
+                const gearListItem = document.createElement("li");
+                gearListItem.textContent = bike.name;
+                gearList.appendChild(gearListItem);
+            }
 
             for (const bike of userData.user.gear) {
                 const listItemGear = document.createElement("li")
