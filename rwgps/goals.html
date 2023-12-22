@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goals of Ride with GPS</title>
+    <script src="goals-page.js"></script>
+    <link rel="stylesheet" href="rwgps-style.css">
+
+</head>
+<body>
+    <h1>Goals</h1>
+    <h2>Current</h2>
+    <label for="goal-sorting">All Goals:</label>
+        <select name="goal-sorting" id="goal-sorting">
+            <option value="all">All Goals</option>
+            <option value="current">Current Goals</option>
+            <option value="past">Past Goals</option>
+            <option value="distance">Distance Goals</option>
+            <option value="elevation">Elevation Goals</option>
+            <option value="time">Time Goals</option>
+        </select>
+    <button class="new-goal">New Goal</button>
+
+    <div class="card-list">
+        <div class="card">
+            <div class="card-title">Current Distance Goal</div>
+            <div class="card-percent">25%</div>
+            <div class="card-amount">850 mi</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Current Time Goal</div>
+            <div class="card-percent">20%</div>
+            <div class="card-amount">14 hours 35 minutes ridden</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Current Elevation Goal</div>
+            <div class="card-percent">45% complete</div>
+            <div class="card-amount">5,625 ft climbed</div>
+        </div>
+    </div>
+
+    <h2>Past</h2>
+    <div class="card-list">
+        <div class="card">Past Goal</div>
+        <div class="card">Past Goal</div>
+        <div class="card">Past Goal</div>
+        <div class="card">Past Goal</div>
+        <div class="card">Past Goal</div>
+        <div class="card">Past Goal</div>
+        <div class="card">Past Goal</div>
+        <div class="card">Past Goal</div>
+        <div class="card">Past Goal</div>
+    </div>
+
+</body>
+</html>
