@@ -11,6 +11,17 @@
 <body>
     <h1>Goals</h1>
     <h2>Current</h2>
+    <label for="goal-sorting">All Goals:</label>
+        <select name="goal-sorting" id="goal-sorting">
+            <option value="all">All Goals</option>
+            <option value="current">Current Goals</option>
+            <option value="past">Past Goals</option>
+            <option value="distance">Distance Goals</option>
+            <option value="elevation">Elevation Goals</option>
+            <option value="time">Time Goals</option>
+        </select>
+    <button class="new-goal">New Goal</button>
+
     <div class="card-list">
         <div class="card">
             <div class="card-title">Current Distance Goal</div>

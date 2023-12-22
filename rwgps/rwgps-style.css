@@ -1,5 +1,5 @@
 body {
-    background-color: gray;
+    background-color: #f5f5f5;
     font-family: sans-serif;
 }
 
@@ -34,4 +34,18 @@ h3 {
     margin: 25px auto;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.08), 0px 1px 6px 1px rgba(0,0,0,.08);
     
+}
+
+.new-goal {
+    color: #fa6400;
+    border-color: #fa6400;
+    font-size: 13px;
+    background-color: none;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 4px;
+    border: 1px solid #fa6400;
+    max-height: 34px;
+    padding: 8px 20px
 }
