@@ -8,9 +8,7 @@ let printUserID = document.querySelector(".user_id");
 let email = searchParams.get('email');
 let password = searchParams.get('password');
 
-
-
-
+// keeping this as a reminder I may want to validate the data in the URL
 // if (isNaN(user_id)) {
 //     printUserID.textContent = "Not a valid user_id parameter";
 // } else {
@@ -66,8 +64,16 @@ apikey=x&apiversion=3&email=${email}&password=${password}`);
                 .then((response) => response.json())
                 .then((ridesData) => {
                     console.log(ridesData)
+                    const rideList = document.querySelector(".rideList");
                     for (const ride of ridesData.results.trips){
+                        const rideListItem = document.createElement("li");
+                        rideListItem.textContent = ride[1];
+                        rideList.appendChild(rideListItem);
                         console.log(ride[1])
+
                     }
                 })
+            
+            
             }) 
+
