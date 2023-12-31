@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RWGPS: New Monthly Goal Chart Proof of Concept</title>
+    <link rel="stylesheet" href="rwgps-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="titleBar">
+        <div id="goal-title">
+            Ride 500 Miles in June, 2022
+        </div>
+    </div>
+    <div class="card line-chart">
+        <canvas id="goal-chart"></canvas>
+    </div>
+
+    <div class="goal-details-container">
+        <div class="goal-details-text card">
+            <div style="padding: 5px;">Goal Details Go Here. </div>
+            <div style="padding: 5px;">Ride 500 miles between June 1 and June 30, 2022.</div>
+            <div style="padding: 5px;">Average Day to meet your goal: X miles</div>
+        </div>
+
+        <div class="pie-chart card">
+            <h2>Gear:</h2>
+            <ul class=" gearList">
+            </ul>
+            <canvas id='gear-chart'></canvas>
+        </div>
+    </div>
+
+    <div class="leader-board">
+        <h2>Leader Board</h2>
+        <div class="participant-card">Participant</div>
+        <div class="participant-card">Participant</div>
+        <div class="participant-card">Participant</div>
+    </div>
+
+    <ul id="userInfoList">
+        <li class="userName">Name: </li>
+    </ul>
+
+
+    <h2>Rides:</h2>
+    <ul class="rideList">
+    </ul>
+
+
+    <script>
+        const searchParams = new URLSearchParams(window.location.search);
+        let user_id = searchParams.get("user_id");
+        // let printUserID = document.querySelector(".user_id");
+
+        let email = searchParams.get('email');
+        let password = searchParams.get('password');
+
+        if (email == null && password == null) {
+            email = window.prompt("email");
+            password = window.prompt("password")
+        }
+
+        const userInfoList = document.querySelector("#userInfoList");
+        const currentUserRequest = new Request(`https://ridewithgps.com/users/current.json?apikey=aa49d17b&apiversion=3&email=${email}&password=${password}`);
+
+        let rideDistances = [];
+
+        // Ride Data Graph
+
+
+
+
+        // Gear used on the Goal, Each slice should be distance % per gear
+        const GEAR = document.getElementById('gear-chart');
+        const gearDistances = [20, 40, 15]; //TODO tally gear distances from rides
+        let gearUsed = [];
+        const gearConfig = {
+            type: 'pie',
+            data: {
+                labels: gearUsed,
+                datasets: [{
+                    data: gearDistances,
+                    backgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
+                }],
+            },
+            hoverBorderWidth: 10,
+            options: {
+                responsive: true,
+            },
+        };
+
+
+        // Start Fetching User Data in Promises
+        fetch(currentUserRequest)
+            .then((response) => response.json())
+            .then((userData) => {
+                console.log(userData);
+                const userName = document.querySelector(".userName");
+                userName.textContent = "Name: " + userData.user.name;
+
+                const gearList = document.querySelector(".gearList");
+                for (const bike of userData.user.gear) {
+                    gearUsed.push(bike.name);
+                }
+                // example https://ridewithgps.com/users/807463/career_stats.json?apikey=aa49d17b&interval=month&interval_value=2021-03
+                const statsRequest = new Request(`https://ridewithgps.com/users/${userData.user.id}/career_stats.json?apikey=aa49d17b&apiversion=3&auth_token=${userData.user.auth_token}&interval=month&interval_value=2022-06`);
+
+                fetch(statsRequest)
+                    .then((response) => response.json())
+                    .then((statsData) => {
+                        console.log(statsData)  //stats here
+
+                        const listItemYearlyStats = document.createElement("li");
+                        listItemYearlyStats.textContent = `Distance in June 2022 ${(statsData.distance * 0.000621371).toFixed(2)} miles`; //put meters to miles value in const 0.000621371
+                        userInfoList.appendChild(listItemYearlyStats);
+                    })
+
+                // Where did I get this URL?
+                const ridesRequest = new Request(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&departed_at_max=2022-07-01T06%3A59%3A59.999Z&departed_at_min=2022-06-01T19%3A00%3A00.000Z&trip_fields=id%2Cname%2Cdistance%2Celevation_gain%2Cgear_id&user_id=${userData.user.id}apikey=aa49d17b&apiversion=3&email=${email}&password=${password}`);
+                fetch(ridesRequest)
+                    .then((response) => response.json())
+                    .then((ridesData) => {
+                        console.log(ridesData);
+                        const rideList = document.querySelector(".rideList");
+                        //for (const ride of ridesData.results.trips) {
+                        for (const ride of ridesData.results.trips) {
+                            rideDistances.unshift(Number((ride[2] * 0.000621371).toFixed(2)));
+                            const rideListItem = document.createElement("li");
+                            rideListItem.textContent = ride[1] + ", " + (ride[2] * 0.000621371).toFixed(2) + " miles, " + (ride[3] * 3.28084).toFixed() + " feet";
+                            rideList.appendChild(rideListItem);
+                        }
+                        let sum = 0
+                        let resultDistances = rideDistances.map(v => Number((sum += v).toFixed(2)));
+                        console.log(resultDistances);
+
+                        // Defining the line-mixed chart that is the main goal
+                        // Currently the data is hard coded just to get a chart on the page 20231225
+                        console.log('Ride distances ' + rideDistances);
+
+                        const mixedChart = new Chart(ctx, {
+                            data: {
+                                datasets: [{
+                                    type: 'line',
+                                    label: 'Stay On Track!',
+                                    data: stayOnTrack,
+                                    pointRadius: 0,
+
+                                }, {
+                                    type: 'line',
+                                    label: 'Cumulative Miles',
+                                    // data: [5, 8, 12, 16, 24, 36, 36, 44, 60, 84, 95, 108],
+                                    data: resultDistances,
+                                    fill: true,
+                                    pointRadius: 5,
+                                    hoverBorderWidth: 10,
+                                }, {
+                                    type: 'line',
+                                    label: '500 mile Goal',
+                                    data: goal,
+                                    pointRadius: 0,
+                                }
+                                ],
+                                labels: daysOfMonth
+                            }
+                        });
+
+                    })
+
+
+            }).then(
+                () => { const pieChart = new Chart(GEAR, gearConfig); }
+            )
+            .then(
+                () => {
+                }
+            )
+
+        const ctx = document.getElementById('goal-chart');
+
+        // Goal Line Generator
+        let goalDistance = 500;
+        let goal = [];
+        for (let g = 1; g < 32; g++) {
+            goal.push(goalDistance);
+        }
+
+        // Goal Track Generator
+        let stayOnTrack = [];
+        for (let i = 8; i < goalDistance; i = i + (goalDistance / 30)) {
+            stayOnTrack.push(i);
+        }
+
+        // Days of Month X-axis
+        let daysOfMonth = [];
+        for (let d = 1; d < 31; d++) {
+            daysOfMonth.push(d);
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
+</head>

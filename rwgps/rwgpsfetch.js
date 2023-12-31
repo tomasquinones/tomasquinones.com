@@ -37,15 +37,15 @@ const currentUserRequest = new Request(`https://ridewithgps.com/users/current.js
                 gearList.appendChild(gearListItem);
             }
 
-            for (const bike of userData.user.gear) {
-                const listItemGear = document.createElement("li")
-
-                listItemGear.textContent = bike.name;
-                userInfoList.append(listItemGear);
-
-                //new Request to get the Career stats
-                // example https://ridewithgps.com/users/807463/career_stats.json?apikey=x&interval=month&interval_value=2021-03
-            }
+            //for (const bike of userData.user.gear) {
+            //    const listItemGear = document.createElement("li")
+            //
+            //    listItemGear.textContent = bike.name;
+            //    userInfoList.append(listItemGear);
+            //
+            //    //new Request to get the Career stats
+            //    // example https://ridewithgps.com/users/807463/career_stats.json?apikey=x&interval=month&interval_value=2021-03
+            //}
             const statsRequest = new Request(`https://ridewithgps.com/users/${userData.user.id}/career_stats.json?apikey=x&apiversion=3&auth_token=${userData.user.auth_token}`);
 
             fetch(statsRequest)
@@ -54,12 +54,12 @@ const currentUserRequest = new Request(`https://ridewithgps.com/users/current.js
                     console.log(statsData)//stats here
 
                     const listItemYearlyStats = document.createElement("li");
-                    listItemYearlyStats.textContent = `Career Miles ${statsData.distance * 0.000621371}`; //put meters to miles value in const 0.000621371
+                    listItemYearlyStats.textContent = `Career Distance ${(statsData.distance * 0.000621371).toFixed(2)} miles`; //put meters to miles value in const 0.000621371
                     userInfoList.appendChild(listItemYearlyStats);
                 })
 
                 const ridesRequest = new Request(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&trip_fields=id%2Cname%2Cdistance%2Celevation_gain&user_id=${userData.user.id}
-apikey=x&apiversion=3&email=${email}&password=${password}`);
+apikey=x&apiversion=3&email=${email}&password=${password}`); // Where did I get this URL?
                 fetch(ridesRequest)
                 .then((response) => response.json())
                 .then((ridesData) => {
@@ -67,9 +67,10 @@ apikey=x&apiversion=3&email=${email}&password=${password}`);
                     const rideList = document.querySelector(".rideList");
                     for (const ride of ridesData.results.trips){
                         const rideListItem = document.createElement("li");
-                        rideListItem.textContent = ride[1];
+                        rideListItem.textContent = ride[1] + ", " + (ride[2] * 0.000621371).toFixed(2) + " miles, "  + (ride[3] * 3.28084).toFixed() + " feet" ;
                         rideList.appendChild(rideListItem);
                         console.log(ride[1])
+                        
 
                     }
                 })

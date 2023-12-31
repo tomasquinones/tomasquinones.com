@@ -16,7 +16,6 @@ h3 {
 }
 
 .card-list {
-    
     background-color: #f5f5f5; 
     padding: 0px 0px;
     width: 950px;
@@ -27,13 +26,49 @@ h3 {
 
 .card {
     background: #ffffff;
-    width: 250px;
-    height: 250px;
     border-radius: 5px;
     padding: 5px;
     margin: 25px auto;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.08), 0px 1px 6px 1px rgba(0,0,0,.08);
+}
+
+.title-bar{
+    width: 100% 
+}
+
+.line-chart{
+    width: 1050px;
+}
+
+.pie-chart{
+    width: 50%;
+}
+
+.goal-details-container{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    width: 1050px;
+    padding: 0px;
     
+}
+
+.goal-details-text {
+    width: 50%;
+}
+
+.leader-board {
+    width: 1050px;
+}
+
+.participant-card {
+    width: 900px;
+    background: #ffffff;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 25px auto;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.08), 0px 1px 6px 1px rgba(0,0,0,.08);
 }
 
 .new-goal {

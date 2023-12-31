@@ -1,57 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+const ctx = document.getElementById('goal-chart');
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-
-
-</head>
-
-
-
-<body>
-    <div>
-        <h1>Goal: 250 Miles in the Month of December:</h1>
-
-    </div>
-    <canvas id="myChart"></canvas>
-
-    <h2>Rides:</h2>
-    <!--Get the last 10 to 20 rides from account-- Newest top, oldest bottom-->
-    <ul class="rideList">
-    </ul>
-
-    </div>
-
-    <div style="width: 50%">
-        <canvas id='gearChart'></canvas>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-        const ctx = document.getElementById('myChart');
-
+        // Goal Line Generator
+        let goalDistance = 500;
         let goal = [];
         for (let g = 1; g < 32; g++) {
-            goal.push(250);
+            goal.push(goalDistance);
         }
 
+        // Goal Track Generator
         let stayOnTrack = [];
-        for (let i = 8; i < 250; i = i + 8.0) {
+        for (let i = 8; i < goalDistance; i = i + (goalDistance / 30)) {
             stayOnTrack.push(i);
         }
 
+        // Days of Month X-axis
         let daysOfMonth = [];
-        for (let d = 1; d < 32; d++) {
+        for (let d = 1; d < 31; d++) {
             daysOfMonth.push(d);
         }
 
-
-
+        // Defining the line-mixed chart that is the main goal
+        // Currently the data is hard coded just to get a chart on the page 20231225
         const mixedChart = new Chart(ctx, {
             data: {
                 datasets: [{
@@ -79,10 +48,11 @@
         });
 
 
-        const GEAR = document.getElementById('gearChart');
+// Gear used on the Goal, Each slice should be distance % per gear
+        const GEAR = document.getElementById('gear-chart');
         const GEARDATA = [20, 40, 15, 35, 8, 38];
         const gearConfig = {
-            type: 'polarArea',
+            type: 'pie',
             data: {
                 labels: ["Gravel Bike", "Road Bike", "Folding Bike", "Touring Bike", "Running", "Full Squish"],
                 datasets: [{
@@ -98,12 +68,3 @@
         };
 
         const pieChart = new Chart(GEAR, gearConfig);
-
-    </script>
-
-
-
-
-</body>
-
-</html>
