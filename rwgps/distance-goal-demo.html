@@ -12,7 +12,7 @@
 <body>
     <div class="titleBar">
         <div id="goal-title">
-            Ride 500 Miles in June, 2022
+            <h1>Ride 500 Miles in June, 2022</h1>
         </div>
     </div>
     <div class="card line-chart">
@@ -21,9 +21,21 @@
 
     <div class="goal-details-container">
         <div class="goal-details-text card">
-            <div style="padding: 5px;">Goal Details Go Here. </div>
+            <h2>Details</h2>
+            <div>
+                <ul id="userInfoList">
+                    <li class="userName">Name: </li>
+                </ul>
+            </div>
             <div style="padding: 5px;">Ride 500 miles between June 1 and June 30, 2022.</div>
             <div style="padding: 5px;">Average Day to meet your goal: X miles</div>
+            <div>Start: June 1, 2022</div>
+            <div>End: June 30, 2022</div>
+            <div>While activities marked 'private' are shown in your ride list for the goal, only you will be able to
+                view their details and not viewable by other participants.</div>
+            <div>You have completed <span id="goal-percentage"></span>% of this goal.</div>
+            <div>Average ride distance: <span id="average-ride-distance"></span> miles</div>
+
         </div>
 
         <div class="pie-chart card">
@@ -34,21 +46,19 @@
         </div>
     </div>
 
-    <div class="leader-board">
+    <div class="leader-board card">
         <h2>Leader Board</h2>
-        <div class="participant-card">Participant</div>
-        <div class="participant-card">Participant</div>
-        <div class="participant-card">Participant</div>
+        <div class="participant-card">Participant 1</div>
+        <div class="participant-card">Participant 2</div>
+        <div class="participant-card">Participant 3</div>
     </div>
 
-    <ul id="userInfoList">
-        <li class="userName">Name: </li>
-    </ul>
 
-
-    <h2>Rides:</h2>
-    <ul class="rideList">
-    </ul>
+    <div class="rides-list-container card">
+        <h2>Rides:</h2>
+        <ul class="rideList">
+        </ul>
+    </div>
 
 
     <script>
@@ -69,29 +79,7 @@
 
         let rideDistances = [];
 
-        // Ride Data Graph
-
-
-
-
-        // Gear used on the Goal, Each slice should be distance % per gear
-        const GEAR = document.getElementById('gear-chart');
-        const gearDistances = [20, 40, 15]; //TODO tally gear distances from rides
-        let gearUsed = [];
-        const gearConfig = {
-            type: 'pie',
-            data: {
-                labels: gearUsed,
-                datasets: [{
-                    data: gearDistances,
-                    backgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
-                }],
-            },
-            hoverBorderWidth: 10,
-            options: {
-                responsive: true,
-            },
-        };
+        let gearData = {};
 
 
         // Start Fetching User Data in Promises
@@ -126,7 +114,6 @@
                     .then((ridesData) => {
                         console.log(ridesData);
                         const rideList = document.querySelector(".rideList");
-                        //for (const ride of ridesData.results.trips) {
                         for (const ride of ridesData.results.trips) {
                             rideDistances.unshift(Number((ride[2] * 0.000621371).toFixed(2)));
                             const rideListItem = document.createElement("li");
@@ -135,34 +122,37 @@
                         }
                         let sum = 0
                         let resultDistances = rideDistances.map(v => Number((sum += v).toFixed(2)));
-                        console.log(resultDistances);
 
-                        // Defining the line-mixed chart that is the main goal
-                        // Currently the data is hard coded just to get a chart on the page 20231225
-                        console.log('Ride distances ' + rideDistances);
 
                         const mixedChart = new Chart(ctx, {
                             data: {
-                                datasets: [{
-                                    type: 'line',
-                                    label: 'Stay On Track!',
-                                    data: stayOnTrack,
-                                    pointRadius: 0,
+                                datasets: [
+                                    {
+                                        type: 'line',
+                                        label: '500 mile Goal',
+                                        data: goal,
+                                        pointRadius: 0,
+                                        backgroundColor: '#ff4000',
+                                        borderColor: '#ff4000'
+                                    }, {
+                                        type: 'line',
+                                        label: 'Stay On Track!',
+                                        data: stayOnTrack,
+                                        pointRadius: 0,
+                                        backgroundColor: '#ffd700',
+                                        borderColor: '#ffd700',
 
-                                }, {
-                                    type: 'line',
-                                    label: 'Cumulative Miles',
-                                    // data: [5, 8, 12, 16, 24, 36, 36, 44, 60, 84, 95, 108],
-                                    data: resultDistances,
-                                    fill: true,
-                                    pointRadius: 5,
-                                    hoverBorderWidth: 10,
-                                }, {
-                                    type: 'line',
-                                    label: '500 mile Goal',
-                                    data: goal,
-                                    pointRadius: 0,
-                                }
+                                    }, {
+                                        type: 'line',
+                                        label: 'Cumulative Miles',
+                                        data: resultDistances,
+                                        fill: true,
+                                        pointRadius: 5,
+                                        hoverBorderWidth: 10,
+                                        backgroundColor: 'hsl(140, 100%, 30%, 50%)',
+                                        borderColor: '#006622',
+
+                                    }
                                 ],
                                 labels: daysOfMonth
                             }
@@ -200,6 +190,25 @@
             daysOfMonth.push(d);
         }
 
+
+        // Gear used on the Goal, Each slice should be distance % per gear
+        const GEAR = document.getElementById('gear-chart');
+        const gearDistances = [20, 40, 15]; //TODO tally gear distances from rides
+        let gearUsed = [];
+        const gearConfig = {
+            type: 'pie',
+            data: {
+                labels: gearUsed,
+                datasets: [{
+                    data: gearDistances,
+                    backgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
+                }],
+            },
+            hoverBorderWidth: 10,
+            options: {
+                responsive: true,
+            },
+        };
 
 
     </script>
