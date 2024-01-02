@@ -63,7 +63,7 @@
 
     <script>
         const searchParams = new URLSearchParams(window.location.search);
-        let user_id = searchParams.get("user_id");
+        let userId = searchParams.get("user_id");
         // let printUserID = document.querySelector(".user_id");
 
         let email = searchParams.get('email');
@@ -80,6 +80,21 @@
         let rideDistances = [];
 
         let gearData = {};
+
+
+        const goalStart = "2022-06-01T00:00:00-08:00";  // T19%3A00%3A00.000Z
+        const goalEnd = "2022-07-01T00:00:00-08:00";  // T06%3A59%3A59.999Z
+        const goalStartDate = Date.parse(goalStart);
+
+        function calculateDays(rideDate) {
+            days = Math.floor((rideDate - goalStartDate) / (24 * 60 * 60 * 1000));
+            return days;
+        }
+
+        let goalDays = [];
+        for (let d = 0; d < 30; d++) {
+            goalDays.push([]);
+        }
 
 
         // Start Fetching User Data in Promises
@@ -105,24 +120,48 @@
                         const listItemYearlyStats = document.createElement("li");
                         listItemYearlyStats.textContent = `Distance in June 2022 ${(statsData.distance * 0.000621371).toFixed(2)} miles`; //put meters to miles value in const 0.000621371
                         userInfoList.appendChild(listItemYearlyStats);
-                    })
+                    });
 
                 // Where did I get this URL?
-                const ridesRequest = new Request(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&departed_at_max=2022-07-01T06%3A59%3A59.999Z&departed_at_min=2022-06-01T19%3A00%3A00.000Z&trip_fields=id%2Cname%2Cdistance%2Celevation_gain%2Cgear_id&user_id=${userData.user.id}apikey=aa49d17b&apiversion=3&email=${email}&password=${password}`);
+                const ridesRequest = new Request(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&departed_at_max=${goalEnd}&departed_at_min=${goalStart}&trip_fields=id%2Cname%2Cdistance%2Celevation_gain%2Cgear_id%2Cdeparted_at&user_id=${userData.user.id}apikey=aa49d17b&apiversion=3&email=${email}&password=${password}`);
                 fetch(ridesRequest)
                     .then((response) => response.json())
                     .then((ridesData) => {
                         console.log(ridesData);
                         const rideList = document.querySelector(".rideList");
-                        for (const ride of ridesData.results.trips) {
-                            rideDistances.unshift(Number((ride[2] * 0.000621371).toFixed(2)));
-                            const rideListItem = document.createElement("li");
-                            rideListItem.textContent = ride[1] + ", " + (ride[2] * 0.000621371).toFixed(2) + " miles, " + (ride[3] * 3.28084).toFixed() + " feet";
-                            rideList.appendChild(rideListItem);
-                        }
-                        let sum = 0
-                        let resultDistances = rideDistances.map(v => Number((sum += v).toFixed(2)));
 
+                        for (const ride of ridesData.results.trips) {
+                            const rideName = ride[1];
+                            const rideDistance = (ride[2] * 0.000621371).toFixed(2);
+                            const rideDepartedAt = Date.parse(ride[5]);
+                            rideDistances.unshift(Number(rideDistance));
+                            //add ride to goalDays
+                            const goalDayIndex = calculateDays(rideDepartedAt);
+                            const goalDay = goalDays[goalDayIndex];
+                            if (goalDay) {
+                                goalDay.push(ride) // hacky way to fix a problem
+                            }
+
+                            const rideListItem = document.createElement("li");
+                            rideListItem.textContent = rideName + ", " + rideDistance + " miles, " + (ride[3] * 3.28084).toFixed() + " feet " + goalDayIndex;
+                            rideList.appendChild(rideListItem);
+
+
+                        }
+
+
+                        let sum = 0
+                        //let resultDistances = rideDistances.map(v => Number((sum += v).toFixed(2)));
+                        const distancePerDay = goalDays.map((goalDay) => {
+                            let dayDistance = 0;
+                            for (const ride of goalDay) {
+                                const rideDistance = (ride[2] * 0.000621371).toFixed(2);
+                                dayDistance += Number(rideDistance);
+                            }
+                            return dayDistance;
+                        })
+
+                        let cumulativeDistances = distancePerDay.map(v => Number((sum += v).toFixed(2)));
 
                         const mixedChart = new Chart(ctx, {
                             data: {
@@ -145,13 +184,20 @@
                                     }, {
                                         type: 'line',
                                         label: 'Cumulative Miles',
-                                        data: resultDistances,
+                                        data: cumulativeDistances,
                                         fill: true,
                                         pointRadius: 5,
                                         hoverBorderWidth: 10,
                                         backgroundColor: 'hsl(140, 100%, 30%, 50%)',
                                         borderColor: '#006622',
 
+                                    },
+                                    {
+                                        type: 'bar',
+                                        label: 'Daily Distances',
+                                        data: distancePerDay,
+                                        backgroundColor: 'red',
+                                        borderColor: 'red',
                                     }
                                 ],
                                 labels: daysOfMonth
@@ -189,6 +235,8 @@
         for (let d = 1; d < 31; d++) {
             daysOfMonth.push(d);
         }
+
+
 
 
         // Gear used on the Goal, Each slice should be distance % per gear
