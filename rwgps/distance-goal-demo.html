@@ -82,8 +82,8 @@
         let gearData = {};
 
 
-        const goalStart = "2022-06-01T00:00:00-08:00";  // T19%3A00%3A00.000Z
-        const goalEnd = "2022-07-01T00:00:00-08:00";  // T06%3A59%3A59.999Z
+        const goalStart = "2022-06-01T00:00:00-08:00";
+        const goalEnd = "2022-07-01T00:00:00-08:00";
         const goalStartDate = Date.parse(goalStart);
 
         function calculateDays(rideDate) {
@@ -97,6 +97,16 @@
         }
 
 
+        function calculateTotalDistance(rideList) {
+            let dayDistance = 0;
+            for (const ride of rideList) {
+                const rideDistance = (ride[2] * 0.000621371).toFixed(2);
+                dayDistance += Number(rideDistance);
+            }
+            return dayDistance;
+        }
+
+
         // Start Fetching User Data in Promises
         fetch(currentUserRequest)
             .then((response) => response.json())
@@ -104,11 +114,19 @@
                 console.log(userData);
                 const userName = document.querySelector(".userName");
                 userName.textContent = "Name: " + userData.user.name;
-
                 const gearList = document.querySelector(".gearList");
-                for (const bike of userData.user.gear) {
-                    gearUsed.push(bike.name);
+
+
+                //for (const bike of userData.user.gear) {
+                //    gearUsed.push(bike.name);
+                //}
+                const gearIdToGearName = {};
+                for (const gear of userData.user.gear) {
+                    gearIdToGearName[gear.id] = gear.name;
                 }
+
+
+
                 // example https://ridewithgps.com/users/807463/career_stats.json?apikey=aa49d17b&interval=month&interval_value=2021-03
                 const statsRequest = new Request(`https://ridewithgps.com/users/${userData.user.id}/career_stats.json?apikey=aa49d17b&apiversion=3&auth_token=${userData.user.auth_token}&interval=month&interval_value=2022-06`);
 
@@ -139,8 +157,10 @@
                             const goalDayIndex = calculateDays(rideDepartedAt);
                             const goalDay = goalDays[goalDayIndex];
                             if (goalDay) {
-                                goalDay.push(ride) // hacky way to fix a problem
+                                goalDay.push(ride) // hacky way to fix a problem with invalid indexes
                             }
+
+
 
                             const rideListItem = document.createElement("li");
                             rideListItem.textContent = rideName + ", " + rideDistance + " miles, " + (ride[3] * 3.28084).toFixed() + " feet " + goalDayIndex;
@@ -149,24 +169,38 @@
 
                         }
 
+                        const ridesByGearId = Object.groupBy(ridesData.results.trips, ride => ride[4])
+                        console.log(ridesByGearId);
+
+
+                        const gearNames = [];
+                        const gearDistances = [];
+
+                        for (const gearId in ridesByGearId) {
+                            const rides = ridesByGearId[gearId];
+                            const ridesDistance = calculateTotalDistance(rides);
+                            if (ridesDistance > 0) {
+                                gearNames.push(gearIdToGearName[gearId]);
+                                gearDistances.push(ridesDistance);
+                            }
+                        }
+                        const pieChart = new Chart(GEAR, makeGearConfig(gearNames, gearDistances));
+
+                        const distancePerDay = goalDays.map(calculateTotalDistance)
 
                         let sum = 0
-                        //let resultDistances = rideDistances.map(v => Number((sum += v).toFixed(2)));
-                        const distancePerDay = goalDays.map((goalDay) => {
-                            let dayDistance = 0;
-                            for (const ride of goalDay) {
-                                const rideDistance = (ride[2] * 0.000621371).toFixed(2);
-                                dayDistance += Number(rideDistance);
-                            }
-                            return dayDistance;
-                        })
-
                         let cumulativeDistances = distancePerDay.map(v => Number((sum += v).toFixed(2)));
 
                         const mixedChart = new Chart(ctx, {
                             data: {
                                 datasets: [
                                     {
+                                        type: 'bar',
+                                        label: 'Daily Distances',
+                                        data: distancePerDay,
+                                        backgroundColor: 'blue',
+                                        borderColor: 'red',
+                                    }, {
                                         type: 'line',
                                         label: '500 mile Goal',
                                         data: goal,
@@ -192,13 +226,7 @@
                                         borderColor: '#006622',
 
                                     },
-                                    {
-                                        type: 'bar',
-                                        label: 'Daily Distances',
-                                        data: distancePerDay,
-                                        backgroundColor: 'red',
-                                        borderColor: 'red',
-                                    }
+
                                 ],
                                 labels: daysOfMonth
                             }
@@ -207,20 +235,22 @@
                     })
 
 
+
             }).then(
-                () => { const pieChart = new Chart(GEAR, gearConfig); }
-            )
+            // () => { const pieChart = new Chart(GEAR, makeGearConfig([20, 40, 15])); }
+        )
             .then(
                 () => {
                 }
             )
+
 
         const ctx = document.getElementById('goal-chart');
 
         // Goal Line Generator
         let goalDistance = 500;
         let goal = [];
-        for (let g = 1; g < 32; g++) {
+        for (let g = 0; g < 32; g++) {
             goal.push(goalDistance);
         }
 
@@ -241,21 +271,23 @@
 
         // Gear used on the Goal, Each slice should be distance % per gear
         const GEAR = document.getElementById('gear-chart');
-        const gearDistances = [20, 40, 15]; //TODO tally gear distances from rides
-        let gearUsed = [];
-        const gearConfig = {
-            type: 'pie',
-            data: {
-                labels: gearUsed,
-                datasets: [{
-                    data: gearDistances,
-                    backgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
-                }],
-            },
-            hoverBorderWidth: 10,
-            options: {
-                responsive: true,
-            },
+        // const gearDistances = [20, 40, 15]; //TODO tally gear distances from rides
+        //let gearUsed = [];
+
+        function makeGearConfig(gearNames, gearDistances) {
+            return {
+                type: 'doughnut',
+                data: {
+                    labels: gearNames,
+                    datasets: [{
+                        data: gearDistances,
+                    }],
+                },
+                hoverBorderWidth: 10,
+                options: {
+                    responsive: true,
+                },
+            };
         };
 
 
