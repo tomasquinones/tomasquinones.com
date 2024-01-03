@@ -41,7 +41,7 @@ h3 {
 }
 
 .pie-chart{
-    width: 50%;
+    width: 33%;
 }
 
 #goal-title {
@@ -59,6 +59,10 @@ h3 {
     width: 1050px;
     padding: 0px;
     
+}
+
+.goal-details-container div {
+    padding: 5px;
 }
 
 .goal-details-text {
@@ -98,6 +102,7 @@ h3 {
     width: 1050px;
     margin-left: auto;
     margin-right: auto;
+    padding: 15px;
 }
 
 
@@ -138,4 +143,14 @@ h3 {
   .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
+  }
+
+  .rideList {
+    list-style-type: none;
+    margin: 10;
+    padding: 0;
+  }
+
+  li {
+    padding: 6px;
   }
