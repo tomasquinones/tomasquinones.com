@@ -39,10 +39,17 @@
         </div>
 
         <div class="pie-chart card">
-            <h2>Gear:</h2>
+            <h2>Gear by Distance:</h2>
+
             <ul class=" gearList">
             </ul>
-            <canvas id='gear-chart'></canvas>
+            <canvas id='gear-distances-chart'></canvas>
+        </div>
+        <div class="pie-chart card">
+            <h2>Gear by Trips:</h2>
+            <ul class=" gearList">
+            </ul>
+            <canvas id='gear-rides-chart'></canvas>
         </div>
     </div>
 
@@ -107,6 +114,28 @@
         }
 
 
+        // Gear used on the Goal
+        const gearDistanceChart = document.getElementById('gear-distances-chart');
+        const gearRidesChart = document.getElementById('gear-rides-chart');
+
+        function makeGearConfig(gearNames, gearDistances) {
+            return {
+                type: 'doughnut',
+                data: {
+                    labels: gearNames,
+                    datasets: [{
+                        data: gearDistances,
+                    }],
+                },
+                hoverBorderWidth: 10,
+                options: {
+                    responsive: true,
+                },
+            };
+        };
+
+
+
         // Start Fetching User Data in Promises
         fetch(currentUserRequest)
             .then((response) => response.json())
@@ -161,10 +190,19 @@
                             }
 
 
+                            const fragment = document.createDocumentFragment();
+                            const alink = fragment
+                                .appendChild(document.createElement("li"))
+                                .appendChild(document.createElement("a"))
+                            alink.href = `https://ridewithgps.com/trips/${ride[0]}`
+                            //const rideListItem = document.createElement("li").appendChild(document.createElement("a"));
+                            // rideListItem.href = `https://ridewithgps.com/trips/${ride[0]}`
 
-                            const rideListItem = document.createElement("li");
-                            rideListItem.textContent = rideName + ", " + rideDistance + " miles, " + (ride[3] * 3.28084).toFixed() + " feet " + goalDayIndex;
-                            rideList.appendChild(rideListItem);
+                            alink.textContent = rideName + ", " + rideDistance + " miles, " + (ride[3] * 3.28084).toFixed() + " feet " + goalDayIndex;
+                            //rideListItem.textContent = rideName + ", " + rideDistance + " miles, " + (ride[3] * 3.28084).toFixed() + " feet " + goalDayIndex;
+
+                            rideList.appendChild(fragment);
+                            //rideList.appendChild(rideListItem);
 
 
                         }
@@ -175,16 +213,23 @@
 
                         const gearNames = [];
                         const gearDistances = [];
+                        const gearTripCounts = [];
 
                         for (const gearId in ridesByGearId) {
                             const rides = ridesByGearId[gearId];
+                            gearTripCounts.push(rides.length);
                             const ridesDistance = calculateTotalDistance(rides);
                             if (ridesDistance > 0) {
                                 gearNames.push(gearIdToGearName[gearId]);
                                 gearDistances.push(ridesDistance);
                             }
                         }
-                        const pieChart = new Chart(GEAR, makeGearConfig(gearNames, gearDistances));
+                        console.log(gearTripCounts);
+
+
+
+                        const pieChart = new Chart(gearDistanceChart, makeGearConfig(gearNames, gearDistances));
+                        const pieChart2 = new Chart(gearRidesChart, makeGearConfig(gearNames, gearTripCounts));
 
                         const distancePerDay = goalDays.map(calculateTotalDistance)
 
@@ -199,7 +244,7 @@
                                         label: 'Daily Distances',
                                         data: distancePerDay,
                                         backgroundColor: 'blue',
-                                        borderColor: 'red',
+                                        borderColor: 'blue',
                                     }, {
                                         type: 'line',
                                         label: '500 mile Goal',
@@ -269,26 +314,7 @@
 
 
 
-        // Gear used on the Goal, Each slice should be distance % per gear
-        const GEAR = document.getElementById('gear-chart');
-        // const gearDistances = [20, 40, 15]; //TODO tally gear distances from rides
-        //let gearUsed = [];
 
-        function makeGearConfig(gearNames, gearDistances) {
-            return {
-                type: 'doughnut',
-                data: {
-                    labels: gearNames,
-                    datasets: [{
-                        data: gearDistances,
-                    }],
-                },
-                hoverBorderWidth: 10,
-                options: {
-                    responsive: true,
-                },
-            };
-        };
 
 
     </script>
