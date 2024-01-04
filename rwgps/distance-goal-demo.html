@@ -19,6 +19,13 @@
         <canvas id="goal-chart"></canvas>
     </div>
 
+    <div id='progress-card' class='card'>
+        <div id='progress-bar-container'>
+            <div id='progress-bar-inner'>
+                Progress
+            </div>
+        </div>
+    </div>
     <div class="goal-details-container">
         <div class="goal-details-text card">
             <h2>Details</h2>
@@ -29,10 +36,14 @@
             </div> -->
             <div>Start: June 1, 2022</div>
             <div>End: June 30, 2022</div>
-            <div>You will need to ride an average of <span id="average-needed"></span> miles per day to complete this
+            <div>You will need to ride an average of <span id="average-needed"></span> miles per day to complete
+                this
                 goal.</div>
             <div>You have completed <span id="goal-percent"></span>% of this goal.</div>
-            <div>While activities marked 'private' are shown in your ride list for the goal, only you will be able to
+            <div class='goal-completed'>You finished this goal by riding a total of <span id='total-distance'></span>
+                miles!</div>
+            <div>While activities marked 'private' are shown in your ride list for the goal, only you will be able
+                to
                 view their details and not viewable by other participants.</div>
 
         </div>
@@ -91,8 +102,8 @@
         let gearData = {};
 
 
-        const goalStart = "2022-06-01T00:00:00-08:00";
-        const goalEnd = "2022-07-01T00:00:00-08:00";
+        const goalStart = "2023-06-01T00:00:00-08:00";
+        const goalEnd = "2023-07-01T00:00:00-08:00";
         const goalStartDate = Date.parse(goalStart);
 
         function calculateDays(rideDate) {
@@ -152,7 +163,7 @@
                     gearIdToGearName[gear.id] = gear.name;
                 }
 
-                const statsRequest = new Request(`https://ridewithgps.com/users/${userData.user.id}/career_stats.json?apikey=aa49d17b&apiversion=3&auth_token=${userData.user.auth_token}&interval=month&interval_value=2022-06`);
+                const statsRequest = new Request(`https://ridewithgps.com/users/${userData.user.id}/career_stats.json?apikey=aa49d17b&apiversion=3&auth_token=${userData.user.auth_token}&interval=month&interval_value=2023-06`);
 
                 // fetch(statsRequest)
                 //     .then((response) => response.json())
@@ -229,15 +240,27 @@
 
                         const distancePerDay = goalDays.map(calculateTotalDistance)
 
+
                         let sum = 0
                         let cumulativeDistances = distancePerDay.map(v => Number((sum += v).toFixed(2)));
 
-                        const goalPercentage = cumulativeDistances.slice([-1]) / goalTarget * 100;
+                        const total_ridden = cumulativeDistances.slice([-1]);
+
+                        const goalPercentage = Number((total_ridden / goalTarget * 100).toFixed(1));
+
+
                         const goal_percent = document.getElementById('goal-percent');
                         goal_percent.textContent = goalPercentage.toFixed(1);
 
                         const average_needed = document.getElementById('average-needed');
                         average_needed.textContent = (goalTarget / 30).toFixed(1);
+
+                        const progress_bar = document.getElementById('progress-bar-inner');
+                        progress_bar.style = `width: ${goalPercentage}%`;
+                        progress_bar.textContent = goalPercentage + "%";
+
+                        const total_distance = document.getElementById('total-distance');
+                        total_distance.textContent = total_ridden;
 
                         const mixedChart = new Chart(ctx, {
                             data: {
