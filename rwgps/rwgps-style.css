@@ -99,10 +99,8 @@ h3 {
 }
 
 .rides-list-container{
-    width: 1050px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 15px;
+    max-width: 1050px;
+    
 }
 
 
@@ -177,4 +175,12 @@ h3 {
     border-bottom-right-radius: 9px;
     color: whitesmoke;
     text-align: center;
+}
+
+.scatter-graph-card {
+    max-width: 1050px;
+}
+
+.comment-card {
+    max-width: 1050px;
 }
