@@ -220,8 +220,9 @@
                     for (const gear of userData.user.gear) {
                         gearIdToGearName[gear.id] = gear.name;
                     }
+                    console.log(gearIdToGearName);
 
-                    const statsRequest = new Request(`https://ridewithgps.com/users/${userData.user.id}/career_stats.json?apikey=aa49d17b&apiversion=3&auth_token=${authToken}&interval=month&interval_value=2023-06`);
+                    // const statsRequest = new Request(`https://ridewithgps.com/users/${userData.user.id}/career_stats.json?apikey=aa49d17b&apiversion=3&auth_token=${authToken}&interval=month&interval_value=2023-06`);
 
                     // Where did I get this URL?
                     const ridesRequest = new Request(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&departed_at_max=${goalEnd}&departed_at_min=${goalStart}&trip_fields=id%2Cname%2Cdistance%2Celevation_gain%2Cgear_id%2Cdeparted_at&user_id=${userData.user.id}&apikey=aa49d17b&apiversion=3&auth_token=${authToken}`);
@@ -270,10 +271,9 @@
                                     gearDistances.push(ridesDistance);
                                 }
                             }
-                            console.log(gearTripCounts);
 
 
-
+                            console.log(gearNames);
                             const pieChart = new Chart(gearDistanceChart, makeGearConfig(gearNames, gearDistances));
                             const pieChart2 = new Chart(gearRidesChart, makeGearConfig(gearNames, gearTripCounts));
 
@@ -350,13 +350,7 @@
                         })
 
 
-                }).then(
-                // () => { const pieChart = new Chart(GEAR, makeGearConfig([20, 40, 15])); }
-            )
-                .then(
-                    () => {
-                    }
-                )
+                })
         }
 
 
