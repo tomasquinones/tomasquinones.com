@@ -11,94 +11,106 @@
 
 <body>
     <div id='authentication-bar'>
-        <div id='sign-in'><a href=''>Sign In</a></div>
-        <div id='sign-out'><a onclick='signOut' href='/'>Sign Out</a></div>
-    </div>
-
-    <div class="titleBar">
-        <div id="goal-title">
-            <h1>Ride 500 Miles in June, 2022</h1>
+        <div id='sign-in'><a href=''>Sign In</a>
+            <form action='javascript:' onsubmit='fetchData()' method='post' class='sign-in-form'>
+                <input type='text' name='email' id='emailForm' placeholder='email' />
+                <input type='password' name='password' id='passwordForm' placeholder='password' />
+                <button type='submit'>submit</button>
+            </form>
         </div>
+        <div id='sign-out'><a onclick='signOut()' href=''>Sign Out</a></div>
     </div>
 
-    <div class="card line-chart">
-        <canvas id="goal-chart"></canvas>
-    </div>
-
-    <div id='progress-card' class='card'>
-        <div id='progress-bar-container'>
-            <div id='progress-bar-inner'>
-                Progress
+    <div id='content-container'>
+        <div class="titleBar">
+            <div id="goal-title">
+                <h1>Ride 500 Miles in June, 2022</h1>
             </div>
         </div>
-    </div>
 
-    <div class="goal-details-container">
-        <div class="goal-details-text card">
-            <h2>Details</h2>
-            <!-- <div>
-                <ul id="userInfoList">
-                    <li class="userName">Name: </li>
+        <div class="card line-chart">
+            <canvas id="goal-chart"></canvas>
+        </div>
+
+        <div id='progress-card' class='card'>
+            <div id='progress-bar-container'>
+                <div id='progress-bar-inner'>
+                    Progress
+                </div>
+            </div>
+        </div>
+
+        <div class="goal-details-container">
+            <div class="goal-details-text card">
+                <h2>Details</h2>
+                <div>Start: June 1, 2022</div>
+                <div>End: June 30, 2022</div>
+                <div>You will need to ride an average of <span id="average-needed"></span> miles per day to complete
+                    this
+                    goal.</div>
+                <div>You have completed <span id="goal-percent"></span>% of this goal.</div>
+                <div class='goal-completed'>You finished this goal by riding a total of <span
+                        id='total-distance'></span>
+                    miles!</div>
+                <div>While activities marked 'private' are shown in your ride list for the goal, only you will be able
+                    to
+                    view their details and not viewable by other participants.</div>
+
+            </div>
+
+            <div class="pie-chart card">
+                <h2>Gear by Distance:</h2>
+
+                <ul class=" gearList">
                 </ul>
-            </div> -->
-            <div>Start: June 1, 2022</div>
-            <div>End: June 30, 2022</div>
-            <div>You will need to ride an average of <span id="average-needed"></span> miles per day to complete
-                this
-                goal.</div>
-            <div>You have completed <span id="goal-percent"></span>% of this goal.</div>
-            <div class='goal-completed'>You finished this goal by riding a total of <span id='total-distance'></span>
-                miles!</div>
-            <div>While activities marked 'private' are shown in your ride list for the goal, only you will be able
-                to
-                view their details and not viewable by other participants.</div>
-
+                <canvas id='gear-distances-chart'></canvas>
+            </div>
+            <div class="pie-chart card">
+                <h2>Gear by Trips:</h2>
+                <ul class=" gearList">
+                </ul>
+                <canvas id='gear-rides-chart'></canvas>
+            </div>
         </div>
 
-        <div class="pie-chart card">
-            <h2>Gear by Distance:</h2>
+        <div class="leader-board card">
+            <h2>TODO: Leader Board</h2>
+            <div class="participant-card">Participant 1</div>
+            <div class="participant-card">Participant 2</div>
+            <div class="participant-card">Participant 3</div>
+        </div>
 
-            <ul class=" gearList">
+        <div class='scatter-graph-card card'>
+            <h2>Rides Scatter Graph</h2>
+            <canvas id='rides-scatter-graph'></canvas>
+        </div>
+
+        <div class="rides-list-container card">
+            <h2>Rides:</h2>
+            <ul class="rideList">
             </ul>
-            <canvas id='gear-distances-chart'></canvas>
         </div>
-        <div class="pie-chart card">
-            <h2>Gear by Trips:</h2>
-            <ul class=" gearList">
-            </ul>
-            <canvas id='gear-rides-chart'></canvas>
+
+        <div class='comment-card card'>
         </div>
     </div>
-
-    <div class="leader-board card">
-        <h2>TODO: Leader Board</h2>
-        <div class="participant-card">Participant 1</div>
-        <div class="participant-card">Participant 2</div>
-        <div class="participant-card">Participant 3</div>
-    </div>
-
-    <div class='scatter-graph-card card'>
-        <h2>Rides Scatter Graph</h2>
-        <canvas id='rides-scatter-graph'></canvas>
-    </div>
-
-    <div class="rides-list-container card">
-        <h2>Rides:</h2>
-        <ul class="rideList">
-        </ul>
-    </div>
-
-    <div class='comment-card card'>
-    </div>
-
 
     <script>
-        const searchParams = new URLSearchParams(window.location.search);
-        let userId = searchParams.get("user_id");
+        let contentContainer = document.getElementById('content-container');
+        contentContainer.style.display = 'none';
+
+        //const searchParams = new URLSearchParams(window.location.search);
+        // let userId = searchParams.get("user_id");
         // let printUserID = document.querySelector(".user_id");
 
         let authToken = localStorage.getItem('auth_token');
 
+        function signOut() {
+            localStorage.clear();
+            authToken = '';
+            document.getElementById('content-container').style.display = 'none';
+            document.getElementById('sign-in').style.display = 'block';
+        }
 
         const ctx = document.getElementById('goal-chart');
 
@@ -121,17 +133,10 @@
         }
 
         // Get the user info
+        let email = '';
+        let password = '';
 
-        let currentUserRequest = null;
 
-
-        if (!authToken) {
-            const email = window.prompt("email");
-            const password = window.prompt("password")
-            currentUserRequest = new Request(`https://ridewithgps.com/users/current.json?apikey=aa49d17b&apiversion=3&email=${email}&password=${password}`);
-        } else {
-            currentUserRequest = new Request(`https://ridewithgps.com/users/current.json?apikey=aa49d17b&apiversion=3&auth_token=${authToken}`);
-        }
 
         const goalTarget = 500; //miles in this demo
 
@@ -187,160 +192,171 @@
 
 
 
+        function fetchData() {
+            contentContainer.style.display = 'block';
+            document.getElementById('sign-in').style.display = 'none';
+            let currentUserRequest = null;
+            if (!authToken) {
+                email = document.getElementById('emailForm').value;
+                password = document.getElementById('passwordForm').value;
+                currentUserRequest = new Request(`https://ridewithgps.com/users/current.json?apikey=aa49d17b&apiversion=3&email=${email}&password=${password}`);
+            } else {
+                currentUserRequest = new Request(`https://ridewithgps.com/users/current.json?apikey=aa49d17b&apiversion=3&auth_token=${authToken}`);
+            }
 
-        // Start Fetching User Data in Promises
-        fetch(currentUserRequest)
-            .then((response) => response.json())
-            .then((userData) => {
-                localStorage.setItem('auth_token', userData.user.auth_token);
-                authToken = localStorage.getItem('auth_token');
-                console.log(authToken);
+            // Start Fetching User Data in Promises
+            fetch(currentUserRequest)
+                .then((response) => response.json())
+                .then((userData) => {
+                    localStorage.setItem('auth_token', userData.user.auth_token);
+                    authToken = localStorage.getItem('auth_token');
+                    console.log(authToken);
 
-                console.log(userData);
-                const gearList = document.querySelector(".gearList");
+                    console.log(userData);
+                    const gearList = document.querySelector(".gearList");
 
-                const gearIdToGearName = {};
-                for (const gear of userData.user.gear) {
-                    gearIdToGearName[gear.id] = gear.name;
-                }
+                    const gearIdToGearName = {};
+                    for (const gear of userData.user.gear) {
+                        gearIdToGearName[gear.id] = gear.name;
+                    }
 
-                const statsRequest = new Request(`https://ridewithgps.com/users/${userData.user.id}/career_stats.json?apikey=aa49d17b&apiversion=3&auth_token=${authToken}&interval=month&interval_value=2023-06`);
+                    const statsRequest = new Request(`https://ridewithgps.com/users/${userData.user.id}/career_stats.json?apikey=aa49d17b&apiversion=3&auth_token=${authToken}&interval=month&interval_value=2023-06`);
 
-                // Where did I get this URL?
-                const ridesRequest = new Request(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&departed_at_max=${goalEnd}&departed_at_min=${goalStart}&trip_fields=id%2Cname%2Cdistance%2Celevation_gain%2Cgear_id%2Cdeparted_at&user_id=${userData.user.id}&apikey=aa49d17b&apiversion=3&auth_token=${authToken}`);
-                fetch(ridesRequest)
-                    .then((response) => response.json())
-                    .then((ridesData) => {
-                        console.log(ridesData);
-                        const rideList = document.querySelector(".rideList");
+                    // Where did I get this URL?
+                    const ridesRequest = new Request(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&departed_at_max=${goalEnd}&departed_at_min=${goalStart}&trip_fields=id%2Cname%2Cdistance%2Celevation_gain%2Cgear_id%2Cdeparted_at&user_id=${userData.user.id}&apikey=aa49d17b&apiversion=3&auth_token=${authToken}`);
+                    fetch(ridesRequest)
+                        .then((response) => response.json())
+                        .then((ridesData) => {
+                            console.log(ridesData);
+                            const rideList = document.querySelector(".rideList");
 
-                        for (const ride of ridesData.results.trips) {
-                            const rideName = ride[1];
-                            const rideDistance = (ride[2] * 0.000621371).toFixed(2);
-                            const rideDepartedAt = Date.parse(ride[5]);
-                            rideDistances.unshift(Number(rideDistance));
-                            //add ride to goalDays
-                            const goalDayIndex = calculateDays(rideDepartedAt);
-                            const goalDay = goalDays[goalDayIndex];
-                            if (goalDay) {
-                                goalDay.push(ride) // hacky way to fix a problem with invalid indexes
+                            for (const ride of ridesData.results.trips) {
+                                const rideName = ride[1];
+                                const rideDistance = (ride[2] * 0.000621371).toFixed(2);
+                                const rideDepartedAt = Date.parse(ride[5]);
+                                rideDistances.unshift(Number(rideDistance));
+                                //add ride to goalDays
+                                const goalDayIndex = calculateDays(rideDepartedAt);
+                                const goalDay = goalDays[goalDayIndex];
+                                if (goalDay) {
+                                    goalDay.push(ride) // hacky way to fix a problem with invalid indexes
+                                }
+
+
+                                const fragment = document.createDocumentFragment();
+                                const alink = fragment
+                                    .appendChild(document.createElement("li"))
+                                    .appendChild(document.createElement("a"))
+                                alink.href = `https://ridewithgps.com/trips/${ride[0]}`
+                                alink.textContent = rideName + ", " + rideDistance + " miles, " + (ride[3] * 3.28084).toFixed() + " feet, on " + ride[5].split('T')[0];
+                                rideList.appendChild(fragment);
                             }
 
-
-                            const fragment = document.createDocumentFragment();
-                            const alink = fragment
-                                .appendChild(document.createElement("li"))
-                                .appendChild(document.createElement("a"))
-                            alink.href = `https://ridewithgps.com/trips/${ride[0]}`
-                            alink.textContent = rideName + ", " + rideDistance + " miles, " + (ride[3] * 3.28084).toFixed() + " feet, on " + ride[5].split('T')[0];
-                            rideList.appendChild(fragment);
-                        }
-
-                        const ridesByGearId = Object.groupBy(ridesData.results.trips, ride => ride[4])
-                        console.log(ridesByGearId);
+                            const ridesByGearId = Object.groupBy(ridesData.results.trips, ride => ride[4])
+                            console.log(ridesByGearId);
 
 
-                        const gearNames = [];
-                        const gearDistances = [];
-                        const gearTripCounts = [];
+                            const gearNames = [];
+                            const gearDistances = [];
+                            const gearTripCounts = [];
 
-                        for (const gearId in ridesByGearId) {
-                            const rides = ridesByGearId[gearId];
-                            gearTripCounts.push(rides.length);
-                            const ridesDistance = calculateTotalDistance(rides);
-                            if (ridesDistance > 0) {
-                                gearNames.push(gearIdToGearName[gearId]);
-                                gearDistances.push(ridesDistance);
+                            for (const gearId in ridesByGearId) {
+                                const rides = ridesByGearId[gearId];
+                                gearTripCounts.push(rides.length);
+                                const ridesDistance = calculateTotalDistance(rides);
+                                if (ridesDistance > 0) {
+                                    gearNames.push(gearIdToGearName[gearId]);
+                                    gearDistances.push(ridesDistance);
+                                }
                             }
-                        }
-                        console.log(gearTripCounts);
+                            console.log(gearTripCounts);
 
 
 
-                        const pieChart = new Chart(gearDistanceChart, makeGearConfig(gearNames, gearDistances));
-                        const pieChart2 = new Chart(gearRidesChart, makeGearConfig(gearNames, gearTripCounts));
+                            const pieChart = new Chart(gearDistanceChart, makeGearConfig(gearNames, gearDistances));
+                            const pieChart2 = new Chart(gearRidesChart, makeGearConfig(gearNames, gearTripCounts));
 
-                        const distancePerDay = goalDays.map(calculateTotalDistance)
-
-
-                        let sum = 0
-                        let cumulativeDistances = distancePerDay.map(v => Number((sum += v).toFixed(2)));
-
-                        const total_ridden = cumulativeDistances.slice([-1]);
-
-                        const goalPercentage = Number((total_ridden / goalTarget * 100).toFixed(1));
+                            const distancePerDay = goalDays.map(calculateTotalDistance)
 
 
-                        const goal_percent = document.getElementById('goal-percent');
-                        goal_percent.textContent = goalPercentage.toFixed(1);
+                            let sum = 0
+                            let cumulativeDistances = distancePerDay.map(v => Number((sum += v).toFixed(2)));
 
-                        const average_needed = document.getElementById('average-needed');
-                        average_needed.textContent = (goalTarget / 30).toFixed(1);
+                            const total_ridden = cumulativeDistances.slice([-1]);
 
-                        const progress_bar = document.getElementById('progress-bar-inner');
-                        progress_bar.style = `width: ${goalPercentage}%`;
-                        progress_bar.textContent = goalPercentage + "%";
-
-                        const total_distance = document.getElementById('total-distance');
-                        total_distance.textContent = total_ridden;
-
-                        const mixedChart = new Chart(ctx, {
-                            data: {
-                                datasets: [
-                                    {
-                                        type: 'bar',
-                                        label: 'Daily Distances',
-                                        data: distancePerDay,
-                                        backgroundColor: 'blue',
-                                        borderColor: 'blue',
-                                        borderWidth: 2,
-                                        borderRadius: 3,
-
-                                    }, {
-                                        type: 'line',
-                                        label: '500 mile Goal',
-                                        data: goalLine,
-                                        pointRadius: 0,
-                                        backgroundColor: '#ff4000',
-                                        borderColor: '#ff4000'
-                                    }, {
-                                        type: 'line',
-                                        label: 'Stay On Track!',
-                                        data: stayOnTrack,
-                                        pointRadius: 0,
-                                        backgroundColor: '#ffd700',
-                                        borderColor: '#ffd700',
-                                        pointRadius: 2,
-                                        hoverBorderWidth: 10,
-
-                                    }, {
-                                        type: 'line',
-                                        label: 'Cumulative Miles',
-                                        data: cumulativeDistances,
-                                        fill: true,
-                                        pointRadius: 3,
-                                        hoverBorderWidth: 10,
-                                        backgroundColor: 'hsl(140, 100%, 30%, 50%)',
-                                        borderColor: '#006622',
-                                        pointStyle: 'rectRounded',
-                                    },
-
-                                ],
-                                labels: daysOfMonth
-                            }
-                        });
-
-                    })
+                            const goalPercentage = Number((total_ridden / goalTarget * 100).toFixed(1));
 
 
-            }).then(
-            // () => { const pieChart = new Chart(GEAR, makeGearConfig([20, 40, 15])); }
-        )
-            .then(
-                () => {
-                }
+                            const goal_percent = document.getElementById('goal-percent');
+                            goal_percent.textContent = goalPercentage.toFixed(1);
+
+                            const average_needed = document.getElementById('average-needed');
+                            average_needed.textContent = (goalTarget / 30).toFixed(1);
+
+                            const progress_bar = document.getElementById('progress-bar-inner');
+                            progress_bar.style = `width: ${goalPercentage}%`;
+                            progress_bar.textContent = goalPercentage + "%";
+
+                            const total_distance = document.getElementById('total-distance');
+                            total_distance.textContent = total_ridden;
+
+                            const mixedChart = new Chart(ctx, {
+                                data: {
+                                    datasets: [
+                                        {
+                                            type: 'bar',
+                                            label: 'Daily Distances',
+                                            data: distancePerDay,
+                                            backgroundColor: 'blue',
+                                            borderColor: 'blue',
+                                            borderWidth: 2,
+                                            borderRadius: 3,
+
+                                        }, {
+                                            type: 'line',
+                                            label: '500 mile Goal',
+                                            data: goalLine,
+                                            pointRadius: 0,
+                                            backgroundColor: '#ff4000',
+                                            borderColor: '#ff4000'
+                                        }, {
+                                            type: 'line',
+                                            label: 'Stay On Track!',
+                                            data: stayOnTrack,
+                                            pointRadius: 0,
+                                            backgroundColor: '#ffd700',
+                                            borderColor: '#ffd700',
+                                            pointRadius: 2,
+                                            hoverBorderWidth: 10,
+
+                                        }, {
+                                            type: 'line',
+                                            label: 'Cumulative Miles',
+                                            data: cumulativeDistances,
+                                            fill: true,
+                                            pointRadius: 3,
+                                            hoverBorderWidth: 10,
+                                            backgroundColor: 'hsl(140, 100%, 30%, 50%)',
+                                            borderColor: '#006622',
+                                            pointStyle: 'rectRounded',
+                                        },
+
+                                    ],
+                                    labels: daysOfMonth
+                                }
+                            });
+
+                        })
+
+
+                }).then(
+                // () => { const pieChart = new Chart(GEAR, makeGearConfig([20, 40, 15])); }
             )
-
+                .then(
+                    () => {
+                    }
+                )
+        }
 
 
 
