@@ -96,14 +96,20 @@
     </div>
 
     <script>
-        let contentContainer = document.getElementById('content-container');
-        contentContainer.style.display = 'none';
+
 
         //const searchParams = new URLSearchParams(window.location.search);
         // let userId = searchParams.get("user_id");
         // let printUserID = document.querySelector(".user_id");
 
         let authToken = localStorage.getItem('auth_token');
+        let contentContainer = document.getElementById('content-container');
+
+        if (authToken) {
+            fetchData();
+        } else {
+            contentContainer.style.display = 'none';
+        }
 
         function signOut() {
             localStorage.clear();
@@ -190,7 +196,18 @@
             };
         };
 
+        //fetching 3,000 miles in 2022
+        function getGoalInfo() {
+            const goalInfo = new Request(`https://ridewithgps.com/goals/21198.json?apikey=aa49d17b&apiversion=3&auth_token=${authToken}`);
+            console.log(goalInfo);
 
+            fetch(goalInfo)
+                .then((response) => response.json())
+                .then((goalData) => {
+                    console.log(goalData);
+                    console.log(goalData.goal.rules);
+                })
+        }
 
         function fetchData() {
             contentContainer.style.display = 'block';
@@ -201,6 +218,7 @@
                 password = document.getElementById('passwordForm').value;
                 currentUserRequest = new Request(`https://ridewithgps.com/users/current.json?apikey=aa49d17b&apiversion=3&email=${email}&password=${password}`);
             } else {
+
                 currentUserRequest = new Request(`https://ridewithgps.com/users/current.json?apikey=aa49d17b&apiversion=3&auth_token=${authToken}`);
             }
 
@@ -211,9 +229,9 @@
                     localStorage.setItem('auth_token', userData.user.auth_token);
                     authToken = localStorage.getItem('auth_token');
                     console.log(authToken);
-
                     console.log(userData);
 
+                    getGoalInfo();
                     //const gearList = document.querySelector(".gearList");
 
                     const gearIdToGearName = {};
@@ -274,6 +292,7 @@
 
 
                             console.log(gearNames);
+
                             const pieChart = new Chart(gearDistanceChart, makeGearConfig(gearNames, gearDistances));
                             const pieChart2 = new Chart(gearRidesChart, makeGearConfig(gearNames, gearTripCounts));
 
