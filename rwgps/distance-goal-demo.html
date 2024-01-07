@@ -61,14 +61,14 @@
             <div class="pie-chart card">
                 <h2>Gear by Distance:</h2>
 
-                <ul class=" gearList">
-                </ul>
+                <!-- <ul class=" gearList">
+                </ul> -->
                 <canvas id='gear-distances-chart'></canvas>
             </div>
             <div class="pie-chart card">
                 <h2>Gear by Trips:</h2>
-                <ul class=" gearList">
-                </ul>
+                <!-- <ul class=" gearList">
+                </ul> -->
                 <canvas id='gear-rides-chart'></canvas>
             </div>
         </div>
@@ -213,7 +213,8 @@
                     console.log(authToken);
 
                     console.log(userData);
-                    const gearList = document.querySelector(".gearList");
+
+                    //const gearList = document.querySelector(".gearList");
 
                     const gearIdToGearName = {};
                     for (const gear of userData.user.gear) {
