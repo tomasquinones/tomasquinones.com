@@ -185,3 +185,38 @@ h3 {
 .comment-card {
     max-width: 1050px;
 }
+
+#goals-container {
+    
+}
+
+
+#goals-list {
+    max-width: 1050px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.goal-list-card {
+    width: 290px;
+    height: 300px;
+    text-align:center;
+    
+}
+
+.goal-image {
+    display: block;
+    width: 95%;
+    height: 200px;
+    border-radius:3px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+#goal-image {
+    float:right; 
+}

@@ -22,7 +22,7 @@
     </div>
 
     <div id='goals-container'>
-        <ul id='goals-list'></ul>
+        <div id='goals-list'></div>
     </div>
 
     <div id='content-container'>
@@ -46,7 +46,7 @@
 
         <div class="goal-details-container">
             <div class="goal-details-text card">
-                <h2>Details</h2>
+                <div id='goal-image'></div>
                 <div>Start: June 1, 2022</div>
                 <div>End: June 30, 2022</div>
                 <div>You will need to ride an average of <span id="average-needed"></span> miles per day to complete
@@ -60,6 +60,7 @@
                     to
                     view their details and not viewable by other participants.</div>
 
+                <div id='original-goal'></div>
             </div>
 
             <div class="pie-chart card">
@@ -220,6 +221,17 @@
 
             const distancePerDay = goalDays.map(calculateTotalDistance)
 
+            const goalLogo = document.getElementById('goal-image');
+            const goalImageThumb = document.createElement('img');
+            goalImageThumb.src = goal.icon;
+            goalLogo.appendChild(goalImageThumb);
+
+            const originalGoal = document.getElementById('original-goal')
+            const originalGoalLink = document.createElement('a');
+            originalGoalLink.href = `https://ridewithgps.com/goals/${goal.id}`;
+            originalGoalLink.textContent = originalGoalLink.href;
+            originalGoal.appendChild(originalGoalLink);
+
             let sum = 0
             let cumulativeDistances = distancePerDay.map(v => Number((sum += v).toFixed(2)));
 
@@ -352,30 +364,57 @@
                 //add ride to goalDays
 
                 const fragment = document.createDocumentFragment();
-                const alink = fragment
+                const rideItem = fragment
                     .appendChild(document.createElement("li"))
-                    .appendChild(document.createElement("a"))
-                alink.href = `https://ridewithgps.com/trips/${ride.id}`
-                alink.textContent = rideName + ", " + rideDistance + " miles, " + (ride.elevation_gain * 3.28084).toFixed() + " feet, on " + ride.departed_at.split('T')[0];
+                rideItem.href = `https://ridewithgps.com/trips/${ride.id}`
+                rideItem.textContent = rideName + ", " + rideDistance + " miles, " + (ride.elevation_gain * 3.28084).toFixed() + " feet, on " + ride.departed_at.split('T')[0];
                 rideList.appendChild(fragment);
             }
 
         }
 
+
+
         function renderGoalsList(goalsData, userData) {
+            console.log('goalsData', goalsData)
+            const filteredGoals = goalsData.filter((goal) => goal.goal_type == 'distance');
+
             const goalList = document.getElementById('goals-list');
 
-            for (const goal of goalsData) {
-                const fragment = document.createDocumentFragment();
-                const alink = fragment
-                    .appendChild(document.createElement("li"))
-                    .appendChild(document.createElement("a"))
-                alink.onclick = () => {
+            for (const goal of filteredGoals) {
+                const goalListCard = document.createElement('div');
+                goalListCard.className = 'goal-list-card card';
+
+                const fragments = document.createDocumentFragment();
+
+                const goalTitle = document.createElement('div');
+                const goalImage = document.createElement('div');
+                const goalStart = document.createElement('div');
+                const goalValue = document.createElement('div');
+
+                goalTitle.className = 'goal-name';
+                goalTitle.textContent = goal.name;
+                fragments.appendChild(goalTitle);
+
+                goalImage.className = 'goal-image'
+                goalImage.style = `background-image: url(${goal.icon})`;
+                fragments.appendChild(goalImage);
+
+                goalStart.className = 'goal-start';
+                goalStart.textContent = `${goal.starts_on} to ${goal.ends_on}`;
+                fragments.appendChild(goalStart);
+
+                goalValue.className = '';
+                goalValue.textContent = `Distance ${Math.round(metersToMiles(goal.goal_params.max))} miles`;
+                fragments.appendChild(goalValue);
+
+                goalListCard.appendChild(fragments);
+                goalList.appendChild(goalListCard);
+
+                goalListCard.onclick = () => {
                     getGoalInfo(goal.id, userData);
                     goalList.style.display = 'none';
                 }
-                alink.textContent = goal.name;
-                goalList.appendChild(fragment);
             }
         }
 
