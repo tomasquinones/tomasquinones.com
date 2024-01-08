@@ -108,13 +108,19 @@
         }
 
 
-        const goalStart = "2023-06-01T00:00:00-08:00";
-        const goalEnd = "2023-07-01T00:00:00-08:00";
-        const goalStartDate = Date.parse(goalStart);
 
-        function calculateDays(rideDate) {
-            days = Math.floor((rideDate - goalStartDate) / (24 * 60 * 60 * 1000));
-            return days;
+        function requestData(url, authToken) {
+            const authHeaders = new Headers();
+            if (authToken) { authHeaders.append('x-rwgps-auth-token', authToken) };
+            authHeaders.append('x-rwgps-api-key', 'aa49d17b');
+            authHeaders.append('x-rwgps-api-version', '3');
+
+            const request = new Request(url, {
+                headers: authHeaders
+            });
+            return fetch(request)
+                .then((response) => response.json())
+
         }
 
 
@@ -122,7 +128,7 @@
         function calculateTotalDistance(rideList) {
             let dayDistance = 0;
             for (const ride of rideList) {
-                const rideDistance = (ride[2] * 0.000621371).toFixed(2);
+                const rideDistance = (ride.distance * 0.000621371).toFixed(2);
                 dayDistance += Number(rideDistance);
             }
             return dayDistance;
@@ -130,51 +136,79 @@
 
 
 
-        function getGoalInfo() {
-            const goalInfo = new Request(`https://ridewithgps.com/goals/21198.json?apikey=aa49d17b&apiversion=3&auth_token=${authToken}`);
-            console.log(goalInfo);
+        function getGoalInfo(userData) {
+            const goalId = 21198;
+            const participantRequest = requestData(`https://ridewithgps.com/goals/${goalId}/participants.json`, authToken)
+            const goalRequest = requestData(`https://ridewithgps.com/goals/${goalId}.json`, authToken)
+            Promise.all([participantRequest, goalRequest])
+                .then((combinedData) => {
+                    const [participantsData, goalData] = combinedData;
+                    console.log({ 'Goal Data': goalData });
+                    console.log({ 'Participant Data': participantsData });
+                    const participant = participantsData.results.find((participant) => participant.user.id == userData.user.id)
+                    console.log({ participant: participant });
+                    requestData(`https://ridewithgps.com/goal_participants/${participant.id}/trips.json?limit=10000&offset=0`, authToken)
+                        .then((trips) => {
+                            console.log({ trips: trips });
+                            renderGoalChart(trips.results, goalData.goal);
+                            renderGearCharts(trips.results, userData);
+                            renderRideList(trips.results);
 
-            fetch(goalInfo)
-                .then((response) => response.json())
-                .then((goalData) => {
-                    console.log(goalData);
-                    ;
+                        })
                 })
         }
 
 
+        function metersToMiles(meters) {
+            return meters * 0.000621371
+        }
 
-        function renderGoalChart(ridesData) {
-            let goalDistance = 500;
-            const goalTarget = 500;
+        function renderGoalChart(rides, goal) {
+            const goalDistance = metersToMiles(goal.goal_params.target_amount); //TODO Convert to Miles
+            const goalTarget = goalDistance; //TODO Convert to miles
+
+            const goalStart = goal.starts_on;
+            const goalEnd = goal.ends_on;
+            const goalStartDate = Date.parse(goalStart);
+
+            function calculateDays(rideDate) {
+                days = Math.floor((rideDate - goalStartDate) / (24 * 60 * 60 * 1000));
+                return days;
+            }
+
+            const goalDayCount = calculateDays(Date.parse(goalEnd)) + 1;
+            console.log('goal day count', goalDayCount);
 
             // Goal Line Generator
             let goalLine = [];
-            for (let g = 0; g < 31; g++) { goalLine.push(goalDistance); }
+            for (let g = 0; g < goalDayCount; g++) { goalLine.push(goalDistance); }
 
             // Goal Track Generator
             let stayOnTrack = [];
-            for (let i = 8; i < goalDistance; i = i + (goalDistance / 30)) {
+            for (let i = 8; i < goalDistance; i = i + (goalDistance / goalDayCount)) {
                 stayOnTrack.push(i);
             }
 
             // Days of Month X-axis
             let daysOfMonth = [];
-            for (let d = 1; d < 31; d++) {
+            for (let d = 1; d < goalDayCount; d++) {
                 daysOfMonth.push(d);
             }
 
             let goalDays = [];
-            for (let d = 0; d < 30; d++) {
+            for (let d = 0; d < goalDayCount; d++) {
                 goalDays.push([]);
             }
 
-            for (const ride of ridesData.results.trips) {
-                const rideDepartedAt = Date.parse(ride[5]);
+            for (const ride of rides) {
+                const rideDepartedAt = Date.parse(ride.departed_at);
+
                 const goalDayIndex = calculateDays(rideDepartedAt);
                 const goalDay = goalDays[goalDayIndex];
                 if (goalDay) {
                     goalDay.push(ride) // hacky way to fix a problem with invalid indexes
+                } else {
+                    console.log("trip out of range", goalDayIndex, ride);
                 }
             }
 
@@ -191,7 +225,7 @@
             goal_percent.textContent = goalPercentage.toFixed(1);
 
             const average_needed = document.getElementById('average-needed');
-            average_needed.textContent = (goalTarget / 30).toFixed(1);
+            average_needed.textContent = (goalTarget / goalDayCount).toFixed(1);
 
             const progress_bar = document.getElementById('progress-bar-inner');
             progress_bar.style = `width: ${goalPercentage}%`;
@@ -276,7 +310,7 @@
                 gearIdToGearName[gear.id] = gear.name;
             }
 
-            const ridesByGearId = Object.groupBy(ridesData.results.trips, ride => ride[4])
+            const ridesByGearId = Object.groupBy(ridesData, ride => ride.gear_id)
             // console.log(ridesByGearId);
 
             const gearNames = [];
@@ -302,9 +336,9 @@
 
             const rideList = document.querySelector(".rideList");
 
-            for (const ride of ridesData.results.trips) {
-                const rideName = ride[1];
-                const rideDistance = (ride[2] * 0.000621371).toFixed(2);
+            for (const ride of ridesData) {
+                const rideName = ride.name;
+                const rideDistance = (ride.distance * 0.000621371).toFixed(2);
 
                 //add ride to goalDays
 
@@ -312,8 +346,8 @@
                 const alink = fragment
                     .appendChild(document.createElement("li"))
                     .appendChild(document.createElement("a"))
-                alink.href = `https://ridewithgps.com/trips/${ride[0]}`
-                alink.textContent = rideName + ", " + rideDistance + " miles, " + (ride[3] * 3.28084).toFixed() + " feet, on " + ride[5].split('T')[0];
+                alink.href = `https://ridewithgps.com/trips/${ride.id}`
+                alink.textContent = rideName + ", " + rideDistance + " miles, " + (ride.elevation_gain * 3.28084).toFixed() + " feet, on " + ride.departed_at.split('T')[0];
                 rideList.appendChild(fragment);
             }
 
@@ -324,43 +358,37 @@
         function fetchData() {
             contentContainer.style.display = 'block';
             document.getElementById('sign-in').style.display = 'none';
-            let currentUserRequest = null;
+            let userUrl = null;
             if (!authToken) {
                 const email = document.getElementById('emailForm').value;
                 const password = document.getElementById('passwordForm').value;
-                currentUserRequest = new Request(`https://ridewithgps.com/users/current.json?apikey=aa49d17b&apiversion=3&email=${email}&password=${password}`);
+                userUrl = `https://ridewithgps.com/users/current.json?email=${email}&password=${password}`;
             } else {
-
-                currentUserRequest = new Request(`https://ridewithgps.com/users/current.json?apikey=aa49d17b&apiversion=3&auth_token=${authToken}`);
+                userUrl = `https://ridewithgps.com/users/current.json`
             }
 
             // Start Fetching User Data in Promises
-            fetch(currentUserRequest)
-                .then((response) => response.json())
+            //fetch(userUrl)
+            //    .then((response) => response.json())
+            requestData(userUrl, authToken)
                 .then((userData) => {
                     localStorage.setItem('auth_token', userData.user.auth_token);
                     authToken = localStorage.getItem('auth_token');
 
                     //console.log({ user: userData });
 
-                    getGoalInfo();
+                    getGoalInfo(userData);
 
-                    const ridesRequest = new Request(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&departed_at_max=${goalEnd}&departed_at_min=${goalStart}&trip_fields=id%2Cname%2Cdistance%2Celevation_gain%2Cgear_id%2Cdeparted_at&user_id=${userData.user.id}&apikey=aa49d17b&apiversion=3&auth_token=${authToken}`);
-                    fetch(ridesRequest)
-                        .then((response) => response.json())
-                        .then((ridesData) => {
-                            console.log(ridesData);
+                    // requestData(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&departed_at_max=${goalEnd}&departed_at_min=${goalStart}&trip_fields=id%2Cname%2Cdistance%2Celevation_gain%2Cgear_id%2Cdeparted_at&user_id=${userData.user.id}`, authToken)
+                    //     .then((ridesData) => {
+                    //         console.log({ 'Rides used during the goal time period': ridesData });
 
+                    //         //renderGearCharts(ridesData, userData);
 
-                            renderGearCharts(ridesData, userData);
+                    //         // renderGoalChart(ridesData.results.trips);
 
-                            renderGoalChart(ridesData);
-
-                            renderRideList(ridesData);
-
-
-
-                        })
+                    //         //renderRideList(ridesData);
+                    //     })
 
 
                 })
