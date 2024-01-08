@@ -100,7 +100,7 @@ h3 {
 
 .rides-list-container{
     max-width: 1050px;
-    
+
 }
 
 
@@ -169,6 +169,7 @@ h3 {
 }
 
 #progress-bar-inner {
+    max-width: 100%;
     background-color: lightblue;
     box-shadow: inset 0 0 25px blue;
     border-top-right-radius: 9px;

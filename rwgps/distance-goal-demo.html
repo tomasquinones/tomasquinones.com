@@ -21,10 +21,14 @@
         <div id='sign-out'><a onclick='signOut()' href=''>Sign Out</a></div>
     </div>
 
+    <div id='goals-container'>
+        <ul id='goals-list'></ul>
+    </div>
+
     <div id='content-container'>
         <div class="titleBar">
-            <div id="goal-title">
-                <h1>Ride 500 Miles in June, 2022</h1>
+            <div>
+                <h1 id="goal-title"></h1>
             </div>
         </div>
 
@@ -136,23 +140,25 @@
 
 
 
-        function getGoalInfo(userData) {
-            const goalId = 21198;
+        function getGoalInfo(goalId, userData) {
             const participantRequest = requestData(`https://ridewithgps.com/goals/${goalId}/participants.json`, authToken)
             const goalRequest = requestData(`https://ridewithgps.com/goals/${goalId}.json`, authToken)
             Promise.all([participantRequest, goalRequest])
                 .then((combinedData) => {
                     const [participantsData, goalData] = combinedData;
+                    document.getElementById('goal-title').textContent = goalData.goal.name;
                     console.log({ 'Goal Data': goalData });
                     console.log({ 'Participant Data': participantsData });
                     const participant = participantsData.results.find((participant) => participant.user.id == userData.user.id)
                     console.log({ participant: participant });
+
                     requestData(`https://ridewithgps.com/goal_participants/${participant.id}/trips.json?limit=10000&offset=0`, authToken)
                         .then((trips) => {
+                            const filteredTrips = trips.results.filter((trip) => !trip.is_excluded);
                             console.log({ trips: trips });
-                            renderGoalChart(trips.results, goalData.goal);
-                            renderGearCharts(trips.results, userData);
-                            renderRideList(trips.results);
+                            renderGoalChart(filteredTrips, goalData.goal);
+                            renderGearCharts(filteredTrips, userData);
+                            renderRideList(filteredTrips);
 
                         })
                 })
@@ -311,9 +317,10 @@
             }
 
             const ridesByGearId = Object.groupBy(ridesData, ride => ride.gear_id)
+
             // console.log(ridesByGearId);
 
-            const gearNames = [];
+            let gearNames = [];
             const gearDistances = [];
             const gearTripCounts = [];
 
@@ -326,7 +333,9 @@
                     gearDistances.push(ridesDistance);
                 }
             }
+            gearNames = gearNames.map((name) => name ? name : 'None');
             // console.log(gearNames);
+
             const pieChart = new Chart(gearDistanceChart, makeGearConfig(gearNames, gearDistances));
             const pieChart2 = new Chart(gearRidesChart, makeGearConfig(gearNames, gearTripCounts));
         }
@@ -353,6 +362,22 @@
 
         }
 
+        function renderGoalsList(goalsData, userData) {
+            const goalList = document.getElementById('goals-list');
+
+            for (const goal of goalsData) {
+                const fragment = document.createDocumentFragment();
+                const alink = fragment
+                    .appendChild(document.createElement("li"))
+                    .appendChild(document.createElement("a"))
+                alink.onclick = () => {
+                    getGoalInfo(goal.id, userData);
+                    goalList.style.display = 'none';
+                }
+                alink.textContent = goal.name;
+                goalList.appendChild(fragment);
+            }
+        }
 
 
         function fetchData() {
@@ -376,8 +401,12 @@
                     authToken = localStorage.getItem('auth_token');
 
                     //console.log({ user: userData });
-
-                    getGoalInfo(userData);
+                    requestData('https://ridewithgps.com/goals.json', authToken)
+                        .then((goalsData) => {
+                            renderGoalsList(goalsData.results, userData)
+                            console.log('goals data!', goalsData);
+                        })
+                    // getGoalInfo(userData);
 
                     // requestData(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&departed_at_max=${goalEnd}&departed_at_min=${goalStart}&trip_fields=id%2Cname%2Cdistance%2Celevation_gain%2Cgear_id%2Cdeparted_at&user_id=${userData.user.id}`, authToken)
                     //     .then((ridesData) => {
