@@ -36,19 +36,11 @@
             <canvas id="goal-chart"></canvas>
         </div>
 
-        <div id='progress-card' class='card'>
-            <div id='progress-bar-container'>
-                <div id='progress-bar-inner'>
-                    Progress
-                </div>
-            </div>
-        </div>
-
         <div class="goal-details-container">
             <div class="goal-details-text card">
                 <div id='goal-image'></div>
-                <div>Start: June 1, 2022</div>
-                <div>End: June 30, 2022</div>
+                <div id='goal-start-date'></div>
+                <div id='goal-end-date'></div>
                 <div>You will need to ride an average of <span id="average-needed"></span> miles per day to complete
                     this
                     goal.</div>
@@ -79,10 +71,8 @@
         </div>
 
         <div class="leader-board card">
-            <h2>TODO: Leader Board</h2>
-            <div class="participant-card">Participant 1</div>
-            <div class="participant-card">Participant 2</div>
-            <div class="participant-card">Participant 3</div>
+            <h2>Leader Board</h2>
+            <div id='leader-board-container'></div>
         </div>
 
 
@@ -99,12 +89,13 @@
     <script>
         let authToken = localStorage.getItem('auth_token');
         const contentContainer = document.getElementById('content-container');
+        contentContainer.style.display = 'none';
 
-        if (authToken) {
-            fetchData();
-        } else {
-            contentContainer.style.display = 'none';
-        }
+        // if (authToken) {
+        //     fetchData();
+        // } else {
+        //     contentContainer.style.display = 'none';
+        // }
 
         function signOut() {
             localStorage.clear();
@@ -147,23 +138,28 @@
             Promise.all([participantRequest, goalRequest])
                 .then((combinedData) => {
                     const [participantsData, goalData] = combinedData;
+
                     document.getElementById('goal-title').textContent = goalData.goal.name;
-                    console.log({ 'Goal Data': goalData });
-                    console.log({ 'Participant Data': participantsData });
+                    //console.log({ 'Goal Data': goalData });
+                    //console.log({ 'Participant Data': participantsData });
                     const participant = participantsData.results.find((participant) => participant.user.id == userData.user.id)
-                    console.log({ participant: participant });
+                    //console.log({ participant: participant });
+
+                    renderLeaderBoardList(participantsData)
 
                     requestData(`https://ridewithgps.com/goal_participants/${participant.id}/trips.json?limit=10000&offset=0`, authToken)
                         .then((trips) => {
                             const filteredTrips = trips.results.filter((trip) => !trip.is_excluded);
-                            console.log({ trips: trips });
+                            //console.log({ trips: trips });
                             renderGoalChart(filteredTrips, goalData.goal);
                             renderGearCharts(filteredTrips, userData);
                             renderRideList(filteredTrips);
 
                         })
+
                 })
         }
+
 
 
         function metersToMiles(meters) {
@@ -184,7 +180,7 @@
             }
 
             const goalDayCount = calculateDays(Date.parse(goalEnd)) + 1;
-            console.log('goal day count', goalDayCount);
+            //console.log('goal day count', goalDayCount);
 
             // Goal Line Generator
             let goalLine = [];
@@ -242,12 +238,12 @@
             const goal_percent = document.getElementById('goal-percent');
             goal_percent.textContent = goalPercentage.toFixed(1);
 
+            document.getElementById('goal-start-date').textContent = `Start: ${goal.starts_on}`;
+            document.getElementById('goal-end-date').textContent = `End: ${goal.ends_on}`;
+
             const average_needed = document.getElementById('average-needed');
             average_needed.textContent = (goalTarget / goalDayCount).toFixed(1);
 
-            const progress_bar = document.getElementById('progress-bar-inner');
-            progress_bar.style = `width: ${goalPercentage}%`;
-            progress_bar.textContent = goalPercentage + "%";
 
             const total_distance = document.getElementById('total-distance');
             total_distance.textContent = total_ridden;
@@ -373,50 +369,72 @@
 
         }
 
+        function hideGoalListContainer(goalsData, userData) {
+            getGoalInfo(goal.id, userData);
+            goalList.style.display = 'none';
+        }
+
+
+        function elementFromHTML(html) {
+            const template = document.createElement('template');
+            template.innerHTML = html.trim();
+            return template.content.firstElementChild;
+        }
 
 
         function renderGoalsList(goalsData, userData) {
-            console.log('goalsData', goalsData)
+            // console.log('goalsData', goalsData)
             const filteredGoals = goalsData.filter((goal) => goal.goal_type == 'distance');
-
+            // console.log('filteredGoals', filteredGoals)
             const goalList = document.getElementById('goals-list');
 
             for (const goal of filteredGoals) {
-                const goalListCard = document.createElement('div');
-                goalListCard.className = 'goal-list-card card';
 
-                const fragments = document.createDocumentFragment();
+                const goalCard = elementFromHTML(`
+                <div class='goal-list-card card'>
+                    <div class='goal-name'>${goal.name}</div>
+                    <div class='goal-image' style='background-image: url("${goal.icon}")'></div>
+                    <div class='goal-distance'>Distance ${Math.round(metersToMiles(goal.goal_params.max))} miles</div>
+                    <div class='goal-start'>${goal.starts_on} to ${goal.ends_on}</div>
+                    </div>
+                    `);
 
-                const goalTitle = document.createElement('div');
-                const goalImage = document.createElement('div');
-                const goalStart = document.createElement('div');
-                const goalValue = document.createElement('div');
 
-                goalTitle.className = 'goal-name';
-                goalTitle.textContent = goal.name;
-                fragments.appendChild(goalTitle);
-
-                goalImage.className = 'goal-image'
-                goalImage.style = `background-image: url(${goal.icon})`;
-                fragments.appendChild(goalImage);
-
-                goalStart.className = 'goal-start';
-                goalStart.textContent = `${goal.starts_on} to ${goal.ends_on}`;
-                fragments.appendChild(goalStart);
-
-                goalValue.className = '';
-                goalValue.textContent = `Distance ${Math.round(metersToMiles(goal.goal_params.max))} miles`;
-                fragments.appendChild(goalValue);
-
-                goalListCard.appendChild(fragments);
-                goalList.appendChild(goalListCard);
-
-                goalListCard.onclick = () => {
+                goalCard.onclick = () => {
                     getGoalInfo(goal.id, userData);
                     goalList.style.display = 'none';
+                    contentContainer.style.display = 'block';
                 }
+                goalList.appendChild(goalCard);
             }
         }
+
+
+        function renderLeaderBoardList(participantsData) {
+            const leaderBoardContainer = document.getElementById('leader-board-container')
+            console.log('results', participantsData);
+
+            for (const rider of participantsData.results) {
+                const riderCard = elementFromHTML(`
+                    <div class='rider-card card'>
+                        <img src='https://ridewithgps.com/photos/${rider.user.highlighted_photo_id}/centi.jpg' class='rider-photo'>
+                        <div class='rider-name'>${rider.user.name}</div>
+                        <div class='rank'>Rank: ${rider.rank}</div>
+                        <div class='rider-distance'>Distance Complete: ${metersToMiles(rider.amount_completed).toFixed(2)} miles</div>
+                        <div class='progress-bar-container'>
+                            <div class='progress-bar-inner' style='width:${(rider.goal_params.percent * 100)}%'>
+                                <div class='rider-percent'>${rider.goal_params.progress_text}</div>      
+                            </div>
+                        </div>
+                    </div>
+
+                `);
+
+                leaderBoardContainer.appendChild(riderCard);
+
+            }
+
+        };
 
 
         function fetchData() {
@@ -431,9 +449,7 @@
                 userUrl = `https://ridewithgps.com/users/current.json`
             }
 
-            // Start Fetching User Data in Promises
-            //fetch(userUrl)
-            //    .then((response) => response.json())
+
             requestData(userUrl, authToken)
                 .then((userData) => {
                     localStorage.setItem('auth_token', userData.user.auth_token);
@@ -445,18 +461,7 @@
                             renderGoalsList(goalsData.results, userData)
                             console.log('goals data!', goalsData);
                         })
-                    // getGoalInfo(userData);
 
-                    // requestData(`https://ridewithgps.com/explore/personal.json?models=trips&sort_by=departed_or_created+DESC&departed_at_max=${goalEnd}&departed_at_min=${goalStart}&trip_fields=id%2Cname%2Cdistance%2Celevation_gain%2Cgear_id%2Cdeparted_at&user_id=${userData.user.id}`, authToken)
-                    //     .then((ridesData) => {
-                    //         console.log({ 'Rides used during the goal time period': ridesData });
-
-                    //         //renderGearCharts(ridesData, userData);
-
-                    //         // renderGoalChart(ridesData.results.trips);
-
-                    //         //renderRideList(ridesData);
-                    //     })
 
 
                 })
