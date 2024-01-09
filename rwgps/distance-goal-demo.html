@@ -405,7 +405,7 @@
                     goalList.style.display = 'none';
                     contentContainer.style.display = 'block';
                 }
-                goalList.appendChild(goalCard);
+                goalList.insertAdjacentElement('afterbegin', goalCard);
             }
         }
 
@@ -438,7 +438,6 @@
 
 
         function fetchData() {
-            // contentContainer.style.display = 'block';
             document.getElementById('sign-in').style.display = 'none';
             let userUrl = null;
             if (!authToken) {
