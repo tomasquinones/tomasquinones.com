@@ -25,7 +25,7 @@
         <div id='goals-list'></div>
     </div>
 
-    <div id='content-container'>
+    <div id='content-container' style='display:none'>
         <div class="titleBar">
             <div>
                 <h1 id="goal-title"></h1>
@@ -438,7 +438,7 @@
 
 
         function fetchData() {
-            contentContainer.style.display = 'block';
+            // contentContainer.style.display = 'block';
             document.getElementById('sign-in').style.display = 'none';
             let userUrl = null;
             if (!authToken) {
