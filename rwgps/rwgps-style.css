@@ -15,6 +15,10 @@ h3 {
     font-size: medium;
 }
 
+#content-container {
+    display: none;
+}
+
 .card-list {
     background-color: #f5f5f5; 
     padding: 0px 0px;
@@ -159,24 +163,7 @@ h3 {
     margin-right: auto; 
 }
 
-#progress-bar-container {
-    box-shadow: inset 0 0 10px darkgrey;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px;
-    line-height: 25px;
-    background-color: #f1f1f1;
-}
 
-#progress-bar-inner {
-    max-width: 100%;
-    background-color: lightblue;
-    box-shadow: inset 0 0 25px blue;
-    border-top-right-radius: 9px;
-    border-bottom-right-radius: 9px;
-    color: whitesmoke;
-    text-align: center;
-}
 
 .scatter-graph-card {
     max-width: 1050px;
@@ -184,10 +171,6 @@ h3 {
 
 .comment-card {
     max-width: 1050px;
-}
-
-#goals-container {
-    
 }
 
 
@@ -207,16 +190,66 @@ h3 {
 }
 
 .goal-image {
-    display: block;
-    width: 95%;
+    width: 200px;
     height: 200px;
-    border-radius:3px;
-    background-position: center;
-    background-size: contain;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius:5px;
+    border-radius: 5px;
+    background-position: center; 
     background-repeat: no-repeat;
-
+    background-size: cover;
 }
 
-#goal-image {
+#goal-details-image {
     float:right; 
+}
+
+.rider-card {
+    padding: 5px;
+}
+
+.rider-name {
+    padding: 5px 10px;
+}
+
+.rank {
+    padding: 5px 10px;
+}
+
+.rider-distance {
+    padding: 5px 10px;
+}
+
+
+.rider-photo {
+    display: block;
+    float: left;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.progress-bar-container {
+    clear: left;
+    box-shadow: inset 0 0 10px darkgrey;
+    margin-left: auto;
+    margin-right: auto;
+    
+    padding: 0px;
+    line-height: 25px;
+    background-color: #f1f1f1;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.progress-bar-inner {
+    z-index: -10;
+    max-width: 100%;
+    background-color: lightblue;
+    box-shadow: inset 0 0 25px blue;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    color: whitesmoke;
+    text-align: center;
+    height: 20px;
 }
