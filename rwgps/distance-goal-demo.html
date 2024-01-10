@@ -6,19 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RWGPS: New Monthly Goal Chart Proof of Concept</title>
     <link rel="stylesheet" href="rwgps-style.css">
+    <link href="https://ridewithgps.com/favicon-32x32.png?2000000008" rel="icon" sizes="32x32" type="image/png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
     <div id='authentication-bar'>
-        <div id='sign-in'><a href=''>Sign In</a>
-            <form action='javascript:' onsubmit='fetchData()' method='post' class='sign-in-form'>
-                <input type='text' name='email' id='emailForm' placeholder='email' />
-                <input type='password' name='password' id='passwordForm' placeholder='password' />
-                <button type='submit'>submit</button>
-            </form>
+        <div id='sign-in'>
+            <h1>Idea Week 2024: Distance Goal Demo</h2>
+                <h2>Sign In</h2>
+                <form action='javascript:' onsubmit='fetchData()' method='post' class='sign-in-form'>
+                    <input type='text' name='email' id='emailForm' placeholder='email' /><br>
+                    <input type='password' name='password' id='passwordForm' placeholder='password' /><br>
+                    <button type='submit'>submit</button>
+                </form>
         </div>
-        <div id='sign-out'><a onclick='signOut()' href=''>Sign Out</a></div>
     </div>
 
     <div id='goals-container'>
@@ -26,6 +28,7 @@
     </div>
 
     <div id='content-container' style='display:none'>
+        <div id='sign-out'><a onclick='signOut()' href=''>Sign Out</a></div>
         <div class="titleBar">
             <div>
                 <h1 id="goal-title"></h1>
@@ -78,8 +81,14 @@
 
         <div class="rides-list-container card">
             <h2>Rides:</h2>
-            <ul class="rideList">
-            </ul>
+            <table id='ride-list-table'>
+                <tr id='header-row'>
+                    <td>Ride Name</td>
+                    <td>Distance</td>
+                    <td>Elevation Gain</td>
+                    <td>Date</td>
+                </tr>
+            </table>
         </div>
 
         <div class='comment-card card'>
@@ -350,24 +359,23 @@
 
 
         function renderRideList(ridesData) {
-
-            const rideList = document.querySelector(".rideList");
+            const rideListTable = document.getElementById('header-row');
 
             for (const ride of ridesData) {
-                const rideName = ride.name;
-                const rideDistance = (ride.distance * 0.000621371).toFixed(2);
+                const rideTableRow = elementFromHTML(`
+                <tr>
+                    <td><a href='https://ridewithgps.com/trips/${ride.id}'>${ride.name}</a></td>
+                    <td>${(ride.distance * 0.000621371).toFixed(2)} miles</td>
+                    <td>${(ride.elevation_gain * 3.28084).toFixed()} feet</td>
+                    <td>${ride.departed_at.split('T')[0]}</td>
+                </tr>
+                `)
 
-                //add ride to goalDays
-
-                const fragment = document.createDocumentFragment();
-                const rideItem = fragment
-                    .appendChild(document.createElement("li"))
-                rideItem.href = `https://ridewithgps.com/trips/${ride.id}`
-                rideItem.textContent = rideName + ", " + rideDistance + " miles, " + (ride.elevation_gain * 3.28084).toFixed() + " feet, on " + ride.departed_at.split('T')[0];
-                rideList.appendChild(fragment);
+                rideListTable.insertAdjacentElement('afterend', rideTableRow);
             }
 
         }
+
 
         function hideGoalListContainer(goalsData, userData) {
             getGoalInfo(goal.id, userData);

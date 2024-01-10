@@ -15,6 +15,15 @@ h3 {
     font-size: medium;
 }
 
+#sign-in {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+
+
 #content-container {
     display: none;
 }
@@ -253,3 +262,26 @@ h3 {
     text-align: center;
     height: 20px;
 }
+
+tr, td{
+    border: 1px solid lightgrey;
+    margin: 0px;
+    padding: 5px;
+}
+
+td > a {
+    text-decoration: none;
+}
+
+#ride-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+
+#header-row {
+    text-align: left;
+    padding: 5px;
+    font-weight: bold;
+}
+
