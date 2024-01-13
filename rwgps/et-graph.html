@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="rwgps.css">
+    <link href="https://ridewithgps.com/favicon-32x32.png?2000000008" rel="icon" sizes="32x32" type="image/png">
+    <script src='riders.js'></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+</head>
+
+<body>
+    <div id='authentication-bar'>
+        <div id='sign-in'>
+            <h1>Idea Week 2024: Estimated Time Graphs</h1>
+            <h2>Sign In</h2>
+            <form action='javascript:' onsubmit='fetchData()' method='post' class='sign-in-form'>
+                <input type='text' name='email' id='emailForm' placeholder='email' /><br>
+                <input type='password' name='password' id='passwordForm' placeholder='password' /><br>
+                <button type='submit'>submit</button>
+            </form>
+        </div>
+        <div id='sign-out'><a onclick='signOut()' href=''>Sign Out</a></div>
+    </div>
+
+    <div id='content-container'>
+        <h2> Estimated Time Profle:</h2>
+        <h3>Speed (mph) by Grade</h3>
+        <div id='et-graph' style='height: 600px;'></div>
+
+        <h3>Pace by Grade</h3>
+        <div id='pace-graph'></div>
+
+        <h3>Comparisons</h3>
+        <div id='compare-graph'></div>
+
+        <div id='compare-against-zack'></div>
+    </div>
+
+
+    <!-- TODO <form>
+        <label for="imperial">Imperial</label><br>
+        <input type="radio" id="imperial" name="units"><br>
+        <label for="metric">Metric</label><br>
+        <input type="radio" id="metric" name="units">
+    </form> -->
+
+    <!-- <form style='border:1px solid gray;'>
+        <input type='checkbox' id='cullen' name='cullen' value='Cullen'>
+        <label for='cullen'>Cullen</label><br>
+        <input type='checkbox' id='zack' name='zack' value='Zack'>
+        <label for='zack'>Zack</label><br>
+        <input type='checkbox' id='notchas' name='notchas' value='notchas'>
+        <label for='notchas'>Notchas</label><br>
+    </form> -->
+
+
+    <script>
+        let authToken = localStorage.getItem('auth_token');
+
+        console.log(authToken)
+
+        function signOut() {
+            localStorage.clear();
+            document.getElementById('content-container').style.display = 'none';
+            document.getElementById('sign-in').style.display = 'block';
+        }
+
+        let grades = [];
+        for (let d = -15; d < 16; d++) {
+            grades.push(d);
+        }
+
+
+
+        function requestData(url, authToken) {
+            const authHeaders = new Headers();
+            if (authToken) { authHeaders.append('x-rwgps-auth-token', authToken) };
+            authHeaders.append('x-rwgps-api-key', 'aa49d17b');
+            authHeaders.append('x-rwgps-api-version', '3');
+
+            const request = new Request(url, {
+                headers: authHeaders
+            });
+            return fetch(request)
+                .then((response) => response.json())
+
+        }
+        function fetchData() {
+            document.getElementById('sign-in').style.display = 'none';
+            let userUrl = null;
+            if (!authToken) {
+                const email = document.getElementById('emailForm').value;
+                const password = document.getElementById('passwordForm').value;
+                userUrl = `https://ridewithgps.com/users/current.json?email=${email}&password=${password}`;
+            } else {
+                userUrl = `https://ridewithgps.com/users/current.json`
+            }
+
+
+            requestData(userUrl, authToken)
+                .then((userData) => {
+                    localStorage.setItem('auth_token', userData.user.auth_token);
+                    authToken = localStorage.getItem('auth_token');
+                    console.log('userData', userData.user.user_summary)
+
+                    const speedAtGrade = Object.entries(userData.user.user_summary).map((item) => [Number(item[0]), (item[1][0] * 0.621371)]);
+                    const paceAtGrade = Object.entries(userData.user.user_summary).map((item) => [Number(item[0]), 60 / (item[1][0] * 0.621371)]);
+                    const quantities = Object.entries(userData.user.user_summary).map((item) => [Number(item[0]), item[1][1]]);
+
+                    const zackSpeedAtGrade = zackData.map((item) => [Number(item[0]), (item[1][0] * 0.621371)]);
+                    const zackPaceAtGrade = zackData.map((item) => [Number(item[0]), 60 / (item[1][0] * 0.621371)]);
+                    const zackQuantities = zackData.map((item) => [Number(item[0]), item[1][1]]);
+
+                    speedAtGrade.sort((a, b) => a[0] - b[0]);
+                    paceAtGrade.sort((a, b) => a[0] - b[0]);
+                    quantities.sort((a, b) => a[0] - b[0]);
+
+                    zackSpeedAtGrade.sort((a, b) => a[0] - b[0]);
+                    zackPaceAtGrade.sort((a, b) => a[0] - b[0]);
+                    zackQuantities.sort((a, b) => a[0] - b[0]);
+
+                    const errorBars = quantities.map((n) => {
+                        return 2 * 2 / Math.sqrt(n[1]);
+                    })
+
+                    const speeds = speedAtGrade.map((item) => Number(item[1]));
+                    const paces = paceAtGrade.map((item) => Number(item[1]));
+
+                    const zackSpeeds = zackSpeedAtGrade.map((item) => Number(item[1]));
+                    const zackPaces = zackPaceAtGrade.map((item) => Number(item[1]));
+
+                    // Graph Me, speed with error bars
+                    let graphSpeedWithErrorBars = [
+                        {
+                            x: grades,
+                            y: speeds,
+                            error_y: {
+                                type: 'data',
+                                array: errorBars,
+                                visible: true
+                            },
+                            type: 'scatter'
+                        }
+                    ];
+
+                    const etGraph = document.getElementById('et-graph');
+                    Plotly.newPlot(etGraph, graphSpeedWithErrorBars);
+
+                    // Graph me pace with error bars
+                    let graphPaceWithErrorBars = [
+                        {
+                            x: grades,
+                            y: paces,
+                            error_y: {
+                                type: 'data',
+                                array: errorBars,
+                                visible: true
+                            },
+                            type: 'scatter'
+                        }
+                    ];
+
+                    const paceGraph = document.getElementById('pace-graph');
+                    Plotly.newPlot(paceGraph, graphPaceWithErrorBars);
+
+                    // Compare Speeds at Grade to Pace at Grade
+                    var lineSpeeds = {
+                        x: grades,
+                        y: speeds,
+                        name: 'Speed(mph)',
+                        type: 'scatter'
+                    };
+                    var linePaces = {
+                        x: grades,
+                        y: paces,
+                        name: 'Pace (mins/mile)',
+                        type: 'scatter'
+                    };
+                    var compareGraphLayout = {
+                        title: 'Speed vs Pace',
+                        xaxis: {
+                            title: 'Grades'
+                        },
+                        yaxis: {
+                            title: 'Speed and Pace'
+                        }
+                    };
+                    var compareGraphData = [lineSpeeds, linePaces];
+                    Plotly.newPlot('compare-graph', compareGraphData, compareGraphLayout);
+
+                    //Compare compare-against-zack
+                    var lineSpeeds2 = {
+                        x: grades,
+                        y: speeds,
+                        name: 'Me',
+                        type: 'scatter'
+                    };
+                    var lineZackSpeeds = {
+                        x: grades,
+                        y: zackSpeeds,
+                        name: 'Zack',
+                        type: 'scatter'
+                    };
+                    var compareZackGraphLayout = {
+                        title: 'Speed vs Pace',
+                        xaxis: {
+                            title: 'Grades'
+                        },
+                        yaxis: {
+                            title: 'Speed'
+                        }
+                    };
+                    var compareZackGraphData = [lineSpeeds2, lineZackSpeeds];
+                    Plotly.newPlot('compare-against-zack', compareZackGraphData, compareZackGraphLayout);
+
+
+                }).then()
+        }
+
+    </script>
+
+</body>
+
+</html>
