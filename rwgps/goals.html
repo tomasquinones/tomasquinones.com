@@ -7,11 +7,14 @@
     <title>RWGPS: New Monthly Goal Chart Proof of Concept</title>
     <link rel="stylesheet" href="rwgps-style.css">
     <link href="https://ridewithgps.com/favicon-32x32.png?2000000008" rel="icon" sizes="32x32" type="image/png">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/rough-viz@2.0.5"></script>
+
 </head>
 
 <body>
-    <div id='authentication-bar'>
+    <!-- <div id='authentication-bar'>
         <div id='sign-in'>
             <h1>Idea Week 2024: Distance Goal Demo</h2>
                 <h2>Sign In</h2>
@@ -21,7 +24,9 @@
                     <button type='submit'>submit</button>
                 </form>
         </div>
-    </div>
+    </div> -->
+    <div id='sign-out'><a onclick='signOut()' href='index.html'>Sign Out</a></div>
+    <div id='back'><a href='index.html'>Back</a></div>
 
     <div id='goals-container'>
         <div id='goals-list'>
@@ -29,8 +34,7 @@
         </div>
     </div>
 
-    <div id='content-container' style='display:none'>
-        <div id='sign-out'><a onclick='signOut()' href=''>Sign Out</a></div>
+    <div id='content-container'>
         <div class="titleBar">
             <div>
                 <h1 id="goal-title"></h1>
@@ -38,7 +42,7 @@
         </div>
 
         <div class="card line-chart">
-            <canvas id="goal-chart"></canvas>
+            <div id="goal-chart"></div>
         </div>
 
         <div class="goal-details-container">
@@ -62,16 +66,11 @@
 
             <div class="pie-chart card">
                 <h2>Gear by Distance:</h2>
-
-                <!-- <ul class=" gearList">
-                </ul> -->
-                <canvas id='gear-distances-chart'></canvas>
+                <div id='gear-distances-chart'></div>
             </div>
             <div class="pie-chart card">
                 <h2>Gear by Trips:</h2>
-                <!-- <ul class=" gearList">
-                </ul> -->
-                <canvas id='gear-rides-chart'></canvas>
+                <div id='gear-trips-chart'></div>
             </div>
         </div>
 
@@ -99,14 +98,12 @@
 
     <script>
         let authToken = localStorage.getItem('auth_token');
-        const contentContainer = document.getElementById('content-container');
-        contentContainer.style.display = 'none';
+        console.log(authToken);
 
-        // if (authToken) {
-        //     fetchData();
-        // } else {
-        //     contentContainer.style.display = 'none';
-        // }
+        if (authToken) {
+            fetchData();
+        }
+
 
         function signOut() {
             localStorage.clear();
@@ -114,6 +111,10 @@
             document.getElementById('sign-in').style.display = 'block';
         }
 
+
+        function metersToMiles(meters) {
+            return meters * 0.000621371
+        }
 
 
         function requestData(url, authToken) {
@@ -131,7 +132,6 @@
         }
 
 
-
         function calculateTotalDistance(rideList) {
             let dayDistance = 0;
             for (const ride of rideList) {
@@ -140,7 +140,6 @@
             }
             return dayDistance;
         }
-
 
 
         function getGoalInfo(goalId, userData) {
@@ -173,9 +172,7 @@
 
 
 
-        function metersToMiles(meters) {
-            return meters * 0.000621371
-        }
+
 
         function renderGoalChart(rides, goal) {
             const goalDistance = metersToMiles(goal.goal_params.target_amount); //TODO Convert to Miles
@@ -255,56 +252,120 @@
             const average_needed = document.getElementById('average-needed');
             average_needed.textContent = (goalTarget / goalDayCount).toFixed(1);
 
-
             const total_distance = document.getElementById('total-distance');
             total_distance.textContent = total_ridden;
 
-            const ctx = document.getElementById('goal-chart');
-            const mixedChart = new Chart(ctx, {
-                data: {
-                    datasets: [
-                        {
-                            type: 'bar',
-                            label: 'Daily Distances',
-                            data: distancePerDay,
-                            backgroundColor: 'blue',
-                            borderColor: 'blue',
-                            borderWidth: 2,
-                            borderRadius: 3,
-
-                        }, {
-                            type: 'line',
-                            label: '500 mile Goal',
-                            data: goalLine,
-                            pointRadius: 0,
-                            backgroundColor: '#ff4000',
-                            borderColor: '#ff4000'
-                        }, {
-                            type: 'line',
-                            label: 'Stay On Track!',
-                            data: stayOnTrack,
-                            pointRadius: 0,
-                            backgroundColor: '#ffd700',
-                            borderColor: '#ffd700',
-                            pointRadius: 2,
-                            hoverBorderWidth: 10,
-
-                        }, {
-                            type: 'line',
-                            label: 'Cumulative Miles',
-                            data: cumulativeDistances,
-                            fill: true,
-                            pointRadius: 3,
-                            hoverBorderWidth: 10,
-                            backgroundColor: 'hsl(140, 100%, 30%, 50%)',
-                            borderColor: '#006622',
-                            pointStyle: 'rectRounded',
-                        },
-
-                    ],
-                    labels: daysOfMonth
+            //Goal Chart using Plotly
+            let chartLines = [{
+                x: daysOfMonth,
+                y: goalLine,
+                type: 'scatter',
+                name: 'Goal',
+                line: {
+                    color: '#FFD700',
+                    width: 5
                 }
-            });
+            }, {
+                x: daysOfMonth,
+                y: stayOnTrack,
+                type: 'scatter',
+                name: 'Ave Per Day',
+                line: {
+                    color: '#FFD700',
+                    width: 3,
+                    dash: 'dash'
+                }
+            }, {
+                x: daysOfMonth,
+                y: cumulativeDistances,
+                type: 'scatter',
+                fill: 'tozeroy',
+                opacity: .2,
+                //fillcolor: 'green',
+                mode: 'lines+markers',
+                fillpattern: {
+                    bgcolor: '#FFD700',
+                },
+                name: 'Cumulative Distances'
+            }, {
+                x: daysOfMonth,
+                y: distancePerDay,
+                type: 'bar',
+                name: 'Distance per Day',
+                opacity: 1,
+                fillpattern: {
+                }
+            }];
+
+            let layout = {
+                autosize: true,
+                showlegend: true,
+                legend: {
+                    //x: .01,
+                    //y: 1.05,
+                    orientation: 'h',
+                },
+                margin: {
+                    t: 25,
+                    r: 15,
+                    b: 15,
+                    l: 30,
+                    pad: 0
+                }
+            };
+
+            let goalChartConfig = {
+                responsive: true
+            }
+
+            Plotly.newPlot('goal-chart', chartLines, layout);
+
+            // const ctx = document.getElementById('goal-chart');
+            // const mixedChart = new Chart(ctx, {
+            //     data: {
+            //         datasets: [
+            //             {
+            //                 type: 'bar',
+            //                 label: 'Daily Distances',
+            //                 data: distancePerDay,
+            //                 backgroundColor: 'blue',
+            //                 borderColor: 'blue',
+            //                 borderWidth: 2,
+            //                 borderRadius: 3,
+
+            //             }, {
+            //                 type: 'line',
+            //                 label: '500 mile Goal',
+            //                 data: goalLine,
+            //                 pointRadius: 0,
+            //                 backgroundColor: '#ff4000',
+            //                 borderColor: '#ff4000'
+            //             }, {
+            //                 type: 'line',
+            //                 label: 'Stay On Track!',
+            //                 data: stayOnTrack,
+            //                 pointRadius: 0,
+            //                 backgroundColor: '#ffd700',
+            //                 borderColor: '#ffd700',
+            //                 pointRadius: 2,
+            //                 hoverBorderWidth: 10,
+
+            //             }, {
+            //                 type: 'line',
+            //                 label: 'Cumulative Miles',
+            //                 data: cumulativeDistances,
+            //                 fill: true,
+            //                 pointRadius: 3,
+            //                 hoverBorderWidth: 10,
+            //                 backgroundColor: 'hsl(140, 100%, 30%, 30%)',
+            //                 borderColor: '#006622',
+            //                 pointStyle: 'rectRounded',
+            //             },
+
+            //         ],
+            //         labels: daysOfMonth
+            //     }
+            // });
         }
 
 
@@ -355,8 +416,40 @@
             gearNames = gearNames.map((name) => name ? name : 'None');
             // console.log(gearNames);
 
-            const pieChart = new Chart(gearDistanceChart, makeGearConfig(gearNames, gearDistances));
-            const pieChart2 = new Chart(gearRidesChart, makeGearConfig(gearNames, gearTripCounts));
+            let gearChartDistances = [{
+                values: gearDistances,
+                labels: gearNames,
+                text: gearDistances,
+                type: 'pie',
+                hole: .4
+
+            }]
+
+            let gearChartTrips = [{
+                values: gearTripCounts,
+                labels: gearNames,
+                text: gearTripCounts,
+                type: 'pie',
+                hole: .4
+            }]
+
+            let gearChartLayout = {
+                height: 320,
+                width: 320,
+                margin: { "t": 0, "b": 0, "l": 0, "r": 0 },
+                showlegend: true,
+                legend: {
+                    x: 0.1,
+                    y: 1.35,
+                    orientation: 'v',
+                }
+            }
+
+            Plotly.newPlot('gear-distances-chart', gearChartDistances, gearChartLayout);
+            Plotly.newPlot('gear-trips-chart', gearChartTrips, gearChartLayout);
+
+            // const pieChart = new Chart(gearDistanceChart, makeGearConfig(gearNames, gearDistances));
+            //const pieChart2 = new Chart(gearRidesChart, makeGearConfig(gearNames, gearTripCounts));
         }
 
 
@@ -413,7 +506,7 @@
                 goalCard.onclick = () => {
                     getGoalInfo(goal.id, userData);
                     goalList.style.display = 'none';
-                    contentContainer.style.display = 'block';
+                    document.getElementById('content-container').style.display = 'block';
                 }
                 goalList.insertAdjacentElement('afterbegin', goalCard);
             }
@@ -448,7 +541,6 @@
 
 
         function fetchData() {
-            document.getElementById('sign-in').style.display = 'none';
             let userUrl = null;
             if (!authToken) {
                 const email = document.getElementById('emailForm').value;

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RWGPS Tools by Tomas Quinones</title>
+    <link href="https://ridewithgps.com/favicon-32x32.png?2000000008" rel="icon" sizes="32x32" type="image/png">
+    <link rel="stylesheet" href="rwgps.css">
+    <script></script>
+</head>
+
+<body>
+
+    <div id='sign-out'><a onclick='signOut()' href=''>Sign Out</a></div>
+    <div id='authentication-bar'>
+        <div id='sign-in'>
+            <h1>RWGPS Tools</h1>
+            <h2 id='prompt'>Sign Into Your Ridewithgps.com Account:</h2>
+            <form action='javascript:' onsubmit='fetchData()' method='post' class='sign-in-form'>
+                <input type='text' name='email' id='emailForm' placeholder='email' /><br>
+                <input type='password' name='password' id='passwordForm' placeholder='password' /><br>
+                <button type='submit'>submit</button>
+            </form>
+        </div>
+
+        <div id='welcome' style='display:none; width: 100%; text-align: center;'>
+            <h2>You are signed in as <span id='user'></span>.</h2>
+        </div>
+
+
+        <div id='content-container'>
+
+            <a href='goals.html' title='Goal Graphs'>
+                <div class='goal-list-card card'>Goal Graphs<br>
+                    <img src='goal-charts.png' style='width: 100%;'>
+                </div>
+            </a>
+            <a href='et-graph.html' title='Estimated Time Graphs'>
+                <div class='goal-list-card card'>
+                    Estimated Time Graphs<br>
+                    <img src='et-graphs.png' style='width: 100%;'>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+
+    <script>
+        let authToken = localStorage.getItem('auth_token');
+        console.log('localStorage before authentication', authToken)
+        document.getElementById('sign-out').style.display = 'none';
+
+
+        if (authToken) {
+            document.getElementById('sign-in').style.display = 'none';
+            document.getElementById('sign-out').style.display = 'block';
+            document.getElementById('welcome').style.display = 'block';
+        }
+
+        function signOut() {
+            localStorage.clear();
+            document.getElementById('content-container').style.display = 'none';
+            document.getElementById('sign-in').style.display = 'block';
+        }
+
+
+
+        function requestData(url, authToken) {
+            const authHeaders = new Headers();
+            if (authToken) { authHeaders.append('x-rwgps-auth-token', authToken) };
+            authHeaders.append('x-rwgps-api-key', 'aa49d17b');
+            authHeaders.append('x-rwgps-api-version', '3');
+
+            const request = new Request(url, {
+                headers: authHeaders
+            });
+            return fetch(request)
+                .then((response) => response.json())
+        }
+
+
+        function fetchData() {
+            let userUrl = null;
+            if (!authToken) {
+                const email = document.getElementById('emailForm').value;
+                const password = document.getElementById('passwordForm').value;
+                if (email == '' || password == '') {
+                    return document.getElementById('prompt').textContent = 'Please Enter a valid email and password';
+                }
+
+                userUrl = `https://ridewithgps.com/users/current.json?email=${email}&password=${password}`;
+                document.getElementById('sign-in').style.display = 'none';
+                document.getElementById('welcome').style.display = 'block';
+                document.getElementById('sign-out').style.display = 'block';
+
+
+            } else {
+                userUrl = `https://ridewithgps.com/users/current.json`
+                document.getElementById('sign-in').style.display = 'none';
+                document.getElementById('welcome').style.display = 'block';
+                document.getElementById('sign-out').style.display = 'block';
+
+
+            }
+
+
+            requestData(userUrl, authToken)
+                .then((userData) => {
+                    localStorage.setItem('auth_token', userData.user.auth_token);
+                    authToken = localStorage.getItem('auth_token');
+                    console.log('userData', userData.user.user_summary);
+                    console.log('userData.user', userData.user);
+                    console.log('localStorage After Authentication', authToken)
+                    document.getElementById('user').textContent = userData.user.display_name;
+                });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

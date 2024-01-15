@@ -12,7 +12,8 @@
 </head>
 
 <body>
-    <div id='authentication-bar'>
+    <div id='sign-out'><a onclick='signOut()' href='index.html'>Sign Out</a></div>
+    <!-- <div id='authentication-bar'>
         <div id='sign-in'>
             <h1>Idea Week 2024: Estimated Time Graphs</h1>
             <h2>Sign In</h2>
@@ -22,8 +23,7 @@
                 <button type='submit'>submit</button>
             </form>
         </div>
-        <div id='sign-out'><a onclick='signOut()' href=''>Sign Out</a></div>
-    </div>
+    </div> -->
 
     <div id='content-container'>
         <h2> Estimated Time Profle:</h2>
@@ -35,7 +35,6 @@
 
         <h3>Comparisons</h3>
         <div id='compare-graph'></div>
-
         <div id='compare-against-zack'></div>
     </div>
 
@@ -59,20 +58,17 @@
 
     <script>
         let authToken = localStorage.getItem('auth_token');
-
         console.log(authToken)
+
+        if (authToken) {
+            fetchData();
+        }
 
         function signOut() {
             localStorage.clear();
             document.getElementById('content-container').style.display = 'none';
             document.getElementById('sign-in').style.display = 'block';
         }
-
-        let grades = [];
-        for (let d = -15; d < 16; d++) {
-            grades.push(d);
-        }
-
 
 
         function requestData(url, authToken) {
@@ -88,8 +84,10 @@
                 .then((response) => response.json())
 
         }
+
+
         function fetchData() {
-            document.getElementById('sign-in').style.display = 'none';
+            // document.getElementById('sign-in').style.display = 'none';
             let userUrl = null;
             if (!authToken) {
                 const email = document.getElementById('emailForm').value;
@@ -132,6 +130,10 @@
                     const zackSpeeds = zackSpeedAtGrade.map((item) => Number(item[1]));
                     const zackPaces = zackPaceAtGrade.map((item) => Number(item[1]));
 
+                    let grades = [];
+                    for (let d = -15; d < 16; d++) {
+                        grades.push(d);
+                    }
                     // Graph Me, speed with error bars
                     let graphSpeedWithErrorBars = [
                         {
