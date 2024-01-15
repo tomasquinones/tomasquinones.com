@@ -492,11 +492,17 @@
             const goalList = document.getElementById('goals-list');
 
             for (const goal of filteredGoals) {
+                let goalPic = goal.icon;
+                if (!goal.icon.includes('https')) {
+                    goalPic = `https://ridewithgps.com${goal.icon}`
+                    console.log(goalPic);
+                }
+
 
                 const goalCard = elementFromHTML(`
                 <div class='goal-list-card card'>
                     <div class='goal-name'>${goal.name}</div>
-                    <div class='goal-image' style='background-image: url("${goal.icon}")'></div>
+                    <div class='goal-image' style='background-image: url("${goalPic}")'></div>
                     <div class='goal-distance'>Distance ${Math.round(metersToMiles(goal.goal_params.max))} miles</div>
                     <div class='goal-start'>${goal.starts_on} to ${goal.ends_on}</div>
                     </div>
