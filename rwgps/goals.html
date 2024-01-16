@@ -115,9 +115,13 @@
             return meters * 0.000621371;
         }
 
+
         function metersToFeet(meters) {
             return meters * 3.281;
         }
+
+
+
 
 
         function requestData(url, authToken) {
@@ -175,8 +179,6 @@
 
 
 
-
-
         function renderGoalChart(rides, goal) {
             const goalDistance = metersToMiles(goal.goal_params.target_amount); //TODO Convert to Miles
             const goalTarget = goalDistance; //TODO Convert to miles
@@ -184,6 +186,8 @@
             const goalStart = goal.starts_on;
             const goalEnd = goal.ends_on;
             const goalStartDate = Date.parse(goalStart);
+
+
 
             function calculateDays(rideDate) {
                 days = Math.floor((rideDate - goalStartDate) / (24 * 60 * 60 * 1000));
@@ -228,9 +232,14 @@
 
             const distancePerDay = goalDays.map(calculateTotalDistance)
 
+
+
             const goalLogo = document.getElementById('goal-image');
             const goalImageThumb = document.createElement('img');
-            goalImageThumb.src = goal.icon;
+            goalImageThumb.src = goal.icon.includes('https') ? goal.icon : `https://ridewithgps.com${goal.icon}`;
+
+
+
             goalLogo.appendChild(goalImageThumb);
 
             const originalGoal = document.getElementById('original-goal')
@@ -506,19 +515,17 @@
                     goalType = 'Moving Time ' + Math.round(goal.goal_params.max / 60 / 60) + ' hours';
                 }
 
-                let goalPic = goal.icon;
-                if (!goal.icon.includes('https')) {
-                    goalPic = `https://ridewithgps.com${goal.icon}`
-                }
+
+                let goalIcon = goal.icon.includes('https') ? goal.icon : "https://ridewithgps.com" + goal.icon;
 
                 const goalCard = elementFromHTML(`
                 <div class='goal-list-card card'>
                     <h2 class='goal-name'>${goal.name}</h2>
-                    <div class='goal-image' style='background-image: url("${goalPic}")'></div>
-                    <div class='goal-value'>${goalType}</div>
+                    <div class='goal-image' style='background-image: url("${goalIcon}")'></div>
+                    <div class='goal-value'> ${goalType}</div>
                     <div class='goal-start'>${goal.starts_on} to ${goal.ends_on}</div>
-                    </div>
-                    `);
+                    </div >
+                `);
 
                 //const goalType = '';
                 goalCard.onclick = () => {
@@ -537,19 +544,19 @@
 
             for (const rider of participantsData.results) {
                 const riderCard = elementFromHTML(`
-                    <div class='rider-card card'>
-                        <img src='https://ridewithgps.com/photos/${rider.user.highlighted_photo_id}/centi.jpg' class='rider-photo'>
+                < div class='rider-card card' >
+                    <img src='https://ridewithgps.com/photos/${rider.user.highlighted_photo_id}/centi.jpg' class='rider-photo'>
                         <div class='rider-name'>${rider.user.name}</div>
                         <div class='rank'>Rank: ${rider.rank}</div>
                         <div class='rider-distance'>Distance Complete: ${metersToMiles(rider.amount_completed).toFixed(2)} miles</div>
                         <div class='progress-bar-container'>
                             <div class='progress-bar-inner' style='width:${(rider.goal_params.percent * 100)}%'>
-                                <div class='rider-percent'>${rider.goal_params.progress_text}</div>      
+                                <div class='rider-percent'>${rider.goal_params.progress_text}</div>
                             </div>
                         </div>
                     </div>
 
-                `);
+            `);
 
                 leaderBoardContainer.appendChild(riderCard);
 
