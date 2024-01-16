@@ -13,17 +13,6 @@
 </head>
 
 <body>
-    <!-- <div id='authentication-bar'>
-        <div id='sign-in'>
-            <h1>Idea Week 2024: Distance Goal Demo</h2>
-                <h2>Sign In</h2>
-                <form action='javascript:' onsubmit='fetchData()' method='post' class='sign-in-form'>
-                    <input type='text' name='email' id='emailForm' placeholder='email' /><br>
-                    <input type='password' name='password' id='passwordForm' placeholder='password' /><br>
-                    <button type='submit'>submit</button>
-                </form>
-        </div>
-    </div> -->
     <div id='sign-out'><a onclick='signOut()' href='index.html'>Sign Out</a></div>
     <div id='back'><a href='index.html'>Back</a></div>
 
@@ -50,15 +39,13 @@
                 <div id='goal-start-date'></div>
                 <div id='goal-end-date'></div>
                 <div>You will need to ride an average of <span id="average-needed"></span> miles per day to complete
-                    this
-                    goal.</div>
+                    this goal.</div>
                 <div>You have completed <span id="goal-percent"></span>% of this goal.</div>
                 <div class='goal-completed'>You finished this goal by riding a total of <span
                         id='total-distance'></span>
                     miles!</div>
                 <div>While activities marked 'private' are shown in your ride list for the goal, only you will be able
-                    to
-                    view their details and not viewable by other participants.</div>
+                    to view their details and not viewable by other participants.</div>
 
                 <div id='original-goal'></div>
             </div>
@@ -143,6 +130,13 @@
                 dayDistance += Number(rideDistance);
             }
             return dayDistance;
+        }
+
+
+        function elementFromHTML(html) {
+            const template = document.createElement('template');
+            template.innerHTML = html.trim();
+            return template.content.firstElementChild;
         }
 
 
@@ -259,6 +253,11 @@
 
             const total_distance = document.getElementById('total-distance');
             total_distance.textContent = total_ridden;
+
+            const goalDetails = elementFromHTML(`
+
+            <div>Total Distance Ridden ${}</div>
+            `);
 
             //Goal Chart using Plotly
             let chartLines = [{
@@ -431,14 +430,6 @@
             getGoalInfo(goal.id, userData);
             goalList.style.display = 'none';
         }
-
-
-        function elementFromHTML(html) {
-            const template = document.createElement('template');
-            template.innerHTML = html.trim();
-            return template.content.firstElementChild;
-        }
-
 
 
         function renderGoalsList(goalsData, userData) {

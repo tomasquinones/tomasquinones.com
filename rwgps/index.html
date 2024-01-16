@@ -57,6 +57,7 @@
             document.getElementById('sign-in').style.display = 'none';
             document.getElementById('sign-out').style.display = 'block';
             document.getElementById('welcome').style.display = 'block';
+            document.getElementById('user').textContent = localStorage.getItem('userID');
         }
 
         function signOut() {
@@ -109,11 +110,12 @@
             requestData(userUrl, authToken)
                 .then((userData) => {
                     localStorage.setItem('auth_token', userData.user.auth_token);
+                    localStorage.setItem('userID', userData.user.display_name);
                     authToken = localStorage.getItem('auth_token');
                     console.log('userData', userData.user.user_summary);
                     console.log('userData.user', userData.user);
-                    console.log('localStorage After Authentication', authToken)
-                    document.getElementById('user').textContent = userData.user.display_name;
+                    console.log('localStorage After Authentication', authToken);
+                    document.getElementById('user').append(userData.user.display_name);// = userData.user.display_name;
                 });
         }
 
