@@ -121,9 +121,6 @@
         }
 
 
-
-
-
         function requestData(url, authToken) {
             const authHeaders = new Headers();
             if (authToken) { authHeaders.append('x-rwgps-auth-token', authToken) };
@@ -232,13 +229,9 @@
 
             const distancePerDay = goalDays.map(calculateTotalDistance)
 
-
-
             const goalLogo = document.getElementById('goal-image');
             const goalImageThumb = document.createElement('img');
             goalImageThumb.src = goal.icon.includes('https') ? goal.icon : `https://ridewithgps.com${goal.icon}`;
-
-
 
             goalLogo.appendChild(goalImageThumb);
 
@@ -331,55 +324,7 @@
             }
 
             Plotly.newPlot('goal-chart', chartLines, layout);
-
-            // const ctx = document.getElementById('goal-chart');
-            // const mixedChart = new Chart(ctx, {
-            //     data: {
-            //         datasets: [
-            //             {
-            //                 type: 'bar',
-            //                 label: 'Daily Distances',
-            //                 data: distancePerDay,
-            //                 backgroundColor: 'blue',
-            //                 borderColor: 'blue',
-            //                 borderWidth: 2,
-            //                 borderRadius: 3,
-
-            //             }, {
-            //                 type: 'line',
-            //                 label: '500 mile Goal',
-            //                 data: goalLine,
-            //                 pointRadius: 0,
-            //                 backgroundColor: '#ff4000',
-            //                 borderColor: '#ff4000'
-            //             }, {
-            //                 type: 'line',
-            //                 label: 'Stay On Track!',
-            //                 data: stayOnTrack,
-            //                 pointRadius: 0,
-            //                 backgroundColor: '#ffd700',
-            //                 borderColor: '#ffd700',
-            //                 pointRadius: 2,
-            //                 hoverBorderWidth: 10,
-
-            //             }, {
-            //                 type: 'line',
-            //                 label: 'Cumulative Miles',
-            //                 data: cumulativeDistances,
-            //                 fill: true,
-            //                 pointRadius: 3,
-            //                 hoverBorderWidth: 10,
-            //                 backgroundColor: 'hsl(140, 100%, 30%, 30%)',
-            //                 borderColor: '#006622',
-            //                 pointStyle: 'rectRounded',
-            //             },
-
-            //         ],
-            //         labels: daysOfMonth
-            //     }
-            // });
         }
-
 
 
         function renderGearCharts(ridesData, userData) {
@@ -460,8 +405,6 @@
             Plotly.newPlot('gear-distances-chart', gearChartDistances, gearChartLayout);
             Plotly.newPlot('gear-trips-chart', gearChartTrips, gearChartLayout);
 
-            // const pieChart = new Chart(gearDistanceChart, makeGearConfig(gearNames, gearDistances));
-            //const pieChart2 = new Chart(gearRidesChart, makeGearConfig(gearNames, gearTripCounts));
         }
 
 
