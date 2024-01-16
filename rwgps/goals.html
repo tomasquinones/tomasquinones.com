@@ -9,7 +9,6 @@
     <link href="https://ridewithgps.com/favicon-32x32.png?2000000008" rel="icon" sizes="32x32" type="image/png">
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
-    <script src="https://unpkg.com/rough-viz@2.0.5"></script>
 
 </head>
 
@@ -113,7 +112,11 @@
 
 
         function metersToMiles(meters) {
-            return meters * 0.000621371
+            return meters * 0.000621371;
+        }
+
+        function metersToFeet(meters) {
+            return meters * 3.281;
         }
 
 
@@ -150,7 +153,7 @@
                     const [participantsData, goalData] = combinedData;
 
                     document.getElementById('goal-title').textContent = goalData.goal.name;
-                    //console.log({ 'Goal Data': goalData });
+                    console.log({ 'Goal Data': goalData });
                     //console.log({ 'Participant Data': participantsData });
                     const participant = participantsData.results.find((participant) => participant.user.id == userData.user.id)
                     //console.log({ participant: participant });
@@ -485,30 +488,39 @@
         }
 
 
+
         function renderGoalsList(goalsData, userData) {
             // console.log('goalsData', goalsData)
-            const filteredGoals = goalsData.filter((goal) => goal.goal_type == 'distance');
-            // console.log('filteredGoals', filteredGoals)
+            //const filteredGoals = goalsData.filter((goal) => goal.goal_type == 'distance');
+
             const goalList = document.getElementById('goals-list');
 
-            for (const goal of filteredGoals) {
+            for (const goal of goalsData) {
+                let goalType = 'unknown';
+
+                if (goal.goal_type == 'distance') {
+                    goalType = 'Distance ' + Math.round(metersToMiles(goal.goal_params.max)).toLocaleString('en-US') + ' miles';
+                } else if (goal.goal_type == 'elevation_gain') {
+                    goalType = 'Elevation Gain ' + Math.round(metersToFeet(goal.goal_params.max)).toLocaleString('en-US') + ' feet';
+                } else if (goal.goal_type == 'moving_time') {
+                    goalType = 'Moving Time ' + Math.round(goal.goal_params.max / 60 / 60) + ' hours';
+                }
+
                 let goalPic = goal.icon;
                 if (!goal.icon.includes('https')) {
                     goalPic = `https://ridewithgps.com${goal.icon}`
-                    console.log(goalPic);
                 }
-
 
                 const goalCard = elementFromHTML(`
                 <div class='goal-list-card card'>
-                    <div class='goal-name'>${goal.name}</div>
+                    <h2 class='goal-name'>${goal.name}</h2>
                     <div class='goal-image' style='background-image: url("${goalPic}")'></div>
-                    <div class='goal-distance'>Distance ${Math.round(metersToMiles(goal.goal_params.max))} miles</div>
+                    <div class='goal-value'>${goalType}</div>
                     <div class='goal-start'>${goal.starts_on} to ${goal.ends_on}</div>
                     </div>
                     `);
 
-
+                //const goalType = '';
                 goalCard.onclick = () => {
                     getGoalInfo(goal.id, userData);
                     goalList.style.display = 'none';
