@@ -235,7 +235,7 @@
             originalGoalLink.textContent = originalGoalLink.href;
             originalGoal.appendChild(originalGoalLink);
 
-            let sum = 0
+            let sum = 0;
             let cumulativeDistances = distancePerDay.map(v => Number((sum += v).toFixed(2)));
 
             const total_ridden = cumulativeDistances.slice([-1]);
@@ -254,10 +254,10 @@
             const total_distance = document.getElementById('total-distance');
             total_distance.textContent = total_ridden;
 
-            const goalDetails = elementFromHTML(`
+            // const goalDetails = elementFromHTML(`
 
-            <div>Total Distance Ridden ${}</div>
-            `);
+            // <div>Total Distance Ridden ${}</div>
+            // `);
 
             //Goal Chart using Plotly
             let chartLines = [{
