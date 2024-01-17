@@ -18,15 +18,12 @@
 
     <div id='goals-container'>
         <div id='goals-list'>
-
         </div>
     </div>
 
     <div id='content-container'>
         <div class="titleBar">
-            <div>
-                <h1 id="goal-title"></h1>
-            </div>
+            <h1 id="goal-title"></h1>
         </div>
 
         <div class="card line-chart">
@@ -35,191 +32,186 @@
 
         <div class="goal-details-container">
             <div id="goal-details-text" class="card">
-
             </div>
-
             <div class="pie-chart card">
                 <h2>Gear by Distance:</h2>
-                <div id='gear-distances-chart'></div>
+                <div id='gear-by-value-chart'></div>
             </div>
             <div class="pie-chart card">
                 <h2>Gear by Trips:</h2>
-                <div id='gear-trips-chart'></div>
+                <div id='gear-by-trips-chart'></div>
             </div>
         </div>
 
         <div class="leader-board card">
             <h2>Leader Board</h2>
-            <div id='leader-board-container'>
-            </div>
-
-
-            <div class="rides-list-container card">
-                <h2>Rides:</h2>
-                <table id='ride-list-table'>
-                    <tr id='header-row'>
-                        <td>Ride Name</td>
-                        <td>Distance</td>
-                        <td>Elevation Gain</td>
-                        <td>Date</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class='comment-card card'>
-            </div>
+            <div id='leader-board-container'></div>
         </div>
 
-        <script>
-            let authToken = localStorage.getItem('auth_token');
-            console.log(authToken);
 
-            if (authToken) {
-                fetchData();
+        <div class="rides-list-container card">
+            <h2>Rides:</h2>
+            <table id='ride-list-table'>
+                <tr id='header-row'>
+                    <td>Ride Name</td>
+                    <td>Distance</td>
+                    <td>Elevation Gain</td>
+                    <td>Date</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let authToken = localStorage.getItem('auth_token');
+        console.log(authToken);
+
+        if (authToken) {
+            fetchData();
+        }
+
+
+        function signOut() {
+            localStorage.clear();
+            document.getElementById('content-container').style.display = 'none';
+            document.getElementById('sign-in').style.display = 'block';
+        }
+
+
+        function metersToMiles(meters) {
+            return meters * 0.000621371;
+        }
+
+
+        function metersToFeet(meters) {
+            return meters * 3.281;
+        }
+
+
+        function requestData(url, authToken) {
+            const authHeaders = new Headers();
+            if (authToken) { authHeaders.append('x-rwgps-auth-token', authToken) };
+            authHeaders.append('x-rwgps-api-key', 'aa49d17b');
+            authHeaders.append('x-rwgps-api-version', '3');
+
+            const request = new Request(url, {
+                headers: authHeaders
+            });
+            return fetch(request)
+                .then((response) => response.json())
+
+        }
+
+
+        function calculateTotalDistance(rideList) {
+            let dayDistance = 0;
+            for (const ride of rideList) {
+                const rideDistance = (ride.distance * 0.000621371).toFixed(2);
+                dayDistance += Number(rideDistance);
+            }
+            return dayDistance;
+        }
+
+
+        function elementFromHTML(html) {
+            const template = document.createElement('template');
+            template.innerHTML = html.trim();
+            return template.content.firstElementChild;
+        }
+
+
+        function getGoalInfo(goalId, userData) {
+            const participantRequest = requestData(`https://ridewithgps.com/goals/${goalId}/participants.json`, authToken)
+            const goalRequest = requestData(`https://ridewithgps.com/goals/${goalId}.json`, authToken)
+            Promise.all([participantRequest, goalRequest])
+                .then((combinedData) => {
+                    const [participantsData, goalData] = combinedData;
+
+                    document.getElementById('goal-title').textContent = goalData.goal.name;
+                    console.log({ 'Goal Data': goalData });
+                    //console.log({ 'Participant Data': participantsData });
+                    const participant = participantsData.results.find((participant) => participant.user.id == userData.user.id)
+                    //console.log({ participant: participant });
+
+                    renderLeaderBoardList(participantsData)
+
+                    requestData(`https://ridewithgps.com/goal_participants/${participant.id}/trips.json?limit=10000&offset=0`, authToken)
+                        .then((trips) => {
+                            const filteredTrips = trips.results.filter((trip) => !trip.is_excluded);
+                            //console.log({ trips: trips });
+                            renderGoalChart(filteredTrips, goalData.goal);
+                            renderGearCharts(filteredTrips, userData);
+                            renderRideList(filteredTrips);
+
+                        })
+
+                })
+        }
+
+
+
+        function renderGoalChart(rides, goal) {
+            const goalDistance = metersToMiles(goal.goal_params.target_amount); //TODO Convert to Miles
+            const goalTarget = goalDistance; //TODO Convert to miles
+
+            const goalStart = goal.starts_on;
+            const goalEnd = goal.ends_on;
+            const goalStartDate = Date.parse(goalStart);
+
+
+
+            function calculateDays(rideDate) {
+                days = Math.floor((rideDate - goalStartDate) / (24 * 60 * 60 * 1000));
+                return days;
             }
 
+            const goalDayCount = calculateDays(Date.parse(goalEnd)) + 1;
 
-            function signOut() {
-                localStorage.clear();
-                document.getElementById('content-container').style.display = 'none';
-                document.getElementById('sign-in').style.display = 'block';
+            // Goal Line Generator
+            let goalLine = [];
+            for (let g = 0; g < goalDayCount; g++) { goalLine.push(goalDistance); }
+
+            // Goal Track Generator
+            let stayOnTrack = [];
+            for (let i = 8; i < goalDistance; i = i + (goalDistance / goalDayCount)) {
+                stayOnTrack.push(i);
             }
 
-
-            function metersToMiles(meters) {
-                return meters * 0.000621371;
+            // Days of Month X-axis
+            let daysOfMonth = [];
+            for (let d = 1; d < goalDayCount; d++) {
+                daysOfMonth.push(d);
             }
 
-
-            function metersToFeet(meters) {
-                return meters * 3.281;
+            let goalDays = [];
+            for (let d = 0; d < goalDayCount; d++) {
+                goalDays.push([]);
             }
 
+            for (const ride of rides) {
+                const rideDepartedAt = Date.parse(ride.departed_at);
 
-            function requestData(url, authToken) {
-                const authHeaders = new Headers();
-                if (authToken) { authHeaders.append('x-rwgps-auth-token', authToken) };
-                authHeaders.append('x-rwgps-api-key', 'aa49d17b');
-                authHeaders.append('x-rwgps-api-version', '3');
-
-                const request = new Request(url, {
-                    headers: authHeaders
-                });
-                return fetch(request)
-                    .then((response) => response.json())
-
-            }
-
-
-            function calculateTotalDistance(rideList) {
-                let dayDistance = 0;
-                for (const ride of rideList) {
-                    const rideDistance = (ride.distance * 0.000621371).toFixed(2);
-                    dayDistance += Number(rideDistance);
+                const goalDayIndex = calculateDays(rideDepartedAt);
+                const goalDay = goalDays[goalDayIndex];
+                if (goalDay) {
+                    goalDay.push(ride) // hacky way to fix a problem with invalid indexes
+                } else {
+                    console.log("trip out of range", goalDayIndex, ride);
                 }
-                return dayDistance;
             }
 
-
-            function elementFromHTML(html) {
-                const template = document.createElement('template');
-                template.innerHTML = html.trim();
-                return template.content.firstElementChild;
-            }
+            const distancePerDay = goalDays.map(calculateTotalDistance)
 
 
-            function getGoalInfo(goalId, userData) {
-                const participantRequest = requestData(`https://ridewithgps.com/goals/${goalId}/participants.json`, authToken)
-                const goalRequest = requestData(`https://ridewithgps.com/goals/${goalId}.json`, authToken)
-                Promise.all([participantRequest, goalRequest])
-                    .then((combinedData) => {
-                        const [participantsData, goalData] = combinedData;
+            const goalImageThumb = goal.icon.includes('https') ? goal.icon : `https://ridewithgps.com${goal.icon}`;
+            const originalGoalLink = `https://ridewithgps.com/goals/${goal.id}`;
 
-                        document.getElementById('goal-title').textContent = goalData.goal.name;
-                        console.log({ 'Goal Data': goalData });
-                        //console.log({ 'Participant Data': participantsData });
-                        const participant = participantsData.results.find((participant) => participant.user.id == userData.user.id)
-                        //console.log({ participant: participant });
+            let sum = 0;
+            let cumulativeDistances = distancePerDay.map(v => Number((sum += v).toFixed(2)));
+            const total_ridden = cumulativeDistances.slice([-1]);
+            const goalPercentage = Number((total_ridden / goalTarget * 100).toFixed(1));
 
-                        renderLeaderBoardList(participantsData)
-
-                        requestData(`https://ridewithgps.com/goal_participants/${participant.id}/trips.json?limit=10000&offset=0`, authToken)
-                            .then((trips) => {
-                                const filteredTrips = trips.results.filter((trip) => !trip.is_excluded);
-                                //console.log({ trips: trips });
-                                renderGoalChart(filteredTrips, goalData.goal);
-                                renderGearCharts(filteredTrips, userData);
-                                renderRideList(filteredTrips);
-
-                            })
-
-                    })
-            }
-
-
-
-            function renderGoalChart(rides, goal) {
-                const goalDistance = metersToMiles(goal.goal_params.target_amount); //TODO Convert to Miles
-                const goalTarget = goalDistance; //TODO Convert to miles
-
-                const goalStart = goal.starts_on;
-                const goalEnd = goal.ends_on;
-                const goalStartDate = Date.parse(goalStart);
-
-
-
-                function calculateDays(rideDate) {
-                    days = Math.floor((rideDate - goalStartDate) / (24 * 60 * 60 * 1000));
-                    return days;
-                }
-
-                const goalDayCount = calculateDays(Date.parse(goalEnd)) + 1;
-
-                // Goal Line Generator
-                let goalLine = [];
-                for (let g = 0; g < goalDayCount; g++) { goalLine.push(goalDistance); }
-
-                // Goal Track Generator
-                let stayOnTrack = [];
-                for (let i = 8; i < goalDistance; i = i + (goalDistance / goalDayCount)) {
-                    stayOnTrack.push(i);
-                }
-
-                // Days of Month X-axis
-                let daysOfMonth = [];
-                for (let d = 1; d < goalDayCount; d++) {
-                    daysOfMonth.push(d);
-                }
-
-                let goalDays = [];
-                for (let d = 0; d < goalDayCount; d++) {
-                    goalDays.push([]);
-                }
-
-                for (const ride of rides) {
-                    const rideDepartedAt = Date.parse(ride.departed_at);
-
-                    const goalDayIndex = calculateDays(rideDepartedAt);
-                    const goalDay = goalDays[goalDayIndex];
-                    if (goalDay) {
-                        goalDay.push(ride) // hacky way to fix a problem with invalid indexes
-                    } else {
-                        console.log("trip out of range", goalDayIndex, ride);
-                    }
-                }
-
-                const distancePerDay = goalDays.map(calculateTotalDistance)
-
-
-                const goalImageThumb = goal.icon.includes('https') ? goal.icon : `https://ridewithgps.com${goal.icon}`;
-                const originalGoalLink = `https://ridewithgps.com/goals/${goal.id}`;
-
-                let sum = 0;
-                let cumulativeDistances = distancePerDay.map(v => Number((sum += v).toFixed(2)));
-                const total_ridden = cumulativeDistances.slice([-1]);
-                const goalPercentage = Number((total_ridden / goalTarget * 100).toFixed(1));
-
-                const goalDetails = elementFromHTML(`
+            const goalDetails = elementFromHTML(`
                 <div id='goal-image'><img src='${goalImageThumb}'><div>
                 <div id='goal-start-date'>Start: ${goal.starts_on}</div>
                 <div id='goal-end-date'>End: ${goal.ends_on}</div>
@@ -232,163 +224,172 @@
                 <div id='original-goal'><a href='${originalGoalLink}'>${originalGoalLink}</a></div>
             `);
 
-                document.getElementById('goal-details-text').append(goalDetails);
-                // TODO Logic for displaying if goal finished
+            document.getElementById('goal-details-text').append(goalDetails);
+            // TODO Logic for displaying if goal finished
 
 
-                //Goal Chart using Plotly
-                let chartLines = [{
-                    x: daysOfMonth,
-                    y: goalLine,
-                    type: 'scatter',
-                    name: 'Goal',
-                    line: {
-                        color: '#FFD700',
-                        width: 5
-                    }
-                }, {
-                    x: daysOfMonth,
-                    y: stayOnTrack,
-                    type: 'scatter',
-                    name: 'Ave Per Day',
-                    line: {
-                        color: '#FFD700',
-                        width: 3,
-                        dash: 'dash'
-                    }
-                }, {
-                    x: daysOfMonth,
-                    y: cumulativeDistances,
-                    type: 'scatter',
-                    fill: 'tozeroy',
-                    opacity: .2,
-                    //fillcolor: 'green',
-                    mode: 'lines+markers',
-                    fillpattern: {
-                        bgcolor: '#FFD700',
-                    },
-                    name: 'Cumulative Distances'
-                }, {
-                    x: daysOfMonth,
-                    y: distancePerDay,
-                    type: 'bar',
-                    name: 'Distance per Day',
-                    opacity: 1,
-                    fillpattern: {
-                    }
-                }];
-
-                let layout = {
-                    autosize: true,
-                    showlegend: true,
-                    legend: {
-                        //x: .01,
-                        //y: 1.05,
-                        orientation: 'h',
-                    },
-                    margin: {
-                        t: 25,
-                        r: 15,
-                        b: 15,
-                        l: 30,
-                        pad: 0
-                    }
-                };
-
-                let goalChartConfig = {
-                    responsive: true
+            //Goal Chart using Plotly
+            let chartLines = [{
+                x: daysOfMonth,
+                y: goalLine,
+                type: 'scatter',
+                name: 'Goal',
+                line: {
+                    color: '#FFD700',
+                    width: 5
                 }
+            }, {
+                x: daysOfMonth,
+                y: stayOnTrack,
+                type: 'scatter',
+                name: 'Ave Per Day',
+                line: {
+                    color: '#FFD700',
+                    width: 3,
+                    dash: 'dash'
+                }
+            }, {
+                x: daysOfMonth,
+                y: cumulativeDistances,
+                type: 'scatter',
+                fill: 'tozeroy',
+                opacity: .2,
+                //fillcolor: 'green',
+                mode: 'lines+markers',
+                fillpattern: {
+                    bgcolor: '#FFD700',
+                },
+                name: 'Cumulative Distances'
+            }, {
+                x: daysOfMonth,
+                y: distancePerDay,
+                type: 'bar',
+                name: 'Distance per Day',
+                opacity: 1,
+                fillpattern: {
+                }
+            }];
 
-                Plotly.newPlot('goal-chart', chartLines, layout);
+            let layout = {
+                autosize: true,
+                showlegend: true,
+                legend: {
+                    //x: .01,
+                    //y: 1.05,
+                    orientation: 'h',
+                },
+                margin: {
+                    t: 25,
+                    r: 15,
+                    b: 15,
+                    l: 30,
+                    pad: 0
+                }
+            };
+
+            let goalChartConfig = {
+                responsive: true
             }
 
+            Plotly.newPlot('goal-chart', chartLines, layout);
+        }
 
-            function renderGearCharts(ridesData, userData) {
-                const gearDistanceChart = document.getElementById('gear-distances-chart');
-                const gearRidesChart = document.getElementById('gear-rides-chart');
 
-                function makeGearConfig(gearNames, gearDistances) {
-                    return {
-                        type: 'doughnut',
-                        data: {
-                            labels: gearNames,
-                            datasets: [{
-                                data: gearDistances,
+        function renderGearCharts(ridesData, userData) {
+            const gearDistanceChart = document.getElementById('gear-by-value-chart');
+            const gearRidesChart = document.getElementById('gear-rides-chart');
 
-                            }],
-                        },
-                        hoverBorderWidth: 10,
-                        options: {
-                            responsive: true,
-                        },
-                    };
+            function makeGearConfig(gearNames, gearDistances) {
+                return {
+                    type: 'doughnut',
+                    data: {
+                        labels: gearNames,
+                        datasets: [{
+                            data: gearDistances,
+
+                        }],
+                    },
+                    hoverBorderWidth: 10,
+                    options: {
+                        responsive: true,
+                    },
                 };
+            };
 
-                const gearIdToGearName = {};
-                for (const gear of userData.user.gear) {
-                    gearIdToGearName[gear.id] = gear.name;
-                }
-
-                const ridesByGearId = Object.groupBy(ridesData, ride => ride.gear_id)
-
-                // console.log(ridesByGearId);
-
-                let gearNames = [];
-                const gearDistances = [];
-                const gearTripCounts = [];
-
-                for (const gearId in ridesByGearId) {
-                    const rides = ridesByGearId[gearId];
-                    gearTripCounts.push(rides.length);
-                    const ridesDistance = calculateTotalDistance(rides);
-                    if (ridesDistance > 0) {
-                        gearNames.push(gearIdToGearName[gearId]);
-                        gearDistances.push(ridesDistance);
-                    }
-                }
-                gearNames = gearNames.map((name) => name ? name : 'None');
-                // console.log(gearNames);
-
-                let gearChartDistances = [{
-                    values: gearDistances,
-                    labels: gearNames,
-                    text: gearDistances,
-                    type: 'pie',
-                    hole: .4
-
-                }]
-
-                let gearChartTrips = [{
-                    values: gearTripCounts,
-                    labels: gearNames,
-                    text: gearTripCounts,
-                    type: 'pie',
-                    hole: .4
-                }]
-
-                let gearChartLayout = {
-                    height: 320,
-                    width: 320,
-                    margin: { "t": 0, "b": 0, "l": 0, "r": 0 },
-                    showlegend: true,
-                    legend: {
-                        x: 0.1,
-                        y: 1.35,
-                        orientation: 'v',
-                    }
-                }
-
-                Plotly.newPlot('gear-distances-chart', gearChartDistances, gearChartLayout);
-                Plotly.newPlot('gear-trips-chart', gearChartTrips, gearChartLayout);
-
+            const gearIdToGearName = {};
+            for (const gear of userData.user.gear) {
+                gearIdToGearName[gear.id] = gear.name;
             }
 
+            const ridesByGearId = Object.groupBy(ridesData, ride => ride.gear_id)
 
-            function renderRideList(ridesData) {
-                const rideListTable = document.getElementById('header-row');
+            // console.log(ridesByGearId);
 
-                for (const ride of ridesData) {
-                    const rideTableRow = elementFromHTML(`
+            let gearNames = [];
+            const gearDistances = [];
+            const gearTripCounts = [];
+
+            for (const gearId in ridesByGearId) {
+                const rides = ridesByGearId[gearId];
+                gearTripCounts.push(rides.length);
+                const ridesDistance = calculateTotalDistance(rides);
+                if (ridesDistance > 0) {
+                    gearNames.push(gearIdToGearName[gearId]);
+                    gearDistances.push(ridesDistance.toFixed(1));
+                }
+            }
+            gearNames = gearNames.map((name) => name ? name : 'None');
+            // console.log(gearNames);
+
+            let gearChartDistances = [{
+                values: gearDistances,
+                labels: gearNames,
+                text: gearDistances,
+                type: 'pie',
+                hole: .4,
+                textinfo: 'value',
+                hovertemplate: '%{label} %{value} miles',
+                name: '',
+                showlegend: false,
+                automargin: true,
+            }]
+
+            let gearChartTrips = [{
+                values: gearTripCounts,
+                labels: gearNames,
+                text: gearTripCounts,
+                type: 'pie',
+                hole: .4,
+                textinfo: 'value',
+                hovertemplate: '%{label} %{value} trips',
+                name: '',
+                automargin: true,
+                showlegend: false,
+            }]
+
+            let gearChartLayout = {
+                height: 310,
+                width: 310,
+                margin: { "t": 0, "b": 0, "l": 0, "r": 0 },
+                showlegend: true,
+                legend: {
+                    x: 0.1,
+                    y: 1.35,
+                    orientation: 'h',
+                }
+            }
+
+            Plotly.newPlot('gear-by-value-chart', gearChartDistances, gearChartLayout);
+            Plotly.newPlot('gear-by-trips-chart', gearChartTrips, gearChartLayout);
+
+        }
+
+
+        function renderRideList(ridesData) {
+            const rideListTable = document.getElementById('header-row');
+
+            for (const ride of ridesData) {
+                const rideTableRow = elementFromHTML(`
                 <tr>
                     <td><a href='https://ridewithgps.com/trips/${ride.id}'>${ride.name}</a></td>
                     <td>${(ride.distance * 0.000621371).toFixed(2)} miles</td>
@@ -397,39 +398,39 @@
                 </tr>
                 `)
 
-                    rideListTable.insertAdjacentElement('afterend', rideTableRow);
+                rideListTable.insertAdjacentElement('afterend', rideTableRow);
+            }
+
+        }
+
+
+        function hideGoalListContainer(goalsData, userData) {
+            getGoalInfo(goal.id, userData);
+            goalList.style.display = 'none';
+        }
+
+
+        function renderGoalsList(goalsData, userData) {
+            // console.log('goalsData', goalsData)
+            //const filteredGoals = goalsData.filter((goal) => goal.goal_type == 'distance');
+
+            const goalList = document.getElementById('goals-list');
+
+            for (const goal of goalsData) {
+                let goalType = 'unknown';
+
+                if (goal.goal_type == 'distance') {
+                    goalType = 'Distance ' + Math.round(metersToMiles(goal.goal_params.max)).toLocaleString('en-US') + ' miles';
+                } else if (goal.goal_type == 'elevation_gain') {
+                    goalType = 'Elevation Gain ' + Math.round(metersToFeet(goal.goal_params.max)).toLocaleString('en-US') + ' feet';
+                } else if (goal.goal_type == 'moving_time') {
+                    goalType = 'Moving Time ' + Math.round(goal.goal_params.max / 60 / 60) + ' hours';
                 }
 
-            }
 
+                let goalIcon = goal.icon.includes('https') ? goal.icon : "https://ridewithgps.com" + goal.icon;
 
-            function hideGoalListContainer(goalsData, userData) {
-                getGoalInfo(goal.id, userData);
-                goalList.style.display = 'none';
-            }
-
-
-            function renderGoalsList(goalsData, userData) {
-                // console.log('goalsData', goalsData)
-                //const filteredGoals = goalsData.filter((goal) => goal.goal_type == 'distance');
-
-                const goalList = document.getElementById('goals-list');
-
-                for (const goal of goalsData) {
-                    let goalType = 'unknown';
-
-                    if (goal.goal_type == 'distance') {
-                        goalType = 'Distance ' + Math.round(metersToMiles(goal.goal_params.max)).toLocaleString('en-US') + ' miles';
-                    } else if (goal.goal_type == 'elevation_gain') {
-                        goalType = 'Elevation Gain ' + Math.round(metersToFeet(goal.goal_params.max)).toLocaleString('en-US') + ' feet';
-                    } else if (goal.goal_type == 'moving_time') {
-                        goalType = 'Moving Time ' + Math.round(goal.goal_params.max / 60 / 60) + ' hours';
-                    }
-
-
-                    let goalIcon = goal.icon.includes('https') ? goal.icon : "https://ridewithgps.com" + goal.icon;
-
-                    const goalCard = elementFromHTML(`
+                const goalCard = elementFromHTML(`
                 <div class='goal-list-card card'>
                     <h2 class='goal-name'>${goal.name}</h2>
                     <div class='goal-image' style='background-image: url("${goalIcon}")'></div>
@@ -438,23 +439,23 @@
                     </div >
                 `);
 
-                    //const goalType = '';
-                    goalCard.onclick = () => {
-                        getGoalInfo(goal.id, userData);
-                        goalList.style.display = 'none';
-                        document.getElementById('content-container').style.display = 'block';
-                    }
-                    goalList.insertAdjacentElement('afterbegin', goalCard);
+                //const goalType = '';
+                goalCard.onclick = () => {
+                    getGoalInfo(goal.id, userData);
+                    goalList.style.display = 'none';
+                    document.getElementById('content-container').style.display = 'block';
                 }
+                goalList.insertAdjacentElement('afterbegin', goalCard);
             }
+        }
 
 
-            function renderLeaderBoardList(participantsData) {
-                const leaderBoardContainer = document.getElementById('leader-board-container')
-                console.log('results', participantsData);
+        function renderLeaderBoardList(participantsData) {
+            const leaderBoardContainer = document.getElementById('leader-board-container')
+            console.log('results', participantsData);
 
-                for (const rider of participantsData.results) {
-                    const riderCard = elementFromHTML(`
+            for (const rider of participantsData.results) {
+                const riderCard = elementFromHTML(`
                 <div class='rider-card card'>
                     <img src='https://ridewithgps.com/photos/${rider.user.highlighted_photo_id}/centi.jpg' class='rider-photo'>
                         <div class='rider-name'>${rider.user.name}</div>
@@ -468,42 +469,42 @@
                 </div>
             `);
 
-                    leaderBoardContainer.appendChild(riderCard);
+                leaderBoardContainer.appendChild(riderCard);
 
-                }
-
-            };
-
-
-            function fetchData() {
-                let userUrl = null;
-                if (!authToken) {
-                    const email = document.getElementById('emailForm').value;
-                    const password = document.getElementById('passwordForm').value;
-                    userUrl = `https://ridewithgps.com/users/current.json?email=${email}&password=${password}`;
-                } else {
-                    userUrl = `https://ridewithgps.com/users/current.json`
-                }
-
-
-                requestData(userUrl, authToken)
-                    .then((userData) => {
-                        localStorage.setItem('auth_token', userData.user.auth_token);
-                        authToken = localStorage.getItem('auth_token');
-
-                        //console.log({ user: userData });
-                        requestData('https://ridewithgps.com/goals.json', authToken)
-                            .then((goalsData) => {
-                                renderGoalsList(goalsData.results, userData)
-                                console.log('goals data!', goalsData);
-                            })
-
-
-
-                    })
             }
 
-        </script>
+        };
+
+
+        function fetchData() {
+            let userUrl = null;
+            if (!authToken) {
+                const email = document.getElementById('emailForm').value;
+                const password = document.getElementById('passwordForm').value;
+                userUrl = `https://ridewithgps.com/users/current.json?email=${email}&password=${password}`;
+            } else {
+                userUrl = `https://ridewithgps.com/users/current.json`
+            }
+
+
+            requestData(userUrl, authToken)
+                .then((userData) => {
+                    localStorage.setItem('auth_token', userData.user.auth_token);
+                    authToken = localStorage.getItem('auth_token');
+
+                    //console.log({ user: userData });
+                    requestData('https://ridewithgps.com/goals.json', authToken)
+                        .then((goalsData) => {
+                            renderGoalsList(goalsData.results, userData)
+                            console.log('goals data!', goalsData);
+                        })
+
+
+
+                })
+        }
+
+    </script>
 
 </body>
 
