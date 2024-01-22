@@ -44,6 +44,12 @@ function paceAtGrade(array) {
   return paces;
 }
 
+function pointsAtGrade(array) {
+  const q = array.map((item) => [Number(item[0]), item[1][1]]);
+  q.sort((a, b) => a[0] - b[0]);
+  return q;
+}
+
 function fetchData() {
   // document.getElementById('sign-in').style.display = 'none';
   let userUrl = null;
@@ -67,26 +73,19 @@ function fetchData() {
       const zackSpeeds = speedAtGrade(zackHam);
 
       const paces = paceAtGrade(userSummary);
-      const zackPaces = paceAtGrade(zackHam);
+      // const zackPaces = paceAtGrade(zackHam);
 
-      const quantities = Object.entries(userData.user.user_summary).map(
-        (item) => [Number(item[0]), item[1][1]]
-      );
-      quantities.sort((a, b) => a[0] - b[0]);
+      //const quantities = pointsAtGrade(userSummary);
 
-      const zQuantities = zackHam.map((item) => [Number(item[0]), item[1][1]]);
-      zQuantities.sort((a, b) => a[0] - b[0]);
-
-      const errorBars = quantities.map((n) => {
+      const errorBars = pointsAtGrade(userSummary).map((n) => {
         return (2 * 2) / Math.sqrt(n[1]);
       });
-
-      // const zackPaces = zackPaceAtGrade.map((item) => Number(item[1]));
 
       let grades = [];
       for (let d = -15; d < 16; d++) {
         grades.push(d);
       }
+
       // Graph Me, speed with error bars
       let graphSpeedWithErrorBars = [
         {
