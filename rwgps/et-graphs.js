@@ -27,6 +27,23 @@ function requestData(url, authToken) {
   return fetch(request).then((response) => response.json());
 }
 
+function speedAtGrade(array) {
+  const a = array.map((item) => [Number(item[0]), item[1][0] * 0.621371]);
+  a.sort((a, b) => a[0] - b[0]);
+  const aSpeeds = a.map((item) => Number(item[1]));
+  return aSpeeds;
+}
+
+function paceAtGrade(array) {
+  const a = array.map((item) => [
+    Number(item[0]),
+    60 / (item[1][0] * 0.621371),
+  ]);
+  a.sort((a, b) => a[0] - b[0]);
+  const paces = a.map((item) => Number(item[1]));
+  return paces;
+}
+
 function fetchData() {
   // document.getElementById('sign-in').style.display = 'none';
   let userUrl = null;
@@ -44,46 +61,27 @@ function fetchData() {
       authToken = localStorage.getItem("auth_token");
       console.log("userData", userData.user.user_summary);
 
-      const speedAtGrade = Object.entries(userData.user.user_summary).map(
-        (item) => [Number(item[0]), item[1][0] * 0.621371]
-      );
-      const paceAtGrade = Object.entries(userData.user.user_summary).map(
-        (item) => [Number(item[0]), 60 / (item[1][0] * 0.621371)]
-      );
+      const userSummary = Object.entries(userData.user.user_summary);
+
+      const speeds = speedAtGrade(userSummary);
+      const zackSpeeds = speedAtGrade(zackHam);
+
+      const paces = paceAtGrade(userSummary);
+      const zackPaces = paceAtGrade(zackHam);
+
       const quantities = Object.entries(userData.user.user_summary).map(
         (item) => [Number(item[0]), item[1][1]]
       );
-
-      const zackSpeedAtGrade = zackHam.map((item) => [
-        Number(item[0]),
-        item[1][0] * 0.621371,
-      ]);
-      const zackPaceAtGrade = zackHam.map((item) => [
-        Number(item[0]),
-        60 / (item[1][0] * 0.621371),
-      ]);
-      const zackQuantities = zackHam.map((item) => [
-        Number(item[0]),
-        item[1][1],
-      ]);
-
-      speedAtGrade.sort((a, b) => a[0] - b[0]);
-      paceAtGrade.sort((a, b) => a[0] - b[0]);
       quantities.sort((a, b) => a[0] - b[0]);
 
-      zackSpeedAtGrade.sort((a, b) => a[0] - b[0]);
-      zackPaceAtGrade.sort((a, b) => a[0] - b[0]);
-      zackQuantities.sort((a, b) => a[0] - b[0]);
+      const zQuantities = zackHam.map((item) => [Number(item[0]), item[1][1]]);
+      zQuantities.sort((a, b) => a[0] - b[0]);
 
       const errorBars = quantities.map((n) => {
         return (2 * 2) / Math.sqrt(n[1]);
       });
 
-      const speeds = speedAtGrade.map((item) => Number(item[1]));
-      const paces = paceAtGrade.map((item) => Number(item[1]));
-
-      const zackSpeeds = zackSpeedAtGrade.map((item) => Number(item[1]));
-      const zackPaces = zackPaceAtGrade.map((item) => Number(item[1]));
+      // const zackPaces = zackPaceAtGrade.map((item) => Number(item[1]));
 
       let grades = [];
       for (let d = -15; d < 16; d++) {
