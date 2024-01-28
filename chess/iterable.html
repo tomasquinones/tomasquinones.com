@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        let myObject = {
+            "a6": 13,
+            "d5": 62,
+            "g2": 13,
+            "h1": 11,
+            "g1": 5,
+            "h2": 8,
+            "a7": 6,
+            "a3": 13,
+            "c2": 21,
+            "e4": 39,
+            "f7": 33,
+            "e2": 17,
+            "d1": 17,
+            "e6": 24,
+            "f5": 21,
+            "g5": 20,
+            "c6": 24,
+            "b5": 31,
+            "a4": 15,
+            "e5": 39,
+            "g4": 17,
+            "h5": 11,
+            "b3": 13,
+            "b4": 28,
+            "e7": 15,
+            "a2": 14,
+            "d3": 27,
+            "c1": 9,
+            "c7": 11,
+            "e3": 17,
+            "h7": 19,
+            "d6": 6,
+            "b7": 12,
+            "f2": 21,
+            "c8": 14,
+            "d8": 11,
+            "f4": 19,
+            "b2": 9,
+            "a1": 9,
+            "h4": 7,
+            "d4": 52,
+            "c3": 17,
+            "c5": 30,
+            "d7": 20,
+            "c4": 34,
+            "b8": 4,
+            "h3": 2,
+            "f6": 33,
+            "f3": 18,
+            "g7": 13,
+            "a5": 7,
+            "g3": 18,
+            "g8": 11,
+            "a8": 12,
+            "h8": 16,
+            "b6": 10,
+            "f8": 11,
+            "e8": 3,
+            "h6": 11,
+            "g6": 19,
+            "d2": 9,
+            "e1": 5,
+            "b1": 6,
+            "f1": 12
+        }
+
+        const unsortedMap = new Map(Object.entries(myObject))
+        console.log('unsorted map', unsortedMap);
+        const unsortedArray = [...unsortedMap]
+
+        const sortedArray = unsortedArray.sort(([key1, value1], [key2, value2]) => key1.localeCompare(key2))
+        const sortedMap = new Map(sortedArray)
+        console.log('sortedMap', sortedMap);
+        for (let i of sortedMap) {
+            console.log(i);
+        }
+    </script>
+</body>
+
+</html>
