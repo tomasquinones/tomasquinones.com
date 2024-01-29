@@ -19,42 +19,44 @@ function renderGraph(data) {
   Plotly.newPlot(captureMap, graphData);
 }
 
-let matches = [];
-let squares = {};
-let coords = [];
-const regex = /x([a-hA-H][1-8])/gm;
+const regex = /x[a-hA-H][1-8]/gm;
 
 fetch(URL)
   .then((response) => response.text())
   .then((text) => {
-    for (m of text.matchAll(regex)) {
-      let square = m[1];
-      if (!squares[square]) {
-        squares[square] = 1;
-      } else {
-        squares[square] += 1;
+    // Set up the initial 2D array of squares, with each square having an
+    // initial value of zero. This way we are guaranteed to have exactly the
+    // right number of squares in the output.
+    let squares = []
+    for (let x = 0; x < 8; ++x) {
+      squares[x] = []
+      for (let y = 0; y < 8; ++y) {
+        squares[x][y] = 0;
       }
     }
 
-    const unsortedMap = new Map(Object.entries(squares));
-    const unsortedArray = [...unsortedMap];
+    // For each match, increment the correct square
+    let startXOrd = "a".codePointAt(0);
+    for (matches of text.matchAll(regex)) {
+      // There should only be one match, since we have no groups.  The first
+      // character is always 'x', so we ignore it. The second character (idx 1)
+      // is the X coordinate, and the third character (idx 2) is the Y
+      // coordinate.
+      let match = matches[0]
 
-    const sortedArray = unsortedArray.sort(([key1, value1], [key2, value2]) =>
-      key1.localeCompare(key2)
-    );
+      // We get the x index by determining the distance between the left-most
+      // square's letter ('a') and the letter for this match.
+      let x = match.codePointAt(1) - startXOrd
 
-    //const sortedMap = new Map(sortedArray);
+      // Y is already just a number, so parse it, then offset it so it's
+      // zero-indexed.
+      let y = Number(match[2]) - 1
 
-    coords = [];
-
-    for (let i = 0; i < sortedArray.length; i) {
-      let temp = [];
-      for (let j = 0; j < 8; j++) {
-        temp.push(sortedArray[i][1]);
-        i++;
-      }
-      coords.push(temp);
+      // console.log("match", match, "x", x, "y", y)
+      squares[x][y]++
     }
-    console.log("coords", coords);
-    renderGraph(coords);
+
+    console.log("squares", squares)
+    // Our data is already in the expected format
+    renderGraph(squares);
   });
