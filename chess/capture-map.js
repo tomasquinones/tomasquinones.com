@@ -9,9 +9,9 @@ const capturesByKings = document.getElementById("captures-by-kings");
 const gamesList = document.getElementById("games");
 
 const user = "tomasquinones";
-// const user = "gameofsquares";
+//const user = "gameofsquares";
 const URL = `https://lichess.org/api/games/user/${user}?perfType=ultraBullet,bullet,blitz,rapid,classical,correspondence`;
-//let data = "";
+//const URL = `https://lichess.org/api/games/user/${user}`;
 
 function renderGraph(data, divId) {
     let graphData = [
@@ -25,13 +25,13 @@ function renderGraph(data, divId) {
     Plotly.newPlot(divId, graphData);
 }
 
-const regexAll = /x[a-hA-H][1-8]/gm;
-const regexPawns = /[a-h]x[a-hA-H][1-8]/gm;
-const regexRooks = /Rx[a-hA-H][1-8]/gm;
-const regexKnights = /Nx[a-hA-H][1-8]/gm;
-const regexBishops = /Bx[a-hA-H][1-8]/gm;
-const regexQueens = /Qx[a-hA-H][1-8]/gm;
-const regexKings = /Kx[a-hA-H][1-8]/gm;
+const regexAll = /x([a-hA-H][1-8])/gm;
+const regexPawns = /[a-h]x([a-hA-H][1-8])/gm;
+const regexRooks = /Rx([a-hA-H][1-8])/gm;
+const regexKnights = /Nx([a-hA-H][1-8])/gm;
+const regexBishops = /Bx([a-hA-H][1-8])/gm;
+const regexQueens = /Qx([a-hA-H][1-8])/gm;
+const regexKings = /Kx([a-hA-H][1-8])/gm;
 
 function findCaptures(text, re, divId) {
     // Set up the initial 2D array of squares, with each square having an
@@ -53,15 +53,15 @@ function findCaptures(text, re, divId) {
         // character is always 'x', so we ignore it. The second character (idx 1)
         // is the X coordinate, and the third character (idx 2) is the Y
         // coordinate.
-        let match = matches[0];
+        let match = matches[1];
 
         // We get the x index by determining the distance between the left-most
         // square's letter ('a') and the letter for this match.
-        let x = match.codePointAt(1) - startXOrd;
+        let x = match.codePointAt(0) - startXOrd;
 
         // Y is already just a number, so parse it, then offset it so it's
         // zero-indexed.
-        let y = Number(match[2]) - 1;
+        let y = Number(match[1]) - 1;
 
         // console.log("match", match, "x", x, "y", y)
         squares[x][y]++;
