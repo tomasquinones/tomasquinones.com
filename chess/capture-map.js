@@ -4,7 +4,7 @@ const gamesList = document.getElementById("games");
 
 const user = "tomasquinones";
 // const user = "gameofsquares";
-const URL = `https://lichess.org/api/games/user/${user}`;
+const URL = `https://lichess.org/api/games/user/${user}?perfType=ultraBullet,bullet,blitz,rapid,classical,correspondence`;
 let data = "";
 
 function renderGraph(data) {
@@ -27,9 +27,9 @@ fetch(URL)
     // Set up the initial 2D array of squares, with each square having an
     // initial value of zero. This way we are guaranteed to have exactly the
     // right number of squares in the output.
-    let squares = []
+    let squares = [];
     for (let x = 0; x < 8; ++x) {
-      squares[x] = []
+      squares[x] = [];
       for (let y = 0; y < 8; ++y) {
         squares[x][y] = 0;
       }
@@ -42,21 +42,21 @@ fetch(URL)
       // character is always 'x', so we ignore it. The second character (idx 1)
       // is the X coordinate, and the third character (idx 2) is the Y
       // coordinate.
-      let match = matches[0]
+      let match = matches[0];
 
       // We get the x index by determining the distance between the left-most
       // square's letter ('a') and the letter for this match.
-      let x = match.codePointAt(1) - startXOrd
+      let x = match.codePointAt(1) - startXOrd;
 
       // Y is already just a number, so parse it, then offset it so it's
       // zero-indexed.
-      let y = Number(match[2]) - 1
+      let y = Number(match[2]) - 1;
 
       // console.log("match", match, "x", x, "y", y)
-      squares[x][y]++
+      squares[x][y]++;
     }
 
-    console.log("squares", squares)
+    console.log("squares", squares);
     // Our data is already in the expected format
     renderGraph(squares);
   });
