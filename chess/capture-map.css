@@ -5,12 +5,18 @@ body {
     padding: 0;
 }
 
+h2 {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #player {
     background-color: inherit;
     width: 800px;
 }
 
-#capture-map {
+.captures {
     background-color: inherit;
     width: 800px;
     height: 800px;

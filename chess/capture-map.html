@@ -11,12 +11,30 @@
 
 <body>
     <div id="player"></div>
-    <div id="capture-map"></div>
+    <h2>All Captures</h2>
+    <div id="captures-by-all" class="captures"></div>
     <div id="about">Fetches games for any user on Lichess.org and writes to a single PGN file. Searches all games in the
-        PGN to find the coordinates of each capture. Uses the Plotly.Express heatmap to grap all the captures.
+        PGN to find the coordinates of each capture. Uses the Plotly.js heatmap to grap all the captures.
     </div>
-
-    <div id="games"></div>
+    <hr>
+    <h2>Captures by Pawns</h2>
+    <div id="captures-by-pawns" class="captures"></div>
+    <hr>
+    <h2>Captures by Rooks</h2>
+    <div id="captures-by-rooks" class="captures"></div>
+    <hr>
+    <h2>Captures by Knights</h2>
+    <div id="captures-by-knights" class="captures"></div>
+    <hr>
+    <h2>Captures by Bishops</h2>
+    <div id="captures-by-bishops" class="captures"></div>
+    <hr>
+    <h2>Captures by Queens</h2>
+    <div id="captures-by-queens" class="captures"></div>
+    <hr>
+    <h2>Captures by Kings</h2>
+    <div id="captures-by-kings" class="captures"></div>
+    <div id="games" class="captures"></div>
 
     <script src="capture-map.js"></script>
 </body>
