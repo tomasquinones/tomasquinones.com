@@ -1,0 +1,34 @@
+body {
+    background-color: #666;
+    font-family: "Courier New", Courier, monospace;
+    margin: 0;
+    padding: 0;
+}
+
+#player {
+    background-color: inherit;
+    width: 800px;
+}
+
+#capture-map {
+    background-color: inherit;
+    width: 800px;
+    height: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#games {
+    background-color: inherit;
+    width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#about {
+    background-color: inherit;
+    width: 800px;
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
