@@ -7,13 +7,16 @@ const capturesByBishops = document.getElementById("captures-by-bishops");
 const capturesByQueens = document.getElementById("captures-by-queens");
 const capturesByKings = document.getElementById("captures-by-kings");
 const gamesList = document.getElementById("games");
+const userName = document.getElementById("user-name");
 
 const user = "tomasquinones";
+userName.innerText = user;
 //const user = "gameofsquares";
-const URL = `https://lichess.org/api/games/user/${user}?perfType=ultraBullet,bullet,blitz,rapid,classical,correspondence`;
+const URL = `https://lichess.org/api/games/user/${user}?perfType=ultraBullet,bullet,blitz,rapid,classical,correspondence&max=100`;
 //const URL = `https://lichess.org/api/games/user/${user}`;
 
 function renderGraph(data, divId) {
+    //TODO: Add the layout updates to change graph colors and padding
     let graphData = [
         {
             z: data,
@@ -25,13 +28,13 @@ function renderGraph(data, divId) {
     Plotly.newPlot(divId, graphData);
 }
 
-const regexAll = /x([a-hA-H][1-8])/gm;
-const regexPawns = /[a-h]x([a-hA-H][1-8])/gm;
-const regexRooks = /Rx([a-hA-H][1-8])/gm;
-const regexKnights = /Nx([a-hA-H][1-8])/gm;
-const regexBishops = /Bx([a-hA-H][1-8])/gm;
-const regexQueens = /Qx([a-hA-H][1-8])/gm;
-const regexKings = /Kx([a-hA-H][1-8])/gm;
+const regexAll = /x([a-h][1-8])/gm;
+const regexPawns = /[a-h]x([a-h][1-8])/gm;
+const regexRooks = /Rx([a-h][1-8])/gm;
+const regexKnights = /Nx([a-h][1-8])/gm;
+const regexBishops = /Bx([a-h][1-8])/gm;
+const regexQueens = /Qx([a-h][1-8])/gm;
+const regexKings = /Kx([a-h][1-8])/gm;
 
 function findCaptures(text, re, divId) {
     // Set up the initial 2D array of squares, with each square having an
@@ -44,8 +47,8 @@ function findCaptures(text, re, divId) {
             squares[x][y] = 0;
         }
     }
+    console.log("Empty Squares Array Created", squares);
 
-    console.log("Empty Square", squares);
     // For each match, increment the correct square
     let startXOrd = "a".codePointAt(0);
     for (matches of text.matchAll(re)) {
