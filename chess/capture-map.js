@@ -19,13 +19,22 @@ function renderGraph(data, divId) {
     //TODO: Add the layout updates to change graph colors and padding
     let graphData = [
         {
+            type: "heatmap",
             z: data,
             x: ["A", "B", "C", "D", "E", "F", "G", "H"],
             y: ["1", "2", "3", "4", "5", "6", "7", "8"],
-            type: "heatmap",
+            hovertemplate: "Captures %{z}",
         },
     ];
-    Plotly.newPlot(divId, graphData);
+    let layout = [
+        {
+            t: 5,
+            b: 5,
+            r: 5,
+            l: 5,
+        },
+    ];
+    Plotly.newPlot(divId, graphData, layout);
 }
 
 const regexAll = /x([a-h][1-8])/gm;

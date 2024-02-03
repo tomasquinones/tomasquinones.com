@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="rotate-arrays.css">
+</head>
+
+<body>
+    <div id="container">
+        <div class="empty-block">1</div>
+        <div class="empty-block">2</div>
+        <div class="empty-block">3</div>
+        <div class="empty-block">4</div>
+        <div class="empty-block">5</div>
+        <div class="empty-block">6</div>
+        <div class="empty-block">7</div>
+        <div class="empty-block">8</div>
+        <div class="empty-block">9</div>
+    </div>
+
+    <script>
+        let shapeT = [
+            ['a', 'b', 'c'],
+            [0, 0, 0],
+            [0, 0, 0]
+        ];
+
+
+        function rotateLeft(array) {
+            let newArray = [
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]
+            ];
+
+            for (let x = 0; x < array.length; x++) {
+                for (let y = array.length - 1; y > 0; y--) {
+                    newArray[y][x] = array[x][y];
+                    //console.log(x, y, newArray);
+                }
+            }
+            return newArray;
+        }
+
+
+
+        console.log(shapeT);
+
+        shapeT = rotateLeft(shapeT);
+        console.log('first rotation', shapeT);
+
+        shapeT = rotateLeft(shapeT);
+        console.log('second rotation', shapeT);
+
+    </script>
+</body>
+
+</html>
