@@ -12,7 +12,7 @@ const captureCountAll = document.getElementById("capture-count-all");
 
 const user = "tomasquinones";
 //lichess.org/api/games/user/${user}
-https: userName.innerText = user;
+userName.innerText = user;
 //const user = "gameofsquares";
 const URL = `https://lichess.org/api/games/user/${user}?perfType=ultraBullet,bullet,blitz,rapid,classical,correspondence&max=100`;
 //const URL = `sample.pgn`;
