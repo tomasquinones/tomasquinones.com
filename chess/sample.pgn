@@ -1,3 +1,471 @@
+[Event "Casual Bullet game"]
+[Site "https://lichess.org/F9oldzsu"]
+[Date "2024.02.04"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "0-1"]
+[UTCDate "2024.02.04"]
+[UTCTime "01:28:13"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "30+3"]
+[ECO "C20"]
+[Termination "Time forfeit"]
+
+1. e4 e5 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/6kbNwAI0"]
+[Date "2024.01.31"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2024.01.31"]
+[UTCTime "01:31:09"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "C20"]
+[Termination "Normal"]
+
+1. e4 e5 2. Qh5 Nf6 3. Qxe5+ Be7 4. Qg5 h6 5. Qxg7 d5 6. Qxh8+ Bf8 7. d4 dxe4 8. Be3 Nd5 9. Na3 Nxe3 10. Be2 Nxg2+ 11. Kd1 Qxd4+ 12. Bd3 Qxh8 13. Be2 Ne3+ 14. Kd2 Qxb2 15. Nb5 Qxa1 16. Nd6+ cxd6 17. Bd3 exd3 18. cxd3 Qxa2+ 19. Kc1 Qc2# 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/mnBaWpHl"]
+[Date "2022.05.24"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2022.05.24"]
+[UTCTime "05:40:46"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "D02"]
+[Termination "Normal"]
+
+1. d4 d5 2. Nf3 e6 3. c3 f5 4. Bf4 g5 5. Bc1 g4 6. Nfd2 c6 7. h4 h5 8. g3 Nf6 9. Bg2 f4 10. gxf4 g3 11. Rf1 Ng4 12. Nf3 gxf2+ 13. Kd2 Bh6 14. Kc2 Qd6 15. e3 Nxe3+ 16. Kd2 Nxd1 17. Kc2 Bxf4 18. Ne5 Bxc1 19. Kxd1 Bxb2 20. Nxc6 Nxc6 21. Kc2 Bxa1 22. Kc1 Qf4+ 23. Kd1 Rf8 24. Kc2 Qxh4 25. Na3 e5 26. Nb5 exd4 27. Nxd4 Bf5+ 28. Kb3 Na5+ 29. Ka3 Bxc3 30. Bxd5 Qxd4 31. Bc4 Qc5+ 32. Ka4 Bc2+ 33. Bb3 Qb4# 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/CWON9Pxj"]
+[Date "2022.04.11"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2022.04.11"]
+[UTCTime "02:07:34"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "C46"]
+[Termination "Normal"]
+
+1. e4 e5 2. Nf3 Nc6 3. Nc3 Nd4 4. Nxe5 d6 5. Nf3 Nf6 6. Nxd4 Nxe4 7. Nd5 c5 8. Nb3 Qg5 9. Bc4 a6 10. Qe2 b5 11. d3 bxc4 12. dxe4 cxb3 13. Qc4 Qe5 14. axb3 Rb8 15. O-O f5 16. exf5 Qxf5 17. h3 Bb7 18. Nc3 d5 19. Re1+ Be7 20. Qf4 Qxc2 21. Qxb8+ Bc8 22. Qc7 Rf8 23. Bf4 Rxf4 24. Qxf4 h6 25. Qh4 g5 26. Qg3 Qxb2 27. Nxd5 Qd4 28. Rad1 Bxh3 29. b4 Qxb4 30. Rb1 Qh4 31. Qc3 Bxg2 32. Nf6+ Kf7 33. f3 Qh1+ 34. Kf2 Bxf6 35. Qc4+ Kg6 36. Qe4+ Kf7 37. Qe8+ Kg7 38. Qd7+ Kg6 39. Qe6 Qh4+ 40. Kg1 Bxf3 41. Rb2 Qg3+ 42. Rg2 Qxg2# 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/M4s9UAt6"]
+[Date "2022.01.20"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2022.01.20"]
+[UTCTime "21:42:02"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "C47"]
+[Termination "Normal"]
+
+1. e4 e5 2. Nf3 Nc6 3. Nc3 Nf6 4. d4 exd4 5. Nxd4 Bc5 6. Nf5 d5 7. Nxg7+ Kf8 8. e5 Ng4 9. Qf3 Ncxe5 10. Ne6+ Ke8 11. Qf5 c6 12. Ng7+ Ke7 13. Bg5+ Nf6 14. Bxf6+ Kd6 15. Bxd8 Nd3+ 16. cxd3 Bxf2+ 17. Kxf2 Bd7 18. Qxf7 Kc5 19. b3 Rc8 20. Qxd7 Rhxd8 21. Ne6+ Kb6 22. Nxd8 Kc5 23. Qxc8 a6 24. Qxb7 a5 25. Qxh7 Kb4 26. Qh4+ Ka3 27. Qa4+ Kb2 28. Nd1+ Kc2 29. b4+ Kd2 30. b5 cxb5 31. Qxa5+ Kc2 32. Qc3# 1-0
+
+
+[Event "Casual Rapid game"]
+[Site "https://lichess.org/WFGsX6Iy"]
+[Date "2021.10.08"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2021.10.08"]
+[UTCTime "18:30:26"]
+[WhiteElo "?"]
+[BlackElo "1320"]
+[Variant "Standard"]
+[TimeControl "600+0"]
+[ECO "C21"]
+[Termination "Normal"]
+
+1. e4 e5 2. d4 exd4 3. h4 Nc6 4. Bd3 Nb4 5. Ne2 c5 6. Nd2 Qa5 7. Kf1 d5 8. Nb3 Qb6 9. exd5 c4 10. Nexd4 cxd3 11. Bf4 dxc2 12. Qf3 Qa6+ 13. Qe2+ Be7 14. Qxa6 bxa6 15. d6 Bf6 16. Re1+ Kd8 17. a3 Nd3 18. Nc6+ Kd7 19. Re2 c1=Q+ 20. Re1 Qxf4 21. Nc5+ Nxc5 22. Na5 Kxd6 23. b4 Bd4 24. Re2 Nd3 25. Kg1 Qg4 26. Ra2 Qd1+ 27. Kh2 Be5+ 28. g3 Qf3 29. Kg1 Bxg3 30. Rh2 Bxh2+ 31. Kf1 Qh1+ 32. Ke2 Nc1+ 33. Ke3 Nxa2 34. Nb3 Bb7 35. Kd3 Rd8 36. Nc5 Kc6+ 37. Nd7 Rxd7+ 38. Kc4 Qc1+ 39. Kb3 Rd3+ 40. Ka4 Qxa3# 0-1
+
+
+[Event "Casual Rapid game"]
+[Site "https://lichess.org/6FVeC6UC"]
+[Date "2021.09.17"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.09.17"]
+[UTCTime "03:54:32"]
+[WhiteElo "1320"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "600+0"]
+[ECO "C20"]
+[Termination "Normal"]
+
+1. e4 e5 2. c4 Qh4 3. g3 Qe7 4. Nf3 b6 5. b3 Qf6 6. Bb2 Qg6 7. Nxe5 Qf6 8. Na3 Bc5 9. Nb5 Kf8 10. Nxd7+ Ke8 11. Nxf6+ Kd8 12. Nxg8 Nc6 13. Bxg7 a6 14. Bf6+ Ke8 15. Nxc7+ Kf8 16. Nxa8 Bd4 17. Bxh8 Bxh8 18. Bh3 Bxa1 19. Qg4 Ne7 20. Qxc8+ Kg7 21. Qg4+ Kf8 22. Nh6 b5 23. Nc7 Be5 24. f4 Bxf4 25. gxf4 f6 26. Rg1 b4 27. Qg7# 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/UwYERtWX"]
+[Date "2021.09.04"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.09.04"]
+[UTCTime "04:28:48"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "B00"]
+[Termination "Normal"]
+
+1. e4 e6 2. Nc3 Nc6 3. Nf3 Nge7 4. Nd4 d5 5. Nxc6 bxc6 6. exd5 exd5 7. Nxd5 Qd6 8. Nxe7 Qe6+ 9. Be2 Ba6 10. c3 Qxe7 11. d4 Qe4 12. f3 Qxe2+ 13. Qxe2+ Be7 14. Qxa6 O-O 15. Qxc6 Rac8 16. O-O Bh4 17. Re1 Rcd8 18. Qe4 g5 19. f4 Rd5 20. Qxd5 gxf4 21. Bxf4 Kg7 22. Qe5+ f6 23. Qh5 f5 24. Qxh4 c6 25. Qg3+ Kh8 26. Qg5 c5 27. Be5+ Rf6 28. Qxf6+ Kg8 29. Qg7# 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/J0ynLbtx"]
+[Date "2021.09.03"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.09.03"]
+[UTCTime "16:59:57"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "B00"]
+[Termination "Normal"]
+
+1. e4 Nc6 2. d3 d6 3. Nc3 Nd4 4. Nd5 e6 5. Nf4 c6 6. c3 Qa5 7. b4 Qd8 8. cxd4 Qb6 9. Bb2 d5 10. Nxe6 Bxe6 11. e5 h5 12. Qf3 Be7 13. Nh3 Bg4 14. Qg3 Qxd4 15. Bxd4 O-O-O 16. Ng5 Nf6 17. Nxf7 Bc5 18. Nxh8 Ne4 19. Qf4 Bb6 20. Qf5+ Kc7 21. Qf7+ Rd7 22. Bxb6+ Kc8 23. Qe8+ Rd8 24. Qxd8# 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/059mzFR9"]
+[Date "2021.09.02"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.09.02"]
+[UTCTime "19:54:57"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "A05"]
+[Termination "Normal"]
+
+1. e3 Nf6 2. Nf3 d6 3. Ng5 Qd7 4. Bc4 e6 5. Bxe6 Qb5 6. Bxf7+ Kd7 7. Be6+ Ke7 8. Bxc8 Nc6 9. Be6 Ne5 10. c4 Qb4 11. a3 Qa5 12. b4 Nf3+ 13. Qxf3 Qb6 14. Nf7 a6 15. Nxh8 Ra7 16. Nc3 Ke8 17. Qf5 Kd8 18. Qxh7 Ke8 19. Qg6+ Ke7 20. Qf7+ Kd8 21. Qd7+ Nxd7 22. Bxd7 c6 23. c5 Qxc5 24. bxc5 Kc7 25. Bf5 dxc5 26. Ng6 b6 27. Ne4 Rb7 28. d4 a5 29. dxc5 a4 30. cxb6+ Kd8 31. Nxf8 Rf7 32. Ne6+ Kc8 33. N6g5+ Kd8 34. Nxf7+ Ke8 35. Bb2 c5 36. Rd1 g5 37. Bg6 c4 38. Rd8+ Ke7 39. Bf6+ Ke6 40. Re8+ Kd7 41. b7 g4 42. b8=Q c3 43. Qb7+ Kxe8 44. Qe7# 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/G5OGMnKy"]
+[Date "2021.08.31"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.08.31"]
+[UTCTime "17:01:45"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "B00"]
+[Termination "Normal"]
+
+1. e4 Nc6 2. Bc4 e5 3. Qf3 Nh6 4. g4 Nb4 5. g5 b5 6. gxh6 d5 7. Bxd5 Qd7 8. Bxa8 c6 9. c3 gxh6 10. cxb4 Bxb4 11. a3 Ba5 12. b4 Bd8 13. d3 Qe6 14. Nh3 O-O 15. Qg3+ Qg6 16. Bg5 Bb6 17. Nc3 Bd4 18. Ne2 Bb6 19. d4 exd4 20. Nef4 Qg7 21. Bxh6 Qg6 22. Bxf8 Kxf8 23. Nxg6+ Kg7 24. Ne7+ Kh6 25. Nxc8 d3 26. Nxb6 a6 27. Qg5# 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/T6A46LR6"]
+[Date "2021.08.31"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2021.08.31"]
+[UTCTime "04:34:41"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "A05"]
+[Termination "Normal"]
+
+1. e3 Nf6 2. Nf3 Ne4 3. d4 Nc6 4. Nfd2 Nb4 5. c3 Nd3+ 6. Ke2 b6 7. h4 Ba6 8. Qc2 Nexf2 9. Nc4 Nxh1 10. Kd2 Nhf2 11. b3 e6 12. a4 c5 13. Be2 b5 14. Nd6+ Bxd6 15. dxc5 Bxc5 16. e4 bxa4 17. Rxa4 Nxc1 18. Kxc1 Bxe2 19. Na3 Be3+ 20. Qd2 Qxh4 21. g3 Qh1+ 22. Kb2 Qxe4 23. Qc2 Qd5 24. Nc4 Bxc4 25. Qxh7 Rxh7 26. Ra3 Bxb3 27. Ka1 Qd1+ 28. Kb2 Qc2+ 29. Ka1 Rh1# 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/0ngqwW7h"]
+[Date "2021.08.31"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.08.31"]
+[UTCTime "03:56:05"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "B01"]
+[Termination "Normal"]
+
+1. e4 d5 2. Nc3 e6 3. exd5 Nf6 4. dxe6 fxe6 5. Bb5+ Bd7 6. a4 Nc6 7. d4 Bd6 8. d5 Ne5 9. dxe6 Bc6 10. Bxc6+ Kf8 11. Bxb7 Bb4 12. Bxa8 Qe7 13. b3 Qxe6 14. Ba3 Nd3+ 15. Kd2 Qe5 16. cxd3 Bxa3 17. Rxa3 Kg8 18. Nd5 Qxd5 19. Bxd5+ Nxd5 20. b4 Nf6 21. b5 Nd7 22. Rc3 Ne5 23. Rxc7 g6 24. Qb3+ Nf7 25. Qxf7# 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/j4K8o48H"]
+[Date "2021.08.29"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2021.08.29"]
+[UTCTime "17:43:11"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "D00"]
+[Termination "Normal"]
+
+1. d4 d5 2. Nc3 Nc6 3. e3 e5 4. h4 exd4 5. Nce2 dxe3 6. Nc3 exf2+ 7. Ke2 fxg1=Q 8. Qxd5 Nd4+ 9. Kd2 Qxd5 10. Rb1 Qe4 11. Kd1 Qxc2+ 12. Ke1 Qgf2# 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/K9BUrkxS"]
+[Date "2021.08.29"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.08.29"]
+[UTCTime "02:40:15"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "B00"]
+[Termination "Normal"]
+
+1. e4 Nc6 2. Nf3 d6 3. Nc3 Nf6 4. Nd5 e5 5. Ng5 Qd7 6. Qf3 h6 7. Nxf6+ Ke7 8. Nxd7 f6 9. Nxf8 fxg5 10. Ng6+ Ke6 11. Nxh8 Nd8 12. Qf5+ Ke7 13. Ng6+ Ke8 14. Qf8+ Kd7 15. Bb5+ c6 16. Qe7# 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/otvRP1ds"]
+[Date "2021.08.29"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2021.08.29"]
+[UTCTime "01:58:24"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "D00"]
+[Termination "Normal"]
+
+1. d4 d5 2. c3 Nc6 3. b4 Nf6 4. e3 Ne4 5. Nd2 Nxc3 6. Qh5 g6 7. Bb2 Nxb4 8. Rc1 Ncxa2 9. Qf3 Nxc1 10. Kd1 Nca2 11. Nh3 e6 12. Be2 b6 13. Re1 Ba6 14. Bxa6 Nxa6 15. Qe2 Nc3+ 16. Kc2 Nxe2 17. Ne4 dxe4 18. Kb1 Bb4 19. Rh1 Nc3+ 20. Bxc3 Bxc3 21. Rf1 Nb4 22. Rd1 Qd5 23. Kc1 Qa2 24. f4 Qc2# 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/GwbKxXyA"]
+[Date "2021.08.25"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "1/2-1/2"]
+[UTCDate "2021.08.25"]
+[UTCTime "15:45:28"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "C25"]
+[Termination "Normal"]
+
+1. e4 e5 2. Nc3 c5 3. Nf3 d6 4. d3 b5 5. h3 b4 6. Nd5 Qa5 7. b3 Nf6 8. Ne3 Bb7 9. g4 Nc6 10. Rg1 Nd4 11. Nd2 Nb5 12. g5 Nc3 13. Ndc4 Qb5 14. Qd2 Nfd5 15. Nxd5 Bxd5 16. Ne3 h6 17. gxh6 gxh6 18. a4 Qa5 19. Nxd5 Nxd5 20. f3 Nf4 21. Qh2 d5 22. h4 dxe4 23. d4 exd4 24. Bxf4 Be7 25. Qh3 e3 26. Be5 f6 27. Bb5+ Kd8 28. Bg3 a6 29. Bd7 Qb6 30. a5 Qb7 31. Bf5 Qxf3 32. Rf1 Qh5 33. Bg4 Qd5 34. O-O-O h5 35. Be2 d3 36. Rf5 Qe6 37. Rxd3+ Bd6 38. Qg2 Qxf5 39. Qb7 Qc8 40. Qf3 c4 41. Rd4 cxb3 42. Bc4 b2+ 43. Kd1 b1=Q+ 44. Ke2 Qxc2+ 45. Rd2 Q2xc4+ 46. Kxe3 Qc3+ 47. Ke4 Qxd2 48. Qf4 Qc4+ 49. Kf3 Re8 50. Bf2 Qdd3+ 51. Kg2 Qxf4 52. Bg3 Qde4+ 53. Kh2 Qe2+ 54. Kh3 Qeg4+ 55. Kh2 Qgxg3+ 56. Kh1 Qff2 1/2-1/2
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/eI8qDTJ4"]
+[Date "2021.05.27"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.05.27"]
+[UTCTime "17:54:41"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "A06"]
+[Termination "Normal"]
+
+1. e4 d5 2. Nf3 c6 3. e5 Bg4 4. h3 Bf5 5. Ng5 h6 6. e6 Bxe6 7. Nxf7 Qc7 8. Nxh8 g5 9. Ng6 Bg7 10. Nf8 Qe5+ 11. Be2 Bf7 12. d4 Qd6 13. Nh7 Bg6 14. g3 Bxh7 15. Be3 Bg6 16. c3 Nd7 17. c4 Be4 18. f3 Bh7 19. cxd5 Qxg3+ 20. Bf2 Qf4 21. dxc6 Nc5 22. c7 h5 23. Be3 Qg3+ 24. Bf2 Qd6 25. Rg1 Ne6 26. Bg3 Qxd4 27. Bb5+ Qd7 28. Bxd7+ Kf7 29. c8=Q Bc2 30. Qcxc2 Nf6 31. Bxe6+ Ke8 32. Qg6+ Kf8 33. Qf7# 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/hEWA9tyB"]
+[Date "2021.05.27"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2021.05.27"]
+[UTCTime "17:45:07"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "A06"]
+[Termination "Normal"]
+
+1. d3 d5 2. Nf3 e6 3. Nc3 Nc6 4. e3 e5 5. a3 Nf6 6. e4 Bd6 7. h3 Be6 8. Nxd5 Bxd5 9. b4 Be6 10. Bg5 Nd4 11. Nxd4 exd4 12. Qf3 h6 13. Bd2 g5 14. Be2 g4 15. Qf4 Bxf4 16. Bxg4 Bxd2+ 17. Kf1 Bc3 18. Ke2 Bxa1 19. Bf5 Bxf5 20. Kf1 Bxe4 21. Rg1 Bxd3+ 22. Ke1 Bxc2 23. Ke2 d3+ 24. Kf1 d2 25. f3 d1=Q+ 26. Kf2 Bd4+ 27. Kg3 Qxg1 28. a4 Be5+ 29. Kh4 Qf2+ 30. g3 Qxg3# 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/eYakZsMr"]
+[Date "2021.05.26"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.05.26"]
+[UTCTime "06:56:58"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "B00"]
+[Termination "Normal"]
+
+1. e4 Nc6 2. Nc3 e6 3. Nf3 h5 4. Nb5 a6 5. Nbd4 g5 6. Nxc6 f6 7. Nxd8 Nh6 8. Nf7 Rg8 9. Nxh6 Rg7 10. d4 Be7 11. g3 Rb8 12. b3 Kf8 13. c4 Rg6 14. d5 exd5 15. cxd5 Bc5 16. Nf5 Kg8 17. Ne7+ Kg7 18. Nxg6 Bb4+ 19. Bd2 Bc5 20. Ne7 Bb6 21. Nxc8 Bc5 22. Na7 Bb6 23. Bxg5 Bc5 24. Bxa6 Bxf2+ 25. Kxf2 Re8 26. Bxb7 Rxe4 27. Qd3 Re1 28. Kxe1 h4 29. Rd1 hxg3 30. hxg3 Kg8 31. Qh7+ Kf8 32. Qh8+ Ke7 33. Qxf6+ Ke8 34. Rh7 c5 35. dxc6 dxc6 36. Bxc6# 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/EbE3nFMK"]
+[Date "2021.05.25"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2021.05.25"]
+[UTCTime "15:32:05"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "D00"]
+[Termination "Normal"]
+
+1. d4 d5 2. Nc3 Nc6 3. Qd3 g6 4. e3 f5 5. Nge2 e5 6. h4 Nb4 7. dxe5 Nxd3+ 8. Kd1 Nxf2+ 9. Kd2 Nxh1 10. Nf4 Ng3 11. Bb5+ c6 12. Nfe2 Nxe2 13. Nxe2 cxb5 14. Nd4 Bb4+ 15. Kd1 Nh6 16. Nxb5 Qd7 17. Nd4 Ng4 18. Bd2 Nxe5 19. Rb1 Nc4 20. Nf3 Qb5 21. Kc1 O-O 22. Kd1 f4 23. Ke1 fxe3 24. a3 exd2+ 25. Kf1 Ne3+ 26. Kf2 d1=Q 27. b3 Qxb1 28. c3 Qc2+ 29. Kxe3 Qbd3# 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/sad9eDm6"]
+[Date "2021.05.24"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2021.05.24"]
+[UTCTime "23:21:15"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "B01"]
+[Termination "Normal"]
+
+1. e4 d5 2. Qf3 dxe4 3. Qh5 g6 4. Qg5 f6 5. Qg3 g5 6. Bc4 h5 7. Qa3 h4 8. Qa5 b6 9. Qa3 Nc6 10. Qa4 Bd7 11. Ne2 e5 12. Bd5 a6 13. Qxe4 Bb4 14. c3 Nd4 15. Bxg8 Rxg8 16. cxb4 Nc2+ 17. Kd1 Nxa1 18. Qh7 Ba4+ 19. Qc2 Nxc2 20. b3 Ne3+ 21. Ke1 Nxg2+ 22. Kf1 Bc6 23. Kg1 a5 24. Nbc3 axb4 25. Na4 b5 26. Ba3 bxa4 27. bxa4 Rxa4 28. Nf4 Rxa3 29. Nh5 Rxa2 30. Nxf6+ Kf7 31. h3 Qxf6 32. d4 Qxf2+ 33. Kh2 Ne3# 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/ijuIgfAg"]
+[Date "2021.05.24"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.05.24"]
+[UTCTime "23:17:22"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "B01"]
+[Termination "Normal"]
+
+1. e4 d5 2. d3 e6 3. Nc3 d4 4. Nf3 Nc6 5. Nxd4 Ne5 6. Nc6 Qd6 7. Nb5 Nxd3+ 8. cxd3 Qc5 9. Nxc7+ Kd7 10. Nxa8 Qxc6 11. Bf4 Qc5 12. Qa4+ Qc6 13. Qxa7 Qc5 14. Nb6+ Qxb6 15. Qxb6 Ke7 16. Qc7+ Ke8 17. Qxc8+ Ke7 18. Bg5+ f6 19. Qxb7+ Kd6 20. Rc1 g6 21. Qc6+ Ke5 22. f4+ Kd4 23. Qxe6 h6 24. Qe8 Bd6 25. Bxf6+ Be5 26. Bxh8 Bg7 27. Qd7+ Ke3 28. Qh3+ Kd4 29. Bxg7+ Nf6 30. Bxf6# 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/XhcS2TUP"]
+[Date "2021.05.24"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "0-1"]
+[UTCDate "2021.05.24"]
+[UTCTime "23:14:15"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "C25"]
+[Termination "Normal"]
+
+1. e4 e5 2. Nc3 Nc6 3. Nd5 Nf6 4. d3 Nd4 5. c3 c6 6. Ne3 c5 7. h4 c4 8. Bd2 cxd3 9. h5 d6 10. f3 b6 11. g4 Ba6 12. Bxd3 Bxd3 13. Rh2 Nxf3+ 14. Kf2 Nxh2 15. Kg2 Nfxg4 16. Nxg4 Qh4 17. Nf6+ gxf6 18. Nh3 Rg8+ 19. Qg4 Rxg4+ 20. Kxh2 Qg3+ 21. Kh1 Qg2# 0-1
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/f6OcwIa0"]
+[Date "2021.05.24"]
+[White "lichess AI level 1"]
+[Black "tomasquinones"]
+[Result "1-0"]
+[UTCDate "2021.05.24"]
+[UTCTime "02:14:42"]
+[WhiteElo "?"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "A00"]
+[Termination "Normal"]
+
+1. e3 Nf6 2. h4 Nc6 3. Nf3 h5 4. d3 g5 5. e4 g4 6. Ng1 g3 7. f4 Ng4 8. Nf3 Ne3 9. a4 Nxd1 10. Nbd2 e6 11. Rb1 Bb4 12. Be2 Ne3 13. b3 Nxg2+ 14. Kd1 1-0
+
+
+[Event "Casual Correspondence game"]
+[Site "https://lichess.org/M9Cb8p1f"]
+[Date "2021.05.24"]
+[White "tomasquinones"]
+[Black "lichess AI level 1"]
+[Result "1-0"]
+[UTCDate "2021.05.24"]
+[UTCTime "02:00:00"]
+[WhiteElo "1500"]
+[BlackElo "?"]
+[Variant "Standard"]
+[TimeControl "-"]
+[ECO "B01"]
+[Termination "Normal"]
+
+1. e4 d5 2. d3 Nf6 3. f3 Qd6 4. Nc3 d4 5. Nb5 Qc5 6. a4 e5 7. b4 Qc6 8. Ba3 Bd7 9. Bc1 h5 10. f4 Ng4 11. fxe5 Nxe5 12. g3 a6 13. Bh3 Bxb4+ 14. Bd2 Qc5 15. Bxd7+ Kf8 16. Qb1 Bc3 17. Nxc7 Nbxd7 18. Qxb7 Rd8 19. Qxa6 Bxa1 20. Bf4 h4 21. Bxe5 Qxc2 22. Bxg7+ Ke7 23. Bxh8 Rb8 24. Qd6+ Kd8 25. Ne6+ Kc8 26. Nxd4 Bxd4 27. Qxd4 Rb3 28. Nf3 hxg3 29. hxg3 Qc1+ 30. Kf2 Qc7 31. Be5 Qc2+ 32. Ke3 Nf8 33. a5 Ra3 34. Qa7 Rxd3+ 35. Kf4 Qc6 36. Qxf7 Rd8 37. Qf5+ Kb7 38. Rb1+ Qb5 39. Rxb5+ Ka6 40. Rb6+ Kxa5 41. Bc3+ Ka4 42. Qa5# 1-0
+
+
 [Event "Casual Correspondence game"]
 [Site "https://lichess.org/YKREhUQM"]
 [Date "2021.05.23"]
@@ -106,7 +574,7 @@
 1. e4 Nc6 2. d3 e5 3. Nc3 b6 4. Nf3 h6 5. Nd5 Bc5 6. g4 Nf6 7. d4 Bxd4 8. Nxd4 Nxd5 9. Nxc6 Nc3 10. bxc3 O-O 11. Nxd8 Rb8 12. Bc4 Ba6 13. Bxa6 Ra8 14. Nxf7 Rad8 15. Nxe5 Rde8 16. Nxd7 Re6 17. Nxf8 Rc6 18. Bb5 Rc4 19. Bxc4+ Kxf8 20. Qf3+ Ke7 21. Qf7+ Kd6 22. Qxg7 b5 23. Bxb5 c5 24. Qxh6+ Ke7 25. Qa6 Kf7 26. Qxa7+ Kg8 27. Qxc5 Kh7 28. Qf5+ Kh8 29. Rb1 Kg7 30. Bc4 Kh8 31. Rb7 1/2-1/2
 
 
-[Event "Casual Standard game"]
+[Event "Casual Correspondence game"]
 [Site "https://lichess.org/JROWE8Rc"]
 [Date "2021.01.29"]
 [White "tomasquinones"]
@@ -126,7 +594,7 @@
 1. Qe4 Kd6 2. Kd3 Kd7 3. Kd4 Kd6 4. Kc4 Kc7 5. Kc5 Kd7 6. Qe5 Kc8 7. Qg5 Kd7 8. Qh5 Ke6 9. Qg5 Kd7 10. Kd5 Kc7 11. Qf5 Kb7 12. Qf6 Kc7 13. Qe6 Kb7 14. Kc5 Kc7 15. Qd6+ Kc8 16. Qe6+ Kd8 17. Qh6 Ke7 18. Kd5 Kf7 19. Ke5 Kg8 20. Kf6 1/2-1/2
 
 
-[Event "Casual Standard game"]
+[Event "Casual Correspondence game"]
 [Site "https://lichess.org/3302IVBK"]
 [Date "2021.01.27"]
 [White "tomasquinones"]
@@ -146,7 +614,7 @@
 1. Ne7+ Kh8 2. Nxf7+ Rxf7 3. Rb8+ Rf8 4. Rxf8+ Ng8 5. Rxg8+ Qxg8 0-1
 
 
-[Event "Casual Standard game"]
+[Event "Casual Correspondence game"]
 [Site "https://lichess.org/jx5ug6dQ"]
 [Date "2020.12.24"]
 [White "tomasquinones"]
@@ -166,7 +634,7 @@
 1. Na6+ Kb6 0-1
 
 
-[Event "Casual Standard game"]
+[Event "Casual Correspondence game"]
 [Site "https://lichess.org/jkfqs4FA"]
 [Date "2020.12.24"]
 [White "tomasquinones"]
@@ -222,7 +690,7 @@
 1. c4 c6 2. Nc3 b5 3. d4 Qa5 4. cxb5 cxb5 5. Nf3 b4 6. Na4 b3+ 7. Qd2 Qxa4 8. Ne5 bxa2 9. Ng4 g6 10. e3 f5 11. Be2 fxg4 12. h4 Nf6 13. Kf1 Bh6 14. Rg1 Nc6 15. Qd3 Nb4 16. Qb5 Qb3 17. Qc5 Nd3 18. Qc3 Qd5 19. Bd2 Ne4 20. Bxd3 Nxc3 21. Bxg6+ hxg6 22. Bxc3 Ba6+ 23. Ke1 Qb3 24. g3 Rf8 25. Bd2 g5 26. hxg5 Bxg5 27. Bc1 Qd3 28. d5 Qe2# 0-1
 
 
-[Event "Casual Standard game"]
+[Event "Casual Rapid game"]
 [Site "https://lichess.org/kPbIjW0w"]
 [Date "2020.12.12"]
 [White "tomasquinones"]
@@ -362,7 +830,7 @@
 [BlackElo "?"]
 [Variant "Standard"]
 [TimeControl "-"]
-[ECO "A00"]
+[ECO "A40"]
 [Termination "Normal"]
 
 1. e3 e5 2. d4 Bb4+ 3. c3 Be7 4. dxe5 Nc6 5. e6 dxe6 6. Qxd8+ Nxd8 7. Nf3 Bd7 8. e4 b6 9. c4 Nc6 10. b3 Nb4 11. Kd2 Bf6 12. Nc3 Rd8 13. Bb2 c5 14. e5 Bc6+ 15. Ke3 Be7 16. Nb5 Nc2+ 17. Ke2 Bxb5 18. cxb5 Nh6 19. Rd1 Nf5 20. g4 Nh4 21. Bc3 Nxf3 22. Kxf3 Rxd1 23. Bg2 Rd7 24. Rc1 Rd3+ 25. Ke4 Rd4+ 26. Kf3 Rd3+ 27. Ke2 Rxc3 28. Kd2 Bd8 29. Kxc3 Nb4 30. Kc4 h5 31. Bc6+ Kf8 32. Rd1 Nd5 33. h3 hxg4 34. hxg4 Rh2 35. Rd2 Kg8 36. Be8 Bc7 37. Bxf7+ Kxf7 38. g5 Rh1 39. b4 Nxb4 40. a3 Rh4+ 41. Kc3 Nd5+ 42. Kd3 Bxe5 43. Ke2 c4 44. g6+ Kf6 45. a4 Re4+ 46. Kf3 Kf5 47. Rc2 c3 48. Rxc3 Rf4+ 49. Kg3 Rg4+ 50. Kh3 Nf4+ 51. Kh2 Nxg6+ 52. Kh1 Bxc3 53. f3 Rb4 0-1
@@ -456,120 +924,6 @@
 [Termination "Normal"]
 
 1. e4 c5 2. Nc3 Nf6 3. e5 d6 4. exf6 gxf6 5. Nd5 Bh6 6. Qh5 Bg5 7. Nf3 e6 8. h4 Bd7 9. hxg5 Qa5 10. gxf6 exd5 11. Ng5 Be6 12. Nxf7 Nc6 13. Nxh8+ Bf7 14. Qxf7+ Kd8 15. Qf8+ Kd7 16. Qxa8 Nb4 17. Rxh7+ Kc6 18. Qxb7# 1-0
-
-
-[Event "Casual Horde game"]
-[Site "https://lichess.org/Sloj0Ds7"]
-[Date "2020.12.02"]
-[White "lichess AI level 1"]
-[Black "tomasquinones"]
-[Result "1/2-1/2"]
-[UTCDate "2020.12.02"]
-[UTCTime "19:50:58"]
-[WhiteElo "?"]
-[BlackElo "1500"]
-[Variant "Horde"]
-[TimeControl "-"]
-[ECO "?"]
-[Termination "Normal"]
-[FEN "rnbqkbnr/pppppppp/8/1PP2PP1/PPPPPPPP/PPPPPPPP/PPPPPPPP/PPPPPPPP w kq - 0 1"]
-[SetUp "1"]
-
-1. a5 a6 2. d5 b6 3. cxb6 cxb6 4. axb6 a5 5. a4 Bb7 6. c5 g6 7. fxg6 d6 8. h5 dxc5 9. bxc5 Nd7 10. g7 Nxc5 11. gxf8=R+ Kxf8 12. c4 Nd7 13. e5 Nxb6 14. d4 e6 15. dxe6 Qe7 16. d5 Nxa4 17. f5 Nxb2 18. f4 Nxc4 19. exf7 Kxf7 20. f6 Bxd5 21. b2 a4 22. fxe7 Kxe7 23. c3 axb3 24. a3 Nxb2 25. cxb2 Rxa3 26. d3 Rxa1 27. d4 Rxd1 28. h4 Rxe1 29. c4 Bxc4 30. h6 Bxb5 31. f3 Rxf1 32. h5 Rxg1 33. h4 Rxh1 34. e4 Bxe2 35. g6 Rh2 36. f5 Rxg2 37. f6+ Ke6 38. g7 Kf7 39. gxh8=R Bxf3 40. g5 Rxb2 41. e6+ Kxe6 42. f7 Kxf7 43. Rxg8 Kxg8 44. e5 Bd5 45. g6 hxg6 46. g4 Rg2 47. h7+ Kxh7 48. hxg6+ Kxg6 49. e6 Re2 50. h5+ Kf6 51. g5+ Kxe6 52. g6 Rg2 53. g7 Rxg7 54. h6 Rh7 1/2-1/2
-
-
-[Event "Casual Crazyhouse game"]
-[Site "https://lichess.org/zPWucXOn"]
-[Date "2020.12.02"]
-[White "lichess AI level 1"]
-[Black "tomasquinones"]
-[Result "0-1"]
-[UTCDate "2020.12.02"]
-[UTCTime "06:33:56"]
-[WhiteElo "?"]
-[BlackElo "1500"]
-[Variant "Crazyhouse"]
-[TimeControl "-"]
-[ECO "A00"]
-[Termination "Normal"]
-
-1. Nh3 e6 2. Ng1 Nf6 3. d4 Nc6 4. Nf3 e5 5. d5 Nd4 6. e4 c6 7. Bd3 cxd5 8. Nc3 dxe4 9. Be3 Nxf3+ 10. Ke2 exd3+ 11. Kxd3 Nd4 12. P@b4 P@e4+ 13. Kc4 P@b5+ 14. Nxb5 Nxb5 15. P@e6 fxe6 16. Re1 Nd6+ 17. Kc5 b6# 0-1
-
-
-[Event "Casual King of the Hill game"]
-[Site "https://lichess.org/oY2NkxEz"]
-[Date "2020.12.02"]
-[White "lichess AI level 1"]
-[Black "tomasquinones"]
-[Result "0-1"]
-[UTCDate "2020.12.02"]
-[UTCTime "01:18:33"]
-[WhiteElo "?"]
-[BlackElo "1500"]
-[Variant "King of the Hill"]
-[TimeControl "-"]
-[ECO "C20"]
-[Termination "Normal"]
-
-1. e4 e5 2. d4 d5 3. Nf3 Bd6 4. Nxe5 Bxe5 5. Bb5+ c6 6. dxe5 cxb5 7. Qxd5 Nf6 8. Qc5 Nxe4 9. Qa3 Be6 10. c4 Qe7 11. cxb5 Kd7 12. Qa4 f6 13. Qxe4 fxe5 14. a4 Kd6 15. Nd2 g6 16. Ra3 Bd5 17. Nc4+ Kc5 18. Qxe5 Qxe5+ 19. Be3+ Qxe3+ 20. Rxe3 Kd4# 0-1
-
-
-[Event "Casual Antichess game"]
-[Site "https://lichess.org/15cDPMsG"]
-[Date "2020.12.02"]
-[White "lichess AI level 1"]
-[Black "tomasquinones"]
-[Result "1-0"]
-[UTCDate "2020.12.02"]
-[UTCTime "01:07:33"]
-[WhiteElo "?"]
-[BlackElo "1500"]
-[Variant "Antichess"]
-[TimeControl "-"]
-[ECO "?"]
-[Termination "Normal"]
-
-1. h4 g5 2. hxg5 f6 3. Rxh7 Rxh7 4. gxf6 exf6 5. e3 Rh1 6. Ke2 Rxg1 7. f4 Rxf1 8. Qxf1 f5 9. Qh1 d6 10. g4 fxg4 11. Qxb7 Bxb7 12. Ke1 c5 13. Nc3 d5 14. Nxd5 Qxd5 15. c4 Qxc4 16. Ke2 Qxa2 17. Rxa2 Bh1 18. Rxa7 Rxa7 19. b4 cxb4 20. Ba3 Rxa3 21. e4 Bxe4 22. Kd3 Rxd3 23. f5 Bxf5# 1-0
-
-
-[Event "Casual Racing Kings game"]
-[Site "https://lichess.org/wczCELW6"]
-[Date "2020.12.02"]
-[White "tomasquinones"]
-[Black "lichess AI level 1"]
-[Result "1-0"]
-[UTCDate "2020.12.02"]
-[UTCTime "01:01:28"]
-[WhiteElo "1500"]
-[BlackElo "?"]
-[Variant "Racing Kings"]
-[TimeControl "-"]
-[ECO "?"]
-[Termination "Normal"]
-[FEN "8/8/8/8/8/8/krbnNBRK/qrbnNBRQ w - - 0 1"]
-[SetUp "1"]
-
-1. Nf4 Bf5 2. Rg5 Bd7 3. Bh3 Nxf2 4. Qg2 Bb5 5. Qxf2 Ne4 6. Rxb5 Rd2 7. Bf5 Rb4 8. Ned3 Ka3 9. Nxb4 Nd6 10. Rxc1 Nxf5 11. Kh3 Nd4 12. Kg4 Qb2 13. Rf1 Qc3 14. Kg5 Qc8 15. Kg6 Nxb5 16. Nfd5 Rd4 17. Nb6 Qb8 18. Kg7 Rd6 19. Qf8 Nc7 20. Qxb8 Nd5 21. Kg8# 1-0
-
-
-[Event "Casual Horde game"]
-[Site "https://lichess.org/DtlWx2O6"]
-[Date "2020.12.02"]
-[White "tomasquinones"]
-[Black "lichess AI level 1"]
-[Result "1-0"]
-[UTCDate "2020.12.02"]
-[UTCTime "00:57:58"]
-[WhiteElo "1500"]
-[BlackElo "?"]
-[Variant "Horde"]
-[TimeControl "-"]
-[ECO "?"]
-[Termination "Normal"]
-[FEN "rnbqkbnr/pppppppp/8/1PP2PP1/PPPPPPPP/PPPPPPPP/PPPPPPPP/PPPPPPPP w kq - 0 1"]
-[SetUp "1"]
-
-1. h5 c6 2. bxc6 e6 3. fxe6 fxe6 4. f5 bxc6 5. g6 Bb7 6. gxh7 Nf6 7. e5 Nxh5 8. gxh5 Qe7 9. f6 Rxh7 10. g4 Qxf6 11. exf6 Rh8 12. fxg7 Rxh5 13. gxh5 Bxc5 14. dxc5 d5 15. cxd5 Kd7 16. dxe6+ Kd8 17. g3 Kc7 18. g4 a5 19. d4 Ra6 20. c4 Ra8 21. b5 Ba6 22. bxa6 Rxa6 23. d5 Kc8 24. dxc6 Ra8 25. b4 Kd8 26. b5 Kc8 27. b3 Na6 28. b4 Rb8 29. c3 Nxb4 30. cxb4 Kd8 31. g8=Q+ Ke7 32. Qxb8 Kf6 33. c7 Kg7 34. c8=Q axb4 35. axb4 Kh7 36. Qh8# 1-0
 
 
 [Event "Rated Rapid game"]
@@ -680,7 +1034,7 @@
 [BlackRatingDiff "-162"]
 [Variant "Standard"]
 [TimeControl "600+0"]
-[ECO "C46"]
+[ECO "C47"]
 [Termination "Normal"]
 
 1. e4 e5 2. Nf3 Nf6 3. Nc3 Nc6 4. Bc4 d5 5. exd5 Nxd5 6. Bxd5 e4 7. Ng1 Ne7 8. Qh5 g6 9. Qg5 c6 10. Qf6 Rg8 11. Qxf7+ Kd7 12. Be6+ Kc7 13. Bxc8 Kxc8 14. Nge2 Rg7 15. Qf4 g5 16. Qg4+ Kc7 17. O-O Qd7 18. Qxe4 Qf5 19. Qxf5 Nxf5 20. d3 Re8 21. Be3 Nxe3 22. fxe3 Rxe3 23. Nd4 Bc5 24. Nf5 Rf7 25. Nxe3 Rxf1+ 26. Rxf1 Bxe3+ 27. Kh1 b5 28. Rf7+ Kd6 29. Rxh7 a5 30. Rh6+ Kc5 31. Ne4+ Kd4 32. Rxc6 1-0
@@ -830,3 +1184,5 @@
 [Termination "Normal"]
 
 1. d3 d5 2. Nc3 e6 3. e3 Nf6 4. Nge2 Nc6 5. b3 Bb4 6. Bb2 Qe7 7. Qd2 a5 8. Rd1 b6 9. e4 dxe4 10. h4 exd3 11. Ng3 dxc2 12. Bd3 c1=Q 13. Nge4 Qxd2+ 14. Kf1 Qxd1+ 15. Nxd1 Nd4 16. Bxd4 e5 17. Bb2 Qd7 18. Be2 Qd2 19. Nxf6+ gxf6 20. Bc3 Qxe2+ 21. Kg1 Qxd1+ 22. Be1 Rg8 23. Kh2 Bxe1 24. g3 Qf3 25. g4 Rxg4 26. a4 Qg2# 0-1
+
+

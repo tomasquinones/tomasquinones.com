@@ -8,14 +8,16 @@ const capturesByQueens = document.getElementById("captures-by-queens");
 const capturesByKings = document.getElementById("captures-by-kings");
 const gamesList = document.getElementById("games");
 const userName = document.getElementById("user-name");
+const captureCountAll = document.getElementById("capture-count-all");
 
 const user = "tomasquinones";
-userName.innerText = user;
+//lichess.org/api/games/user/${user}
+https: userName.innerText = user;
 //const user = "gameofsquares";
 const URL = `https://lichess.org/api/games/user/${user}?perfType=ultraBullet,bullet,blitz,rapid,classical,correspondence&max=100`;
-//const URL = `https://lichess.org/api/games/user/${user}`;
+//const URL = `sample.pgn`;
 
-function renderGraph(data, divId) {
+function renderGraph(data, divId, captureCount) {
     //TODO: Add the layout updates to change graph colors and padding
     let graphData = [
         {
@@ -37,60 +39,122 @@ function renderGraph(data, divId) {
     Plotly.newPlot(divId, graphData, layout);
 }
 
-const regexAll = /x([a-h][1-8])/gm;
-const regexPawns = /[a-h]x([a-h][1-8])/gm;
-const regexRooks = /Rx([a-h][1-8])/gm;
-const regexKnights = /Nx([a-h][1-8])/gm;
-const regexBishops = /Bx([a-h][1-8])/gm;
-const regexQueens = /Qx([a-h][1-8])/gm;
-const regexKings = /Kx([a-h][1-8])/gm;
-
-function findCaptures(text, re, divId) {
+function findCaptures(games, piece, divId) {
     // Set up the initial 2D array of squares, with each square having an
     // initial value of zero. This way we are guaranteed to have exactly the
     // right number of squares in the output.
     let squares = [];
+    let captureCount = 0;
     for (let x = 0; x < 8; ++x) {
         squares[x] = [];
         for (let y = 0; y < 8; ++y) {
             squares[x][y] = 0;
         }
     }
-    console.log("Empty Squares Array Created", squares);
-
     // For each match, increment the correct square
     let startXOrd = "a".codePointAt(0);
-    for (matches of text.matchAll(re)) {
-        // There should only be one match, since we have no groups.  The first
-        // character is always 'x', so we ignore it. The second character (idx 1)
-        // is the X coordinate, and the third character (idx 2) is the Y
-        // coordinate.
-        let match = matches[1];
+    for (const game of games) {
+        let playerWhite = true;
+        game.white == user ? (playerWhite = true) : (playerWhite = false);
 
-        // We get the x index by determining the distance between the left-most
-        // square's letter ('a') and the letter for this match.
-        let x = match.codePointAt(0) - startXOrd;
+        for (const move of game.moves) {
+            if (
+                //move.file &&
+                //move.rank &&
+                move.capture &&
+                move.white == playerWhite &&
+                piece.includes(move.piece)
+            ) {
+                // We get the x index by determining the distance between the left-most
+                // square's letter ('a') and the letter for this match.
+                let x = move.file.codePointAt(0) - startXOrd;
 
-        // Y is already just a number, so parse it, then offset it so it's
-        // zero-indexed.
-        let y = Number(match[1]) - 1;
+                // Y is already just a number, so parse it, then offset it so it's
+                // zero-indexed.
+                let y = Number(move.rank) - 1;
 
-        // console.log("match", match, "x", x, "y", y)
-        squares[x][y]++;
+                // console.log("match", match, "x", x, "y", y)
+                squares[x][y]++;
+                captureCount++;
+            }
+        }
     }
-    //console.log(re, squares);
+    console.log(`total captures by ${piece} `, captureCount);
     // Our data is already in the expected format
-    renderGraph(squares, divId);
+    renderGraph(squares, divId, captureCount);
+}
+
+// -------------------------------------------------------
+// Game Classes!
+class Game {
+    constructor(rawData) {
+        let splitData = rawData.split("\n\n");
+        const metadata = splitData[0].split("\n");
+        let moveText = splitData[1];
+        const metaRegex = /\[(\w+)\s"(.*)"\]/;
+
+        for (const item of metadata) {
+            // console.log("item", item);
+            let match = item.match(metaRegex);
+            if (match) {
+                let key = match[1].toLowerCase();
+                let value = match[2];
+                this[key] = value;
+            }
+        }
+
+        const resultRegex = /\s+(0-1|1-0|1\/2-1\/2|\*)$/;
+        moveText = moveText.replace(resultRegex, "");
+
+        const moveRegex =
+            /(?<turn>\d+)\.\s(?<white>\S+)((?<!#)\s(?<black>\S+))?/g;
+
+        this.moves = [];
+
+        for (const match of moveText.matchAll(moveRegex)) {
+            const groups = match.groups;
+            this.moves.push(new Move(groups.turn, true, groups.white));
+            if (groups.black) {
+                this.moves.push(new Move(groups.turn, false, groups.black));
+            }
+        }
+    }
+}
+
+class Move {
+    constructor(turn, white, rawData) {
+        this.turn = turn;
+        this.white = white;
+        const moveRegex =
+            /((?<piece>[RNBQK])?(?<disambiguator>[a-h])?(?<capture>x)?(?<file>[a-h])(?<rank>[1-8])(?<promotion>=[RNBQ])?(?<checks>[+#])?)|(?<castle>O-O(-O)?)/;
+        const match = rawData.match(moveRegex);
+
+        Object.assign(this, match.groups);
+    }
 }
 
 fetch(URL)
     .then((response) => response.text())
     .then((text) => {
-        findCaptures(text, regexAll, capturesAll);
-        findCaptures(text, regexPawns, capturesByPawns);
-        findCaptures(text, regexRooks, capturesByRooks);
-        findCaptures(text, regexKnights, capturesByKnights);
-        findCaptures(text, regexBishops, capturesByBishops);
-        findCaptures(text, regexQueens, capturesByQueens);
-        findCaptures(text, regexKings, capturesByKings);
+        const arrayOfGameInstances = text
+            .split("\n\n\n")
+            .filter((text) => text.length > 0)
+            .map((gameData) => {
+                return new Game(gameData);
+            });
+
+        console.log("arrayOfGameInstances", arrayOfGameInstances);
+        //const allMoves = arrayOfGameInstances.map((game) => game.moves).join();
+
+        findCaptures(
+            arrayOfGameInstances,
+            [undefined, "R", "N", "B", "Q", "K"],
+            capturesAll
+        );
+        findCaptures(arrayOfGameInstances, [undefined], capturesByPawns);
+        findCaptures(arrayOfGameInstances, ["R"], capturesByRooks);
+        findCaptures(arrayOfGameInstances, ["N"], capturesByKnights);
+        findCaptures(arrayOfGameInstances, ["B"], capturesByBishops);
+        findCaptures(arrayOfGameInstances, ["Q"], capturesByQueens);
+        findCaptures(arrayOfGameInstances, ["K"], capturesByKings);
     });
