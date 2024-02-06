@@ -10,10 +10,10 @@ const gamesList = document.getElementById("games");
 const userName = document.getElementById("user-name");
 const captureCountAll = document.getElementById("capture-count-all");
 
-const user = "tomasquinones";
+//const user = "tomasquinones";
+const user = "gameofsquares";
 //lichess.org/api/games/user/${user}
 userName.innerText = user;
-//const user = "gameofsquares";
 const URL = `https://lichess.org/api/games/user/${user}?perfType=ultraBullet,bullet,blitz,rapid,classical,correspondence&max=100`;
 //const URL = `sample.pgn`;
 
@@ -28,14 +28,10 @@ function renderGraph(data, divId, captureCount) {
             hovertemplate: "Captures %{z}",
         },
     ];
-    let layout = [
-        {
-            t: 5,
-            b: 5,
-            r: 5,
-            l: 5,
-        },
-    ];
+    let layout = {
+        margin: { t: 25, b: 25, r: 25, l: 25 },
+        paper_bgcolor: "#DCDCDC",
+    };
     Plotly.newPlot(divId, graphData, layout);
 }
 
@@ -45,12 +41,14 @@ function findCaptures(games, piece, divId) {
     // right number of squares in the output.
     let squares = [];
     let captureCount = 0;
+
     for (let x = 0; x < 8; ++x) {
         squares[x] = [];
         for (let y = 0; y < 8; ++y) {
             squares[x][y] = 0;
         }
     }
+
     // For each match, increment the correct square
     let startXOrd = "a".codePointAt(0);
     for (const game of games) {
@@ -58,6 +56,7 @@ function findCaptures(games, piece, divId) {
         game.white == user ? (playerWhite = true) : (playerWhite = false);
 
         for (const move of game.moves) {
+            move.piece == undefined ? (move.piece = "P") : move.piece;
             if (
                 //move.file &&
                 //move.rank &&
@@ -65,6 +64,7 @@ function findCaptures(games, piece, divId) {
                 move.white == playerWhite &&
                 piece.includes(move.piece)
             ) {
+                console.log("move.piece", move.piece);
                 // We get the x index by determining the distance between the left-most
                 // square's letter ('a') and the letter for this match.
                 let x = move.file.codePointAt(0) - startXOrd;
@@ -148,10 +148,10 @@ fetch(URL)
 
         findCaptures(
             arrayOfGameInstances,
-            [undefined, "R", "N", "B", "Q", "K"],
+            ["P", "R", "N", "B", "Q", "K"],
             capturesAll
         );
-        findCaptures(arrayOfGameInstances, [undefined], capturesByPawns);
+        findCaptures(arrayOfGameInstances, ["P"], capturesByPawns);
         findCaptures(arrayOfGameInstances, ["R"], capturesByRooks);
         findCaptures(arrayOfGameInstances, ["N"], capturesByKnights);
         findCaptures(arrayOfGameInstances, ["B"], capturesByBishops);
