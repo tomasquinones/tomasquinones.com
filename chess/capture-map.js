@@ -10,8 +10,8 @@ const gamesList = document.getElementById("games");
 const userName = document.getElementById("user-name");
 const captureCountAll = document.getElementById("capture-count-all");
 
-//const user = "tomasquinones";
-const user = "gameofsquares";
+const user = "tomasquinones";
+//const user = "gameofsquares";
 //lichess.org/api/games/user/${user}
 userName.innerText = user;
 const URL = `https://lichess.org/api/games/user/${user}?perfType=ultraBullet,bullet,blitz,rapid,classical,correspondence&max=100`;
