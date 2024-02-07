@@ -10,11 +10,14 @@ const gamesList = document.getElementById("games");
 const userName = document.getElementById("user-name");
 const captureCountAll = document.getElementById("capture-count-all");
 
-const user = "tomasquinones";
+const user2 = "tomasquinones";
+const user = "DrNykterstein"; // Magnus Carlsen
+// const user = "TSMFTXH"; // Hikaru Nakamura
+
 //const user = "gameofsquares";
 //lichess.org/api/games/user/${user}
 userName.innerText = user;
-const URL = `https://lichess.org/api/games/user/${user}?perfType=ultraBullet,bullet,blitz,rapid,classical,correspondence&max=100`;
+const URL = `https://lichess.org/api/games/user/${user}?perfType=ultraBullet,bullet,blitz,rapid,classical,correspondence&max=500`;
 //const URL = `sample.pgn`;
 
 function renderGraph(data, divId, captureCount) {

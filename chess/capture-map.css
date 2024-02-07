@@ -22,6 +22,8 @@ h2 {
     height: 500px;
     margin-right: auto;
     margin-left: auto;
+    background: url("spinner.gif") center no-repeat;
+    background-size: 150px;
 }
 
 #games {
