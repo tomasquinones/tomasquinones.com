@@ -25,6 +25,7 @@ function renderGraph(data, divId, captureCount) {
     let graphData = [
         {
             type: "heatmap",
+            colorscale: "Portland",
             z: data,
             x: ["A", "B", "C", "D", "E", "F", "G", "H"],
             y: ["1", "2", "3", "4", "5", "6", "7", "8"],
