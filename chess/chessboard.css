@@ -1,3 +1,7 @@
+body {
+    background-color: #383838;
+}
+
 #board {
     width: 800px;
     height: 800px;
@@ -26,9 +30,9 @@
 }
 
 .white {
-    background-color: ghostwhite;
+    background-color: #d3d3d3;
 }
 
 .black {
-    background-color: darkgrey;
+    background-color: #a9a9a9;
 }
