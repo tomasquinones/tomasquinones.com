@@ -23,9 +23,9 @@ body {
 
 .squares {
     display: inline-block;
-    width: 98px;
-    height: 98px;
-    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    /* aborder: 1px solid black; */
     text-decoration: none;
 }
 

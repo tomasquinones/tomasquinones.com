@@ -1,0 +1,14 @@
+body {
+    background-color: darkgray;
+}
+.square {
+    border: 1px solid darkblue;
+    background-color: lightgray;
+    height: 200px;
+    width: 200px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
