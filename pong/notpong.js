@@ -18,7 +18,7 @@ function initBall() {
 }
 
 const PADDLE_WIDTH = 5;
-const PADDLE_HEIGHT = 30;
+const PADDLE_HEIGHT = 50;
 const PADDLE_OFFSET = 10;
 let leftPaddleTop = 10;
 let rightPaddleTop = 30;
