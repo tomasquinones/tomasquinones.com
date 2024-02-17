@@ -1,6 +1,8 @@
 class GameView {
     constructor() {
-        let canvas = document.querySelector("#canvas");
+        canvas = document.querySelector("#canvas");
+        canvas.width = window.innerWidth - 50;
+        canvas.height = window.innerHeight - 50;
         this.ctx = canvas.getContext("2d");
         this.width = canvas.width;
         this.height = canvas.height;
@@ -11,12 +13,14 @@ class GameView {
         // Fill the canvas with black
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(0, 0, this.width, this.height);
+
         entities.forEach((entity) => entity.draw(this.ctx));
     }
 
     drawScores(scores) {
         this.ctx.fillStyle = "white";
-        this.ctx.font = "30px monospace";
+        let fontSize = window.innerHeight / 20;
+        this.ctx.font = `${fontSize}px monospace`;
         this.ctx.textAlign = "left";
         this.ctx.fillText(scores.leftScore.toString(), 50, 50);
         this.ctx.textAlign = "right";
@@ -25,7 +29,8 @@ class GameView {
 
     drawGameOver() {
         this.ctx.fillStyle = "white";
-        this.ctx.font = "30px monospace";
+        let fontSize = window.innerHeight / 20;
+        this.ctx.font = `${fontSize}px monospace`;
         this.ctx.textAlign = "center";
         this.ctx.fillText("GAME OVER", this.width / 2, this.height / 2);
     }
@@ -55,8 +60,8 @@ class Entity {
 }
 
 class Paddle extends Entity {
-    static WIDTH = 5;
-    static HEIGHT = 40;
+    static WIDTH = window.innerWidth / 80;
+    static HEIGHT = window.innerHeight / 8;
     static OFFSET = 10;
 
     constructor(x, y) {
@@ -65,7 +70,7 @@ class Paddle extends Entity {
 }
 
 class Ball extends Entity {
-    static SIZE = 5;
+    static SIZE = window.innerHeight / 80;
 
     constructor() {
         super(0, 0, Ball.SIZE, Ball.SIZE);
@@ -73,10 +78,10 @@ class Ball extends Entity {
     }
 
     init() {
-        this.x = 20;
-        this.y = 30;
-        this.xSpeed = 4;
-        this.ySpeed = 2;
+        this.x = window.innerWidth / 20;
+        this.y = window.innerHeight / 30;
+        this.xSpeed = window.innerWidth * 0.009;
+        this.ySpeed = window.innerHeight * 0.008;
     }
 
     update() {
@@ -106,6 +111,7 @@ class Ball extends Entity {
             ballBox.bottom > paddleBox.top;
 
         if (collisionOccurred) {
+            console.log(collisionOccurred);
             let distanceFromTop = ballBox.top - paddleBox.top;
             let distanceFromBottom = paddleBox.bottom - ballBox.bottom;
             this.adjustAngle(distanceFromTop, distanceFromBottom);
@@ -144,7 +150,7 @@ class Scores {
 
 class Computer {
     static followBall(paddle, ball) {
-        const MAX_SPEED = 2;
+        const MAX_SPEED = window.innerHeight * 0.008;
         let ballBox = ball.boundingBox();
         let paddleBox = paddle.boundingBox();
 
@@ -187,7 +193,7 @@ class Game {
         );
         this.ball.checkPaddleCollision(
             this.rightPaddle,
-            Math.abs(this.ball.xSpeed)
+            -Math.abs(this.ball.xSpeed)
         );
         this.ball.checkWallCollision(
             this.gameView.width,
