@@ -5,6 +5,7 @@ const pauseButton = document.querySelector("#pause-button");
 const resetButton = document.querySelector("#reset-button");
 const timerStatus = document.querySelector("#status");
 const streakCounter = document.querySelector("#streak");
+
 let alarm = document.getElementById("alarm");
 
 let minutes = 25;
@@ -21,6 +22,8 @@ function startTimer() {
             seconds < 10 ? "0" + seconds : seconds
         }`;
 
+        document.title = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+
         if (minutes === 0 && seconds === 0) {
             // clearInterval(intervalId);
             alarm.play();
@@ -30,6 +33,7 @@ function startTimer() {
             if (isWorking) {
                 shortBreak();
                 isWorking = false;
+                streakCounter.append(" X");
             } else {
                 workingStatus();
                 isWorking = true;
@@ -53,7 +57,6 @@ function workingStatus() {
     minutes = 25;
     timerStatus.innerHTML = "Time to work!";
     body.style.backgroundColor = "DarkRed";
-    streakCounter.append(" X");
 }
 
 function pauseTimer() {
@@ -65,8 +68,10 @@ function pauseTimer() {
 
 function resetTimer() {
     minutes = 25;
+    seconds = 0;
     clearInterval(intervalId);
     timer.innerHTML = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+    document.title = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
     pauseButton.style.display = "none";
     playButton.style.display = "block";
     playButton.innerHTML = "START";
