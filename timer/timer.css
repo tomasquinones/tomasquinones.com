@@ -1,0 +1,76 @@
+body {
+    background-color: gray;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    color: lightgray;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: lightgray;
+}
+
+#container {
+    text-align: center;
+}
+
+#timer {
+    font-size: 300px;
+    font-weight: 800;
+    padding: 0;
+    text-shadow: 0px 0px 300px black;
+}
+
+#play-button {
+    font-size: 50px;
+    width: fit-content;
+    padding: 1px;
+    margin: 0 auto;
+    height: 100px;
+}
+
+#play-button:hover {
+    text-shadow: 0px 0px 10px black;
+}
+
+#play-button:active {
+    font-size: 50px;
+    color: gray;
+}
+
+#pause-button {
+    font-size: 50px;
+    width: fit-content;
+    padding: 1px;
+    margin: 0 auto;
+    height: 100px;
+    display: none;
+}
+
+#reset-button {
+    width: fit-content;
+    font-size: 50px;
+    padding: 0;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+#reset-button:hover {
+    text-shadow: 0px 0px 10px black;
+}
+
+#status {
+    font-size: 100px;
+}
+
+#streak {
+    font-size: ;
+}
+
+#about {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 500px;
+    margin: 0px auto;
+    padding: 25px 0;
+}

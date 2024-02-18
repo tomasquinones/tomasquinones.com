@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="timer.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="timer">25:00</div>
+        <div id="play-button">START</div>
+        <div id="pause-button">PAUSE</div>
+        <div id="reset-button">RESET</div>
+        <div id="status"></div>
+        <div id='streak'>Streak:</div>
+        <div id="about">This timer is based on the <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique"
+                target="_blank">Pomodoro Techique</a>. Currently it simply alternates between 25 minute work sessions
+            and 5 minute breaks.</div>
+
+    </div>
+    <audio id="alarm">
+        <source src="call-attention.mp3" type="audio/mp3">
+    </audio>
+    <script src="timer.js"></script>
+</body>
+
+</html>
