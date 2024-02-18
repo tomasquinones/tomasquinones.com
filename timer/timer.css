@@ -17,6 +17,7 @@ a:active {
 
 #timer {
     font-size: 300px;
+    font-size: 40vmin;
     font-weight: 800;
     padding: 0;
     text-shadow: 0px 0px 300px black;
@@ -65,7 +66,7 @@ a:active {
 }
 
 #streak {
-    font-size: ;
+    font-size: 25px;
 }
 
 #about {
