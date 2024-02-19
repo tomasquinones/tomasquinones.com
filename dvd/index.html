@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVD Screensaver</title>
+</head>
+
+<body>
+    <style>
+        body,
+        html {
+            background-color: gray;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            display: block;
+        }
+    </style>
+    <canvas id="canvas"></canvas>
+    <script>
+        let canvas = document.querySelector('#canvas')
+        let ctx = canvas.getContext('2d');
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let colors = ['red', 'blue', 'green'];
+        ctx.canvas.width = width;
+        ctx.canvas.height = height;
+        let logoWidth = 0;
+        let logoHeight = 0;
+
+        let logo = new Image();
+        logo.src = 'dvd_logo.svg'
+        logo.addEventListener('load', () => {
+            // once the image is loaded:
+            logoWidth = logo.naturalWidth; // this will be 300
+            logoHeight = logo.naturalHeight; // this will be 400
+            console.log(logoHeight);
+
+        }, false);
+
+
+        console.log('logo', logo.naturalWidth);
+        let logoPosition = { x: 100, y: 100 }
+
+        let xSpeed = 4;
+        let ySpeed = 2;
+
+
+        function draw() {
+            ctx.fillStyle = 'gray';
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.fillStyle = 'black';
+            ctx.drawImage(logo, logoPosition.x, logoPosition.y, 500, 300)
+        }
+
+        function update() {
+            logoPosition.x += xSpeed;
+            logoPosition.y += ySpeed;
+        }
+
+        function checkCollision() {
+            let ball = {
+                left: logoPosition.x,
+                right: logoPosition.x + 500,
+                top: logoPosition.y,
+                bottom: logoPosition.y + 300
+            }
+
+            if (ball.left < 0 || ball.right > width) {
+                xSpeed = -xSpeed
+            }
+
+            if (ball.top < 0 || ball.bottom > height) {
+                ySpeed = -ySpeed;
+            }
+        }
+
+        function loop() {
+            draw();
+            update();
+            checkCollision();
+            setTimeout(loop, 30)
+        }
+
+        loop();
+
+    </script>
+</body>
+
+</html>
