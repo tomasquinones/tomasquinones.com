@@ -54,7 +54,6 @@ function shortBreak() {
 }
 
 function workingStatus() {
-    minutes = 25;
     timerStatus.innerHTML = "Time to work!";
     body.style.backgroundColor = "DarkRed";
 }
