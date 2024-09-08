@@ -8,7 +8,7 @@ const streakCounter = document.querySelector("#streak");
 
 let alarm = document.getElementById("alarm");
 
-let minutes = 25;
+let minutes = 1;
 let seconds = 0;
 let intervalId;
 let isWorking = true;
@@ -17,38 +17,37 @@ function startTimer() {
     playButton.style.display = "none";
     pauseButton.style.display = "block";
     workingStatus();
-    intervalId = setInterval(() => {
-        timer.innerHTML = `${minutes}:${
-            seconds < 10 ? "0" + seconds : seconds
-        }`;
+    intervalId = setInterval(timerCountDown, 1000);
+}
 
-        document.title = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+function timerCountDown() {
+    timer.innerHTML = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
 
-        if (minutes === 0 && seconds === 0) {
-            // clearInterval(intervalId);
-            alarm.play();
+    document.title = `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
 
-            //playButton.style.display = "block";
-            //pauseButton.style.display = "none";
-            if (isWorking) {
-                shortBreak();
-                isWorking = false;
-                streakCounter.append(" X");
-            } else {
-                workingStatus();
-                isWorking = true;
-            }
-        } else if (minutes > 0 && seconds === 0) {
-            seconds = 59;
-            minutes--;
+    if (minutes === 0 && seconds === 0) {
+        alarm.play();
+
+        //playButton.style.display = "block";
+        //pauseButton.style.display = "none";
+        if (isWorking) {
+            shortBreak();
+            isWorking = false;
+            streakCounter.append(" X");
         } else {
-            seconds--;
+            workingStatus();
+            isWorking = true;
         }
-    }, 1000);
+    } else if (minutes > 0 && seconds === 0) {
+        seconds = 59;
+        minutes--;
+    } else {
+        seconds--;
+    }
 }
 
 function shortBreak() {
-    minutes = 5;
+    minutes = 1;
     timerStatus.innerHTML = "Take a quick break!";
     body.style.backgroundColor = "CadetBlue";
 }
