@@ -1,0 +1,14 @@
+body {
+}
+
+.row {
+}
+
+.square {
+    width: 200px;
+    height: 25px;
+    background-color: gray;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 5px;
+}
