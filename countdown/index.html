@@ -8,74 +8,21 @@
     <script src="https://kit.fontawesome.com/9d89c78646.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="countdown.css">
+
 </head>
 
 <body>
-
-    <style>
-        body {
-            background-color: gray;
-        }
-
-        .contentcard {
-            background-color: silver;
-        }
-    </style>
-
-
     <div class="container">
-        <div class="row">
-            <div class="col card center">
-                <h1>Goals and Important Dates: <i class="fa-regular fa-calendar-days fa-xl"></i></h1>
-            </div>
+        <div class="" id="title-box">
+            <h1>Goals and Important Dates: <i class="fa-regular fa-calendar-days fa-xl"></i></h1>
         </div>
 
-        <div class="row">
-            <div class="col card p-3">
-                <div class="">
-                    <h2>Idea Week 2024 </h2>
-                </div>
-                <div class="">January 10, 2024</div>
-                <div><span class="days_until_idea_week"></span> Days to Go.</div>
-            </div>
 
-            <div class="col card p-3">
-                <div class="">
-                    <h2>Last Day of Invisalign</h2>
-                </div>
-                <div class="">February 1, 2024</div>
-                <div><span class="last_invisalign"></span> Days to Go.</div>
-            </div>
+        <div id="goalListContainer">
 
-            <div class="col card p-3">
-                <div class="">
-                    <h2>New Year's Eve 2024</h2>
-                </div>
-                <div class="">December 31, 2024</div>
-                <div><span class="last_days"></span> Days to Go!</div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col card p-3">
-                <h2>10th Anniversary at Ride with GPS</h2>
-                <h3>August 14, 2024</h3>
-                <div><span class="rwgps_anniversary"></span> Days to Go!</div>
-            </div>
-            <div class="col card p-3">
-
-            </div>
-            <div class="col card p-3">
-
-            </div>
         </div>
     </div>
-
-
-
-
-    <div class="contentcard">
-    </div>
-
 
 
 
@@ -83,32 +30,65 @@
         let dateNow = new Date();
         const FULLDAY = (24 * 60 * 60 * 1000);
 
+        const myGoals =
+            [
+                {
+                    "title": "new year 2024",
+                    "subtitle": "bring it in",
+                    "date": "2024-12-31"
+                },
+                {
+                    "title": "My 48th Birthday",
+                    "subtitle": "Almost 50 Years Old",
+                    "date": "2024-12-13"
+                },
+                {
+                    "title": "Idea Week Fall 2024",
+                    "subtitle": "A full week of hacking on something fun for work",
+                    "date": "2024-10-07"
+                },
+                {
+                    "title": "11th Anniversary at Ride with GPS",
+                    "subtitle": "Another Year Another Dolla Dolla",
+                    "date": "2025-08-14"
+                },
+                {
+                    "title": "Global Game Jam 2025",
+                    "subtitle": "Program a small but original game in just a few days. More information at GlobalGameJam.org",
+                    "date": "2025-01-20"
+                }
+            ];
+
 
         function calculateDays(specialDate, currentDate) {
-            days = Math.ceil((specialDate - currentDate) / (24 * 60 * 60 * 1000));
-            console.log("Ceiling " + Math.ceil((specialDate - currentDate) / FULLDAY));
-            console.log("Floor " + Math.floor((specialDate - currentDate) / FULLDAY));
-            console.log("Round " + Math.round((specialDate - currentDate) / FULLDAY));
-            console.log("No rounding " + ((specialDate - currentDate) / FULLDAY));
-
+            convertedDate = new Date(specialDate);
+            days = Math.ceil((convertedDate - currentDate) / (24 * 60 * 60 * 1000));
+            //console.log("Ceiling " + Math.ceil((specialDate - currentDate) / FULLDAY));
             return days;
         }
 
-        let ideaWeek = new Date("2024-01-10");
-        let days_until_idea_week = document.querySelector(".days_until_idea_week");
-        days_until_idea_week.textContent = calculateDays(ideaWeek, dateNow);
+        function elementFromHTML(html) {
+            const template = document.createElement('template');
+            template.innerHTML = html.trim();
+            return template.content.firstElementChild;
+        };
 
-        let lastDayOf2024 = new Date("2024-12-31");
-        let last_days = document.querySelector(".last_days");
-        last_days.textContent = calculateDays(lastDayOf2024, dateNow);
 
-        let lastDayOfInvisalign = new Date("2024-02-01");
-        let last_invisalign = document.querySelector(".last_invisalign");
-        last_invisalign.textContent = calculateDays(lastDayOfInvisalign, dateNow);
 
-        let rwgpsAnniversary = new Date("2024-08-14");
-        let rwgps_anniversary = document.querySelector(".rwgps_anniversary");
-        rwgps_anniversary.textContent = calculateDays(rwgpsAnniversary, dateNow);
+        const goalList = document.getElementById("goalListContainer")
+        for (const item of myGoals) {
+            const goalCard = elementFromHTML(`
+                    <div class="contentcard">
+                        <h3>${item.date}</h3>
+                    <h2>${item.title}</h2>
+                    <p>${item.subtitle}</p>
+                    <span>${calculateDays(item.date, dateNow)} days
+                    </div>
+                    `)
+
+            goalList.insertAdjacentElement('beforeend', goalCard);
+        }
+
     </script>
 
 
