@@ -1,9 +1,40 @@
+html {
+    height: 100%;
+}
+
 body {
     background-color: gray;
+    background-color: #1fc8db;
+    background-image: linear-gradient(
+        140deg,
+        #eadedb 0%,
+        #bc70a4 50%,
+        #bfd641 75%
+    );
+    opacity: 0.95;
+    height: 100%;
+}
+
+#container {
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
 }
 
 h1 {
     text-align: center;
+}
+
+a:link {
+    color: purple;
+}
+
+a:visited {
+    color: rgb(62, 0, 62);
+}
+
+a:hover {
+    font-size: 110%;
 }
 
 #title-box {
@@ -11,7 +42,7 @@ h1 {
     text-align: center;
     padding: 10px;
     width: 80%;
-    border: 1px solid black;
+    box-shadow: 5px 5px 5px rgb(60, 20, 106);
     background-color: rgb(218, 218, 218);
     border-radius: 10px;
 }
@@ -28,8 +59,13 @@ h1 {
     width: 350px;
     max-width: 350px;
     margin: 15px;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
     background-color: rgb(218, 218, 218);
-    box-shadow: 5px 5px 5px black;
+    box-shadow: 5px 5px 5px rgb(60, 20, 106);
+}
+
+#footer {
+    font-family: monospace;
+    font-size: 12px;
 }

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div id="container">
         <div class="" id="title-box">
             <h1>Goals and Important Dates: <i class="fa-regular fa-calendar-days fa-xl"></i></h1>
         </div>
@@ -22,20 +22,21 @@
         <div id="goalListContainer">
 
         </div>
+
+        <div id="footer">Last Update: 20240919 - TQ</div>
     </div>
 
 
 
     <script>
-        let dateNow = new Date();
-        const FULLDAY = (24 * 60 * 60 * 1000);
+
 
         const myGoals =
             [
                 {
-                    "title": "new year 2024",
-                    "subtitle": "bring it in",
-                    "date": "2024-12-31"
+                    "title": "Idea Week Fall 2024",
+                    "subtitle": "A full week of hacking on something fun for work",
+                    "date": "2024-10-07"
                 },
                 {
                     "title": "My 48th Birthday",
@@ -43,22 +44,24 @@
                     "date": "2024-12-13"
                 },
                 {
-                    "title": "Idea Week Fall 2024",
-                    "subtitle": "A full week of hacking on something fun for work",
-                    "date": "2024-10-07"
+                    "title": "new year 2024",
+                    "subtitle": "bring it in",
+                    "date": "2024-12-31"
+                },
+                {
+                    "title": "Global Game Jam 2025",
+                    "subtitle": "Program a small but original game in just a few days. More information at <a href='https://globalgamejam.org' target='_new'>GlobalGameJam.org</a>",
+                    "date": "2025-01-20"
                 },
                 {
                     "title": "11th Anniversary at Ride with GPS",
                     "subtitle": "Another Year Another Dolla Dolla",
                     "date": "2025-08-14"
                 },
-                {
-                    "title": "Global Game Jam 2025",
-                    "subtitle": "Program a small but original game in just a few days. More information at GlobalGameJam.org",
-                    "date": "2025-01-20"
-                }
             ];
 
+        let dateNow = new Date();
+        const FULLDAY = (24 * 60 * 60 * 1000);
 
         function calculateDays(specialDate, currentDate) {
             convertedDate = new Date(specialDate);
