@@ -1,3 +1,4 @@
 credentials.json
 *.swp
 *.swo
+.DS_Store
