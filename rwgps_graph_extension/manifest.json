@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "RWGPS Goal Graphs",
+    "version": "1.0",
+
+    "description": "Adds a new graph to RWGPS goals pages.",
+
+    "icons": {
+        "48": "icons/"
+    },
+
+    "content_scripts": [
+        {
+            "run_at": "document_idle",
+            "matches": ["*://*.ridewithgps.com/goals/*"],
+            "js": ["rwgps_graph.js", "plotly-2.29.1.min.js"],
+            "css": ["rwgps_graph.css"]
+        }
+    ]
+}
