@@ -1,0 +1,41 @@
+body {
+    background-color: gray;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#container {
+    width: 900px;
+    height: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(62, 62, 62);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.cardHeading {
+    font-size: 4em;
+}
+
+.card {
+    width: 130px;
+    height: 100px;
+    margin: 4px;
+    padding: 15px;
+    background-color: rgb(219, 219, 219);
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    margin: 18px auto 0.25em 18px;
+}
+
+a:link {
+    color: darkblue;
+    text-decoration: underline dotted;
+}
