@@ -39,3 +39,7 @@ a:link {
     color: darkblue;
     text-decoration: underline dotted;
 }
+
+.done {
+    background-color: gold;
+}
