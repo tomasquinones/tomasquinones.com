@@ -1,0 +1,380 @@
+/* ===========================================
+   THEME: TRON (1982)
+   The Digital Frontier
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS === */
+  --bg-void: #000000;
+  --bg-deep: #050508;
+  --bg-surface: #0a0a10;
+  --bg-elevated: #101018;
+  --bg-hover: #181820;
+
+  /* === ACCENT COLORS (Tron palette) === */
+  --neon-pink: #ff6600;      /* Sark/MCP orange */
+  --neon-magenta: #ff4400;   /* Dark orange */
+  --neon-cyan: #00dffc;      /* Tron cyan */
+  --neon-blue: #00a0c0;      /* Darker cyan */
+  --neon-purple: #6080ff;    /* Program blue */
+  --neon-orange: #ff6600;    /* Orange */
+  --neon-yellow: #ffe64d;    /* Light beam yellow */
+
+  /* Tron-specific colors */
+  --tron-cyan: #00dffc;
+  --tron-cyan-dim: #008090;
+  --tron-cyan-bright: #40ffff;
+  --tron-blue: #4080ff;
+  --tron-orange: #ff6600;
+  --tron-yellow: #ffe64d;
+  --tron-white: #c0e0ff;
+  --tron-black: #000000;
+  --tron-grid: #00dffc;
+
+  /* === TEXT COLORS === */
+  --text-primary: #c0e0ff;
+  --text-secondary: #80a0c0;
+  --text-muted: #405060;
+  --text-accent: var(--tron-cyan);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, var(--tron-cyan) 0%, var(--tron-blue) 50%, var(--tron-orange) 100%);
+  --gradient-ocean: linear-gradient(135deg, var(--tron-cyan-bright) 0%, var(--tron-cyan) 50%, var(--tron-blue) 100%);
+  --gradient-horizon: linear-gradient(180deg, #000000 0%, #000510 40%, #001020 100%);
+  --gradient-chrome: linear-gradient(135deg, var(--tron-cyan) 0%, var(--tron-cyan-dim) 100%);
+
+  /* === GLOW EFFECTS === */
+  --glow-pink: 0 0 10px var(--tron-orange), 0 0 20px var(--tron-orange), 0 0 40px rgba(255, 102, 0, 0.5);
+  --glow-cyan: 0 0 10px var(--tron-cyan), 0 0 20px var(--tron-cyan), 0 0 40px rgba(0, 223, 252, 0.5);
+  --glow-purple: 0 0 10px var(--tron-blue), 0 0 20px var(--tron-blue), 0 0 40px rgba(64, 128, 255, 0.5);
+  --glow-subtle-pink: 0 0 5px rgba(255, 102, 0, 0.5);
+  --glow-subtle-cyan: 0 0 5px rgba(0, 223, 252, 0.5);
+
+  /* === BORDERS === */
+  --border-subtle: 1px solid rgba(0, 223, 252, 0.2);
+  --border-accent: 1px solid var(--tron-cyan);
+  --border-glow: 1px solid var(--tron-cyan-bright);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'Orbitron', 'Rajdhani', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--tron-cyan);
+  --accent-secondary: var(--tron-blue);
+  --accent-tertiary: var(--tron-orange);
+}
+
+/* === TRON OVERRIDES === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--tron-cyan), 0 0 20px rgba(0, 223, 252, 0.5);
+}
+
+.neon-pink {
+  color: var(--tron-orange);
+  text-shadow: var(--glow-pink);
+}
+
+.neon-cyan {
+  color: var(--tron-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.neon-purple {
+  color: var(--tron-blue);
+  text-shadow: var(--glow-purple);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--tron-cyan-bright) 0%, var(--tron-cyan) 50%, var(--tron-blue) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px var(--tron-cyan));
+}
+
+/* Tron grid landscape background */
+body {
+  background: var(--tron-black);
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Tron grid container */
+.tron-grid {
+  display: block !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* SVG grid styling */
+.tron-grid-svg {
+  position: absolute;
+  top: 66.67vh;
+  left: 0;
+  width: 100%;
+  height: 33.33vh;
+}
+
+/* Horizon glow line */
+.tron-grid::before {
+  content: '';
+  position: absolute;
+  top: calc(66.67vh - 1px);
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--tron-cyan);
+  box-shadow:
+    0 0 10px var(--tron-cyan),
+    0 0 25px var(--tron-cyan),
+    0 0 50px rgba(0, 223, 252, 0.8),
+    0 0 100px rgba(0, 223, 252, 0.5);
+}
+
+/* Glow at horizon */
+.tron-grid::after {
+  content: '';
+  position: absolute;
+  top: calc(66.67vh - 120px);
+  left: 0;
+  right: 0;
+  height: 240px;
+  background: radial-gradient(
+    ellipse 50% 50% at 50% 50%,
+    rgba(0, 223, 252, 0.25) 0%,
+    rgba(0, 223, 252, 0.08) 40%,
+    transparent 70%
+  );
+}
+
+/* Sky background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 66.67vh;
+  background: linear-gradient(
+    180deg,
+    #000000 0%,
+    #000205 40%,
+    #000810 80%,
+    #001525 100%
+  );
+  pointer-events: none;
+  z-index: -2;
+}
+
+body::after {
+  content: none;
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  border-radius: 0;
+  border: 1px solid var(--tron-cyan);
+  background: transparent;
+}
+
+.btn-primary {
+  background: transparent;
+  color: var(--tron-cyan);
+  border: 2px solid var(--tron-cyan);
+  box-shadow:
+    0 0 10px rgba(0, 223, 252, 0.3),
+    inset 0 0 10px rgba(0, 223, 252, 0.1);
+}
+
+.btn-primary:hover {
+  background: var(--tron-cyan);
+  color: var(--tron-black);
+  box-shadow:
+    0 0 20px var(--tron-cyan),
+    0 0 40px rgba(0, 223, 252, 0.5);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--tron-blue);
+  border-color: var(--tron-blue);
+  box-shadow: 0 0 10px rgba(64, 128, 255, 0.2);
+}
+
+.btn-secondary:hover {
+  background: var(--tron-blue);
+  color: var(--tron-black);
+  box-shadow: 0 0 20px var(--tron-blue);
+}
+
+.btn-ghost {
+  color: var(--tron-cyan-dim);
+  border-color: var(--tron-cyan-dim);
+}
+
+.btn-ghost:hover {
+  color: var(--tron-cyan);
+  border-color: var(--tron-cyan);
+  background: transparent;
+  box-shadow: 0 0 10px rgba(0, 223, 252, 0.3);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: 0;
+  font-size: 0.7rem;
+  border-width: 1px;
+}
+
+.badge-pink {
+  background: transparent;
+  color: var(--tron-orange);
+  border-color: var(--tron-orange);
+  box-shadow: 0 0 5px rgba(255, 102, 0, 0.3);
+}
+
+.badge-cyan {
+  background: transparent;
+  color: var(--tron-cyan);
+  border-color: var(--tron-cyan);
+  box-shadow: 0 0 5px rgba(0, 223, 252, 0.3);
+}
+
+.badge-purple {
+  background: transparent;
+  color: var(--tron-blue);
+  border-color: var(--tron-blue);
+  box-shadow: 0 0 5px rgba(64, 128, 255, 0.3);
+}
+
+.section-title {
+  color: var(--tron-cyan);
+  border-bottom: 1px solid var(--tron-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 10px var(--tron-cyan);
+}
+
+.divider {
+  background: var(--tron-cyan);
+  height: 1px;
+  box-shadow: 0 0 10px var(--tron-cyan), 0 0 20px rgba(0, 223, 252, 0.5);
+}
+
+.card {
+  border-radius: 0;
+  border: 1px solid var(--tron-cyan-dim);
+  background: rgba(0, 20, 30, 0.8);
+  box-shadow:
+    0 0 10px rgba(0, 223, 252, 0.1),
+    inset 0 0 20px rgba(0, 223, 252, 0.05);
+}
+
+.card:hover {
+  border-color: var(--tron-cyan);
+  box-shadow:
+    0 0 20px rgba(0, 223, 252, 0.3),
+    inset 0 0 30px rgba(0, 223, 252, 0.1);
+  transform: none;
+}
+
+a {
+  color: var(--tron-cyan);
+}
+
+a:hover {
+  color: var(--tron-cyan-bright);
+  text-shadow: 0 0 10px var(--tron-cyan);
+}
+
+.input {
+  border-radius: 0;
+  border: 1px solid var(--tron-cyan-dim);
+  background: rgba(0, 10, 20, 0.9);
+}
+
+.input:focus {
+  border-color: var(--tron-cyan);
+  box-shadow: 0 0 10px rgba(0, 223, 252, 0.3);
+}
+
+.input::placeholder {
+  color: var(--tron-cyan-dim);
+}
+
+.font-sample {
+  border: 1px solid var(--tron-cyan-dim);
+  border-radius: 0;
+  background: rgba(0, 10, 20, 0.8);
+}
+
+.color-swatch {
+  border-radius: 0;
+  border: 1px solid var(--tron-cyan-dim);
+}
+
+/* Hide default grid background */
+.grid-bg {
+  background-image: none !important;
+}
+
+/* Hero adjustments */
+.hero-container {
+  border: 1px solid var(--tron-cyan);
+  border-radius: 0;
+  background: rgba(0, 20, 40, 0.9);
+  box-shadow:
+    0 0 30px rgba(0, 223, 252, 0.2),
+    inset 0 0 50px rgba(0, 223, 252, 0.1);
+}
+
+.blink {
+  color: var(--tron-cyan);
+  text-shadow: 0 0 10px var(--tron-cyan);
+}
+
+/* CRT scanline effect */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* CRT vignette */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}

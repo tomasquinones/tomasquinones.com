@@ -1,0 +1,279 @@
+/* ===========================================
+   THEME: VECTOR ARCADE
+   Tempest / Battlezone / Asteroids wire-frame
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS === */
+  --bg-void: #000000;
+  --bg-deep: #050505;
+  --bg-surface: #0a0a0a;
+  --bg-elevated: #111111;
+  --bg-hover: #1a1a1a;
+
+  /* === ACCENT COLORS === */
+  --neon-pink: #ffffff;
+  --neon-magenta: #cccccc;
+  --neon-cyan: #00ffff;
+  --neon-blue: #4444ff;
+  --neon-purple: #ff00ff;
+  --neon-orange: #ffaa00;
+  --neon-yellow: #ffff00;
+
+  /* Vector-specific colors */
+  --vector-white: #ffffff;
+  --vector-dim: #aaaaaa;
+  --vector-bright: #ffffff;
+  --vector-cyan: #00ffff;
+  --vector-magenta: #ff00ff;
+  --vector-yellow: #ffff00;
+  --vector-red: #ff0000;
+  --vector-green: #00ff00;
+  --vector-blue: #4444ff;
+  --void-black: #000000;
+
+  /* === TEXT COLORS === */
+  --text-primary: #ffffff;
+  --text-secondary: #aaaaaa;
+  --text-muted: #555555;
+  --text-accent: var(--vector-white);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
+  --gradient-ocean: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+  --gradient-horizon: linear-gradient(180deg, #000000 0%, #050505 40%, #0a0a0a 100%);
+  --gradient-chrome: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+
+  /* === GLOW EFFECTS === */
+  --glow-pink: 0 0 2px #ffffff, 0 0 5px #ffffff, 0 0 10px rgba(255, 255, 255, 0.5);
+  --glow-cyan: 0 0 2px #00ffff, 0 0 5px #00ffff, 0 0 10px rgba(0, 255, 255, 0.5);
+  --glow-purple: 0 0 2px #ff00ff, 0 0 5px #ff00ff, 0 0 10px rgba(255, 0, 255, 0.5);
+  --glow-subtle-pink: 0 0 3px rgba(255, 255, 255, 0.6);
+  --glow-subtle-cyan: 0 0 3px rgba(0, 255, 255, 0.6);
+
+  /* === BORDERS === */
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.3);
+  --border-accent: 1px solid var(--vector-white);
+  --border-glow: 1px solid var(--vector-cyan);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'Orbitron', 'VT323', monospace;
+  --font-body: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--vector-white);
+  --accent-secondary: var(--vector-cyan);
+  --accent-tertiary: var(--vector-magenta);
+}
+
+/* === VECTOR OVERRIDES === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.neon-pink {
+  color: var(--vector-white);
+  text-shadow: var(--glow-pink);
+}
+
+.neon-cyan {
+  color: var(--vector-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.neon-purple {
+  color: var(--vector-magenta);
+  text-shadow: var(--glow-purple);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--vector-white) 0%, var(--vector-cyan) 50%, var(--vector-magenta) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: none;
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-family: var(--font-body);
+  font-weight: 400;
+  border-radius: 0;
+  border: 1px solid var(--vector-white);
+  background: transparent;
+}
+
+.btn-primary {
+  background: transparent;
+  color: var(--vector-white);
+  border: 1px solid var(--vector-white);
+  box-shadow: var(--glow-subtle-pink);
+}
+
+.btn-primary:hover {
+  background: var(--vector-white);
+  color: var(--void-black);
+  box-shadow: var(--glow-pink);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--vector-cyan);
+  border-color: var(--vector-cyan);
+}
+
+.btn-secondary:hover {
+  background: var(--vector-cyan);
+  color: var(--void-black);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-ghost {
+  color: var(--vector-dim);
+  border-color: var(--vector-dim);
+}
+
+.btn-ghost:hover {
+  color: var(--vector-white);
+  border-color: var(--vector-white);
+  background: transparent;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: 0;
+  font-size: 0.7rem;
+  background: transparent;
+}
+
+.badge-pink {
+  background: transparent;
+  color: var(--vector-white);
+  border: 1px solid var(--vector-white);
+}
+
+.badge-cyan {
+  background: transparent;
+  color: var(--vector-cyan);
+  border: 1px solid var(--vector-cyan);
+}
+
+.badge-purple {
+  background: transparent;
+  color: var(--vector-magenta);
+  border: 1px solid var(--vector-magenta);
+}
+
+.section-title {
+  color: var(--vector-white);
+  border-bottom: 1px solid var(--vector-white);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.divider {
+  background: var(--vector-white);
+  height: 1px;
+  box-shadow: var(--glow-subtle-pink);
+}
+
+.card {
+  border-radius: 0;
+  border: 1px solid var(--vector-dim);
+  background: transparent;
+}
+
+.card:hover {
+  border-color: var(--vector-white);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.02);
+  transform: none;
+}
+
+a {
+  color: var(--vector-cyan);
+}
+
+a:hover {
+  color: var(--vector-white);
+  text-shadow: var(--glow-subtle-pink);
+}
+
+.input {
+  border-radius: 0;
+  border: 1px solid var(--vector-dim);
+  background: transparent;
+}
+
+.input:focus {
+  border-color: var(--vector-white);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.input::placeholder {
+  color: var(--vector-dim);
+}
+
+.font-sample {
+  border: 1px solid var(--vector-dim);
+  border-radius: 0;
+  background: transparent;
+}
+
+.color-swatch {
+  border-radius: 0;
+  border: 1px solid var(--vector-dim);
+}
+
+/* Hide grid background */
+.grid-bg {
+  background-image: none;
+}
+
+/* Hero adjustments */
+.hero-container {
+  border: 1px solid var(--vector-white);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.blink {
+  color: var(--vector-white);
+  text-shadow: var(--glow-subtle-pink);
+}
+
+/* CRT vignette */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Scanline effect - very subtle */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(255, 255, 255, 0.02) 3px,
+    rgba(255, 255, 255, 0.02) 6px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}

@@ -1,0 +1,291 @@
+/* ===========================================
+   THEME: ATARI 2600
+   Blocky pixels, limited palette, wood grain era
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS (TV static black) === */
+  --bg-void: #000000;
+  --bg-deep: #1a1a1a;
+  --bg-surface: #2a2a2a;
+  --bg-elevated: #3a3a3a;
+  --bg-hover: #4a4a4a;
+
+  /* === ACCENT COLORS (Atari 2600 palette) === */
+  --neon-pink: #d62816;      /* Atari red */
+  --neon-magenta: #b71e7b;   /* Atari magenta */
+  --neon-cyan: #2dcddf;      /* Atari cyan */
+  --neon-blue: #2038ec;      /* Atari blue */
+  --neon-purple: #7b2cbf;    /* Purple */
+  --neon-orange: #e07308;    /* Atari orange */
+  --neon-yellow: #ece100;    /* Atari yellow */
+
+  /* Atari-specific colors */
+  --atari-red: #d62816;
+  --atari-orange: #e07308;
+  --atari-yellow: #ece100;
+  --atari-green: #31a831;
+  --atari-cyan: #2dcddf;
+  --atari-blue: #2038ec;
+  --atari-brown: #6a3400;
+  --atari-tan: #cb9870;
+  --atari-white: #ececec;
+  --atari-gray: #7b7b7b;
+  --atari-black: #000000;
+
+  /* === TEXT COLORS === */
+  --text-primary: var(--atari-white);
+  --text-secondary: var(--atari-tan);
+  --text-muted: var(--atari-gray);
+  --text-accent: var(--atari-orange);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, var(--atari-red) 0%, var(--atari-orange) 50%, var(--atari-yellow) 100%);
+  --gradient-ocean: linear-gradient(135deg, var(--atari-cyan) 0%, var(--atari-blue) 100%);
+  --gradient-horizon: linear-gradient(180deg, #000000 0%, #1a1a1a 50%, #2a2a2a 100%);
+  --gradient-chrome: linear-gradient(135deg, var(--atari-tan) 0%, var(--atari-brown) 100%);
+
+  /* === GLOW EFFECTS (CRT phosphor glow) === */
+  --glow-pink: 0 0 8px var(--atari-red), 0 0 16px rgba(214, 40, 22, 0.5);
+  --glow-cyan: 0 0 8px var(--atari-cyan), 0 0 16px rgba(45, 205, 223, 0.5);
+  --glow-purple: 0 0 8px var(--atari-orange), 0 0 16px rgba(224, 115, 8, 0.5);
+  --glow-subtle-pink: 0 0 4px rgba(214, 40, 22, 0.4);
+  --glow-subtle-cyan: 0 0 4px rgba(45, 205, 223, 0.4);
+
+  /* === BORDERS === */
+  --border-subtle: 4px solid var(--atari-gray);
+  --border-accent: 4px solid var(--atari-orange);
+  --border-glow: 4px solid var(--atari-cyan);
+
+  /* === TYPOGRAPHY (Blocky system fonts) === */
+  --font-display: 'VT323', 'Courier New', monospace;
+  --font-body: 'VT323', 'Courier New', monospace;
+  --font-mono: 'VT323', 'Courier New', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--atari-orange);
+  --accent-secondary: var(--atari-cyan);
+  --accent-tertiary: var(--atari-red);
+}
+
+/* === ATARI 2600 OVERRIDES === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  image-rendering: pixelated;
+}
+
+.neon-pink {
+  color: var(--atari-red);
+  text-shadow: var(--glow-pink);
+}
+
+.neon-cyan {
+  color: var(--atari-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.neon-purple {
+  color: var(--atari-orange);
+  text-shadow: var(--glow-purple);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--atari-yellow) 0%, var(--atari-orange) 50%, var(--atari-red) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-family: var(--font-body);
+  font-weight: 400;
+  border-radius: 0;
+  border: 4px solid var(--atari-orange);
+  background: var(--atari-black);
+  padding: 12px 24px;
+}
+
+.btn-primary {
+  background: var(--atari-orange);
+  color: var(--atari-black);
+  border-color: var(--atari-orange);
+  box-shadow: var(--glow-purple);
+}
+
+.btn-primary:hover {
+  background: var(--atari-yellow);
+  border-color: var(--atari-yellow);
+  box-shadow: 0 0 15px var(--atari-yellow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--atari-cyan);
+  border-color: var(--atari-cyan);
+}
+
+.btn-secondary:hover {
+  background: var(--atari-cyan);
+  color: var(--atari-black);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-ghost {
+  color: var(--atari-gray);
+  border-color: var(--atari-gray);
+  border-width: 4px;
+}
+
+.btn-ghost:hover {
+  color: var(--atari-white);
+  border-color: var(--atari-white);
+  background: transparent;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: 0;
+  font-size: 0.8rem;
+  border-width: 2px;
+  padding: 4px 8px;
+}
+
+.badge-pink {
+  background: rgba(214, 40, 22, 0.2);
+  color: var(--atari-red);
+  border-color: var(--atari-red);
+}
+
+.badge-cyan {
+  background: rgba(45, 205, 223, 0.2);
+  color: var(--atari-cyan);
+  border-color: var(--atari-cyan);
+}
+
+.badge-purple {
+  background: rgba(224, 115, 8, 0.2);
+  color: var(--atari-orange);
+  border-color: var(--atari-orange);
+}
+
+.section-title {
+  color: var(--atari-yellow);
+  border-bottom: 4px solid var(--atari-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.divider {
+  background: var(--atari-orange);
+  height: 4px;
+  box-shadow: var(--glow-subtle-pink);
+}
+
+.card {
+  border-radius: 0;
+  border: 4px solid var(--atari-gray);
+  background: var(--bg-surface);
+}
+
+.card:hover {
+  border-color: var(--atari-orange);
+  box-shadow: 0 0 20px rgba(224, 115, 8, 0.3);
+  transform: none;
+}
+
+a {
+  color: var(--atari-cyan);
+}
+
+a:hover {
+  color: var(--atari-yellow);
+  text-shadow: var(--glow-subtle-cyan);
+}
+
+.input {
+  border-radius: 0;
+  border: 4px solid var(--atari-gray);
+  background: var(--bg-void);
+  font-family: var(--font-mono);
+}
+
+.input:focus {
+  border-color: var(--atari-orange);
+  box-shadow: 0 0 10px rgba(224, 115, 8, 0.4);
+}
+
+.input::placeholder {
+  color: var(--atari-gray);
+}
+
+.font-sample {
+  border: 4px solid var(--atari-gray);
+  border-radius: 0;
+  background: var(--bg-deep);
+}
+
+.color-swatch {
+  border-radius: 0;
+  border: 4px solid var(--atari-gray);
+}
+
+/* Hide grid background */
+.grid-bg {
+  background-image: none;
+}
+
+/* Hero adjustments */
+.hero-container {
+  border: 4px solid var(--atari-orange);
+  border-radius: 0;
+  background: var(--bg-surface);
+  box-shadow: 0 0 30px rgba(224, 115, 8, 0.2);
+}
+
+.blink {
+  color: var(--atari-yellow);
+  text-shadow: var(--glow-purple);
+}
+
+/* CRT scanline effect */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.2) 2px,
+    rgba(0, 0, 0, 0.2) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* CRT curvature / vignette */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Slight RGB offset for CRT feel */
+h1, h2, h3 {
+  text-shadow:
+    2px 0 0 rgba(255, 0, 0, 0.3),
+    -2px 0 0 rgba(0, 255, 255, 0.3);
+}

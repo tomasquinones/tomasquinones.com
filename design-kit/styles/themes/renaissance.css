@@ -1,0 +1,229 @@
+/* ===========================================
+   THEME: RENAISSANCE MAN
+   Modern classical - art gallery aesthetic
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS === */
+  --bg-void: #0f1114;
+  --bg-deep: #181b20;
+  --bg-surface: #22262d;
+  --bg-elevated: #2c3138;
+  --bg-hover: #363c44;
+
+  /* === ACCENT COLORS === */
+  --neon-pink: #d4a853;
+  --neon-magenta: #a67c52;
+  --neon-cyan: #5b8a72;
+  --neon-blue: #6b8cae;
+  --neon-purple: #9b6b7a;
+  --neon-orange: #c4956a;
+  --neon-yellow: #e8d5a3;
+
+  /* Renaissance-specific colors */
+  --gold: #d4a853;
+  --gold-light: #e8c378;
+  --burgundy: #8b5a5a;
+  --sage: #5b8a72;
+  --steel: #6b8cae;
+  --cream: #faf8f5;
+  --ivory: #f0ede8;
+  --bronze: #a67c52;
+  --rose: #9b6b7a;
+
+  /* === TEXT COLORS === */
+  --text-primary: #faf8f5;
+  --text-secondary: #b8b5b0;
+  --text-muted: #7a7875;
+  --text-accent: var(--gold);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, #d4a853 0%, #a67c52 50%, #8b5a5a 100%);
+  --gradient-ocean: linear-gradient(135deg, #5b8a72 0%, #6b8cae 50%, #9b6b7a 100%);
+  --gradient-horizon: linear-gradient(180deg, #0f1114 0%, #181b20 40%, #22262d 100%);
+  --gradient-chrome: linear-gradient(135deg, #d4a853 0%, #a67c52 100%);
+
+  /* === GLOW EFFECTS === */
+  --glow-pink: 0 2px 15px rgba(212, 168, 83, 0.2);
+  --glow-cyan: 0 2px 15px rgba(91, 138, 114, 0.2);
+  --glow-purple: 0 2px 15px rgba(155, 107, 122, 0.2);
+  --glow-subtle-pink: 0 1px 8px rgba(212, 168, 83, 0.15);
+  --glow-subtle-cyan: 0 1px 8px rgba(91, 138, 114, 0.15);
+
+  /* === BORDERS === */
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.08);
+  --border-accent: 1px solid var(--gold);
+  --border-glow: 1px solid var(--sage);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--gold);
+  --accent-secondary: var(--sage);
+  --accent-tertiary: var(--rose);
+}
+
+/* === RENAISSANCE OVERRIDES === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.neon-pink {
+  color: var(--gold);
+  text-shadow: none;
+}
+
+.neon-cyan {
+  color: var(--sage);
+  text-shadow: none;
+}
+
+.neon-purple {
+  color: var(--rose);
+  text-shadow: none;
+}
+
+.btn {
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-family: var(--font-body);
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--bg-void);
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  box-shadow: var(--glow-pink);
+}
+
+.btn-secondary {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.btn-secondary:hover {
+  background: var(--gold);
+  color: var(--bg-void);
+  box-shadow: none;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-style: normal;
+  font-size: 0.65rem;
+}
+
+.badge-pink {
+  background: rgba(212, 168, 83, 0.12);
+  color: var(--gold);
+  border-color: rgba(212, 168, 83, 0.4);
+}
+
+.badge-cyan {
+  background: rgba(91, 138, 114, 0.12);
+  color: var(--sage);
+  border-color: rgba(91, 138, 114, 0.4);
+}
+
+.badge-purple {
+  background: rgba(155, 107, 122, 0.12);
+  color: var(--rose);
+  border-color: rgba(155, 107, 122, 0.4);
+}
+
+.section-title {
+  color: var(--text-primary);
+  border-bottom-color: var(--gold);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.divider {
+  background: linear-gradient(90deg, transparent, var(--gold), rgba(212, 168, 83, 0.3), transparent);
+}
+
+.card {
+  border-radius: var(--radius-sm);
+}
+
+.card:hover {
+  border-color: rgba(212, 168, 83, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+a {
+  color: var(--gold);
+}
+
+a:hover {
+  color: var(--gold-light);
+  text-shadow: none;
+}
+
+.input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 168, 83, 0.1);
+}
+
+.font-sample {
+  border: var(--border-subtle);
+}
+
+/* Hide grid background */
+.grid-bg {
+  background-image: none;
+}
+
+/* Hero adjustments */
+.hero-container {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--cream) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* CRT scanline effect - subtle for elegant theme */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* CRT vignette - subtle */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 65%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}

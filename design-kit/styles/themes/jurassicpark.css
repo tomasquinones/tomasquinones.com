@@ -1,0 +1,308 @@
+/* ===========================================
+   THEME: JURASSIC PARK (1993)
+   Life finds a way
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS === */
+  --bg-void: #1a1a18;
+  --bg-deep: #232320;
+  --bg-surface: #2d2d28;
+  --bg-elevated: #383832;
+  --bg-hover: #45453d;
+
+  /* === ACCENT COLORS (JP palette) === */
+  --neon-pink: #e4342a;      /* JP Red */
+  --neon-magenta: #c92a21;   /* Dark red */
+  --neon-cyan: #f9bf1e;      /* JP Yellow */
+  --neon-blue: #1a5e3a;      /* Jungle green */
+  --neon-purple: #8b4513;    /* Safari brown */
+  --neon-orange: #e4832a;    /* Warning orange */
+  --neon-yellow: #f9bf1e;    /* JP Yellow */
+
+  /* Jurassic Park-specific colors */
+  --jp-red: #e4342a;
+  --jp-yellow: #f9bf1e;
+  --jp-black: #1a1a18;
+  --jp-jungle-green: #1a5e3a;
+  --jp-dark-green: #0f3d25;
+  --jp-khaki: #c4b998;
+  --jp-tan: #d4c4a8;
+  --jp-orange: #e4832a;
+  --jp-brown: #6b4423;
+  --jp-jeep-green: #4a6741;
+  --jp-jeep-tan: #c9b896;
+  --jp-fence-gray: #5a5a55;
+
+  /* === TEXT COLORS === */
+  --text-primary: #f5f0e6;
+  --text-secondary: #c4b998;
+  --text-muted: #7a7568;
+  --text-accent: var(--jp-yellow);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, var(--jp-red) 0%, var(--jp-orange) 50%, var(--jp-yellow) 100%);
+  --gradient-ocean: linear-gradient(135deg, var(--jp-jungle-green) 0%, var(--jp-dark-green) 50%, var(--jp-jeep-green) 100%);
+  --gradient-horizon: linear-gradient(180deg, #1a1a18 0%, #232320 40%, #2d2d28 100%);
+  --gradient-chrome: linear-gradient(135deg, var(--jp-tan) 0%, var(--jp-brown) 100%);
+
+  /* === GLOW EFFECTS (subtle, warm) === */
+  --glow-pink: 0 2px 15px rgba(228, 52, 42, 0.4);
+  --glow-cyan: 0 2px 15px rgba(249, 191, 30, 0.4);
+  --glow-purple: 0 2px 15px rgba(26, 94, 58, 0.4);
+  --glow-subtle-pink: 0 1px 8px rgba(228, 52, 42, 0.3);
+  --glow-subtle-cyan: 0 1px 8px rgba(249, 191, 30, 0.3);
+
+  /* === BORDERS === */
+  --border-subtle: 1px solid rgba(196, 185, 152, 0.2);
+  --border-accent: 2px solid var(--jp-yellow);
+  --border-glow: 2px solid var(--jp-red);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'Bebas Neue', 'Impact', sans-serif;
+  --font-body: 'Open Sans', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--jp-yellow);
+  --accent-secondary: var(--jp-red);
+  --accent-tertiary: var(--jp-jungle-green);
+}
+
+/* === JURASSIC PARK OVERRIDES === */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700&display=swap');
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 var(--jp-red), 4px 4px 0 rgba(0,0,0,0.3);
+}
+
+.neon-pink {
+  color: var(--jp-red);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+.neon-cyan {
+  color: var(--jp-yellow);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+.neon-purple {
+  color: var(--jp-jungle-green);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+}
+
+.gradient-text {
+  background: linear-gradient(180deg, var(--jp-yellow) 0%, var(--jp-yellow) 45%, var(--jp-red) 45%, var(--jp-red) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.4));
+}
+
+/* Jungle canopy background */
+body {
+  background-color: var(--bg-void);
+  background-image:
+    /* Subtle jungle texture */
+    radial-gradient(ellipse at 20% 80%, rgba(26, 94, 58, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(26, 94, 58, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse at 60% 90%, rgba(15, 61, 37, 0.12) 0%, transparent 45%);
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  border-radius: 0;
+  border: 3px solid var(--jp-yellow);
+  background: var(--jp-black);
+}
+
+.btn-primary {
+  background: var(--jp-yellow);
+  color: var(--jp-black);
+  border-color: var(--jp-yellow);
+  box-shadow: 3px 3px 0 var(--jp-red);
+}
+
+.btn-primary:hover {
+  background: var(--jp-red);
+  color: var(--text-primary);
+  border-color: var(--jp-red);
+  box-shadow: 3px 3px 0 var(--jp-yellow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--jp-yellow);
+  border-color: var(--jp-yellow);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+}
+
+.btn-secondary:hover {
+  background: var(--jp-yellow);
+  color: var(--jp-black);
+  box-shadow: 3px 3px 0 var(--jp-red);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--jp-khaki);
+  border-color: var(--jp-fence-gray);
+  box-shadow: none;
+}
+
+.btn-ghost:hover {
+  color: var(--jp-yellow);
+  border-color: var(--jp-yellow);
+  background: rgba(249, 191, 30, 0.1);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.badge-pink {
+  background: var(--jp-red);
+  color: var(--text-primary);
+  border: none;
+}
+
+.badge-cyan {
+  background: var(--jp-yellow);
+  color: var(--jp-black);
+  border: none;
+}
+
+.badge-purple {
+  background: var(--jp-jungle-green);
+  color: var(--text-primary);
+  border: none;
+}
+
+.section-title {
+  color: var(--jp-yellow);
+  border-bottom: 3px solid var(--jp-red);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+}
+
+.divider {
+  background: linear-gradient(90deg,
+    transparent,
+    var(--jp-red) 15%,
+    var(--jp-yellow) 50%,
+    var(--jp-red) 85%,
+    transparent
+  );
+  height: 3px;
+}
+
+.card {
+  border-radius: 0;
+  border: 2px solid var(--jp-fence-gray);
+  background: var(--bg-surface);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+}
+
+.card:hover {
+  border-color: var(--jp-yellow);
+  box-shadow: 6px 6px 0 rgba(228, 52, 42, 0.3);
+  transform: translate(-2px, -2px);
+}
+
+a {
+  color: var(--jp-yellow);
+}
+
+a:hover {
+  color: var(--jp-red);
+  text-shadow: none;
+}
+
+.input {
+  border-radius: 0;
+  border: 2px solid var(--jp-fence-gray);
+  background: var(--bg-deep);
+}
+
+.input:focus {
+  border-color: var(--jp-yellow);
+  box-shadow: 0 0 0 3px rgba(249, 191, 30, 0.2);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.font-sample {
+  border: 2px solid var(--jp-fence-gray);
+  border-radius: 0;
+  background: var(--bg-deep);
+}
+
+.color-swatch {
+  border-radius: 0;
+  border: 2px solid var(--jp-fence-gray);
+}
+
+/* Hide default grid background */
+.grid-bg {
+  background-image: none !important;
+}
+
+/* Hero adjustments - Park gate feel */
+.hero-container {
+  border: 4px solid var(--jp-yellow);
+  border-radius: 0;
+  background:
+    linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-elevated) 100%);
+  box-shadow: 8px 8px 0 var(--jp-red);
+}
+
+.blink {
+  color: var(--jp-orange);
+  animation: warning-flash 1s ease-in-out infinite;
+}
+
+@keyframes warning-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Film grain effect */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Subtle vignette */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 50%,
+    rgba(10, 10, 8, 0.5) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}

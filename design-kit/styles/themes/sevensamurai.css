@@ -1,0 +1,353 @@
+/* ===========================================
+   THEME: SEVEN SAMURAI (1954)
+   Kurosawa's masterpiece - B&W film aesthetic
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS (grayscale) === */
+  --bg-void: #0a0a0a;
+  --bg-deep: #141414;
+  --bg-surface: #1e1e1e;
+  --bg-elevated: #2a2a2a;
+  --bg-hover: #363636;
+
+  /* === ACCENT COLORS (B&W palette) === */
+  --neon-pink: #e8e8e8;      /* Bright white */
+  --neon-magenta: #c0c0c0;   /* Silver */
+  --neon-cyan: #a0a0a0;      /* Medium gray */
+  --neon-blue: #707070;      /* Dark gray */
+  --neon-purple: #505050;    /* Charcoal */
+  --neon-orange: #d8d8d8;    /* Off-white */
+  --neon-yellow: #f0f0f0;    /* Near white */
+
+  /* Seven Samurai-specific tones */
+  --film-white: #f0f0f0;
+  --film-light: #d0d0d0;
+  --film-mid: #909090;
+  --film-dark: #505050;
+  --film-shadow: #303030;
+  --film-black: #0a0a0a;
+  --film-grain: #1a1a1a;
+
+  /* === TEXT COLORS === */
+  --text-primary: var(--film-white);
+  --text-secondary: var(--film-light);
+  --text-muted: var(--film-mid);
+  --text-accent: var(--film-white);
+
+  /* === GRADIENTS (grayscale) === */
+  --gradient-sunset: linear-gradient(135deg, var(--film-white) 0%, var(--film-mid) 50%, var(--film-dark) 100%);
+  --gradient-ocean: linear-gradient(135deg, var(--film-light) 0%, var(--film-mid) 50%, var(--film-shadow) 100%);
+  --gradient-horizon: linear-gradient(180deg, #0a0a0a 0%, #141414 40%, #1e1e1e 100%);
+  --gradient-chrome: linear-gradient(135deg, var(--film-light) 0%, var(--film-dark) 100%);
+
+  /* === GLOW EFFECTS (subtle, filmic) === */
+  --glow-pink: 0 0 20px rgba(240, 240, 240, 0.3);
+  --glow-cyan: 0 0 15px rgba(160, 160, 160, 0.3);
+  --glow-purple: 0 0 10px rgba(80, 80, 80, 0.4);
+  --glow-subtle-pink: 0 0 8px rgba(240, 240, 240, 0.2);
+  --glow-subtle-cyan: 0 0 5px rgba(160, 160, 160, 0.2);
+
+  /* === BORDERS === */
+  --border-subtle: 1px solid rgba(240, 240, 240, 0.15);
+  --border-accent: 2px solid var(--film-light);
+  --border-glow: 1px solid var(--film-white);
+
+  /* === TYPOGRAPHY === */
+  /* Period-appropriate 1950s fonts - clean modernist style */
+  --font-display: 'Playfair Display', 'Times New Roman', serif;
+  --font-body: 'Source Serif Pro', 'Georgia', serif;
+  --font-mono: 'Courier Prime', 'Courier New', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--film-white);
+  --accent-secondary: var(--film-light);
+  --accent-tertiary: var(--film-mid);
+}
+
+/* === SEVEN SAMURAI OVERRIDES === */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap');
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: none;
+  text-shadow: none;
+  font-style: normal;
+}
+
+h1 {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.neon-pink {
+  color: var(--film-white);
+  text-shadow: var(--glow-subtle-pink);
+}
+
+.neon-cyan {
+  color: var(--film-light);
+  text-shadow: none;
+}
+
+.neon-purple {
+  color: var(--film-mid);
+  text-shadow: none;
+}
+
+.gradient-text {
+  background: linear-gradient(180deg, var(--film-white) 0%, var(--film-mid) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Film projector light effect background */
+body {
+  background-color: var(--bg-void);
+  background-image:
+    /* Central light source like film projection */
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(40, 40, 40, 0.8) 0%, transparent 70%);
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 0;
+  border: 2px solid var(--film-light);
+  background: transparent;
+}
+
+.btn-primary {
+  background: var(--film-white);
+  color: var(--film-black);
+  border-color: var(--film-white);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--film-white);
+  border-color: var(--film-white);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--film-light);
+  border-color: var(--film-light);
+}
+
+.btn-secondary:hover {
+  background: var(--film-light);
+  color: var(--film-black);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--film-mid);
+  border-color: var(--film-dark);
+}
+
+.btn-ghost:hover {
+  color: var(--film-light);
+  border-color: var(--film-light);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+.badge-pink {
+  background: var(--film-white);
+  color: var(--film-black);
+  border: none;
+}
+
+.badge-cyan {
+  background: transparent;
+  color: var(--film-light);
+  border: 1px solid var(--film-light);
+}
+
+.badge-purple {
+  background: var(--film-dark);
+  color: var(--film-light);
+  border: none;
+}
+
+.section-title {
+  color: var(--film-white);
+  border-bottom: 1px solid var(--film-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+}
+
+.divider {
+  background: var(--film-mid);
+  height: 1px;
+}
+
+.card {
+  border-radius: 0;
+  border: 1px solid var(--film-dark);
+  background: var(--bg-surface);
+}
+
+.card:hover {
+  border-color: var(--film-light);
+  box-shadow: 0 0 30px rgba(240, 240, 240, 0.05);
+  transform: none;
+}
+
+a {
+  color: var(--film-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--film-white);
+  text-shadow: none;
+}
+
+.input {
+  border-radius: 0;
+  border: 1px solid var(--film-dark);
+  background: var(--bg-deep);
+}
+
+.input:focus {
+  border-color: var(--film-light);
+  box-shadow: none;
+}
+
+.input::placeholder {
+  color: var(--film-dark);
+  font-style: italic;
+}
+
+.font-sample {
+  border: 1px solid var(--film-dark);
+  border-radius: 0;
+  background: var(--bg-deep);
+}
+
+.color-swatch {
+  border-radius: 0;
+  border: 1px solid var(--film-dark);
+}
+
+/* Hide default grid background */
+.grid-bg {
+  background-image: none !important;
+}
+
+/* Hero adjustments - Film frame feel */
+.hero-container {
+  border: 3px solid var(--film-mid);
+  border-radius: 0;
+  background: var(--bg-surface);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+/* Film sprocket holes decoration */
+.hero-container::before,
+.hero-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 15px,
+    var(--film-dark) 15px,
+    var(--film-dark) 25px,
+    transparent 25px,
+    transparent 40px
+  );
+}
+
+.hero-container::before {
+  left: -30px;
+}
+
+.hero-container::after {
+  right: -30px;
+}
+
+.blink {
+  color: var(--film-white);
+  animation: projector-flicker 0.15s ease-in-out infinite;
+}
+
+@keyframes projector-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.92; }
+}
+
+/* Heavy film grain effect */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain-shift 0.5s steps(4) infinite;
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Strong vignette for old film look */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Scratches overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, transparent 99.5%, rgba(255,255,255,0.03) 99.5%),
+    linear-gradient(90deg, transparent 98%, rgba(255,255,255,0.02) 98%);
+  background-size: 200px 100%, 150px 100%;
+  pointer-events: none;
+  z-index: 9997;
+  animation: scratch-move 8s linear infinite;
+}
+
+@keyframes scratch-move {
+  0% { background-position: 0 0, 50px 0; }
+  100% { background-position: 200px 0, 250px 0; }
+}

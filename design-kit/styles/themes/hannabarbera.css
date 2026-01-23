@@ -1,0 +1,385 @@
+/* ===========================================
+   THEME: HANNA-BARBERA
+   60s/70s Saturday morning cartoon aesthetic
+   Scooby-Doo, Flintstones, Jetsons vibes
+   =========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka+One&family=Luckiest+Guy&display=swap');
+
+:root {
+  /* === BACKGROUNDS (Retro cartoon tones) === */
+  --bg-void: #2a1a4a;        /* Deep purple */
+  --bg-deep: #3d2a5c;        /* Purple */
+  --bg-surface: #4a3a6a;     /* Lighter purple */
+  --bg-elevated: #5c4a7c;    /* Even lighter */
+  --bg-hover: #6e5a8e;       /* Hover state */
+
+  /* === ACCENT COLORS (Cartoon palette) === */
+  --neon-pink: #ff6b9d;      /* Bubblegum pink */
+  --neon-magenta: #e83e8c;   /* Hot pink */
+  --neon-cyan: #17d4c1;      /* Turquoise */
+  --neon-blue: #4dabf7;      /* Sky blue */
+  --neon-purple: #9775fa;    /* Grape */
+  --neon-orange: #ff8533;    /* Tangerine */
+  --neon-yellow: #ffd43b;    /* Sunshine */
+
+  /* Hanna-Barbera-specific colors */
+  --scooby-orange: #ff8c42;
+  --scooby-brown: #8b4513;
+  --mystery-purple: #7b68ee;
+  --mystery-green: #69db7c;
+  --flintstone-orange: #ff7f50;
+  --flintstone-brown: #d2691e;
+  --jetson-blue: #00bfff;
+  --jetson-purple: #9370db;
+  --yogi-green: #228b22;
+  --yogi-tie: #20b2aa;
+  --cartoon-white: #fff5e6;
+  --cartoon-black: #1a0a30;
+  --speech-bubble: #ffffff;
+  --pow-yellow: #ffed4a;
+  --zap-orange: #ff6f00;
+  --boom-red: #ff1744;
+
+  /* === TEXT COLORS === */
+  --text-primary: var(--cartoon-white);
+  --text-secondary: #e0d0ff;
+  --text-muted: #a090c0;
+  --text-accent: var(--pow-yellow);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, var(--boom-red) 0%, var(--zap-orange) 50%, var(--pow-yellow) 100%);
+  --gradient-ocean: linear-gradient(135deg, var(--jetson-blue) 0%, var(--jetson-purple) 50%, var(--mystery-purple) 100%);
+  --gradient-horizon: linear-gradient(180deg, #ff9a56 0%, #ff6b9d 30%, #9775fa 70%, #2a1a4a 100%);
+  --gradient-chrome: linear-gradient(135deg, var(--pow-yellow) 0%, var(--zap-orange) 100%);
+
+  /* === GLOW EFFECTS (Soft cartoon glow) === */
+  --glow-pink: 0 4px 20px rgba(255, 107, 157, 0.5);
+  --glow-cyan: 0 4px 20px rgba(23, 212, 193, 0.5);
+  --glow-purple: 0 4px 20px rgba(151, 117, 250, 0.5);
+  --glow-subtle-pink: 0 2px 10px rgba(255, 107, 157, 0.3);
+  --glow-subtle-cyan: 0 2px 10px rgba(23, 212, 193, 0.3);
+
+  /* === BORDERS === */
+  --border-subtle: 3px solid rgba(255, 255, 255, 0.2);
+  --border-accent: 4px solid var(--cartoon-black);
+  --border-glow: 4px solid var(--pow-yellow);
+
+  /* === TYPOGRAPHY (Wacky cartoon fonts) === */
+  --font-display: 'Bangers', 'Luckiest Guy', cursive;
+  --font-body: 'Fredoka One', 'Comic Sans MS', cursive;
+  --font-mono: 'VT323', 'Courier New', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--scooby-orange);
+  --accent-secondary: var(--mystery-green);
+  --accent-tertiary: var(--mystery-purple);
+}
+
+/* === HANNA-BARBERA OVERRIDES === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  /* Comic book text effect */
+  text-shadow:
+    3px 3px 0 var(--cartoon-black),
+    -1px -1px 0 var(--cartoon-black),
+    1px -1px 0 var(--cartoon-black),
+    -1px 1px 0 var(--cartoon-black);
+  transform: rotate(-2deg);
+}
+
+h1 {
+  transform: rotate(-3deg) skewX(-3deg);
+}
+
+.neon-pink {
+  color: var(--boom-red);
+  text-shadow:
+    4px 4px 0 var(--cartoon-black),
+    -2px -2px 0 var(--pow-yellow);
+}
+
+.neon-cyan {
+  color: var(--jetson-blue);
+  text-shadow:
+    4px 4px 0 var(--cartoon-black),
+    -2px -2px 0 var(--cartoon-white);
+}
+
+.neon-purple {
+  color: var(--mystery-purple);
+  text-shadow:
+    4px 4px 0 var(--cartoon-black),
+    -2px -2px 0 var(--mystery-green);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--pow-yellow) 0%, var(--zap-orange) 50%, var(--boom-red) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(4px 4px 0 var(--cartoon-black));
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  border: 4px solid var(--cartoon-black);
+  background: var(--pow-yellow);
+  color: var(--cartoon-black);
+  box-shadow: 5px 5px 0 var(--cartoon-black);
+  transform: rotate(-1deg);
+  transition: all 0.15s ease;
+}
+
+.btn:hover {
+  transform: rotate(1deg) scale(1.05);
+  box-shadow: 7px 7px 0 var(--cartoon-black);
+}
+
+.btn-primary {
+  background: var(--scooby-orange);
+  color: var(--cartoon-white);
+}
+
+.btn-primary:hover {
+  background: var(--pow-yellow);
+  color: var(--cartoon-black);
+}
+
+.btn-secondary {
+  background: var(--mystery-green);
+  color: var(--cartoon-black);
+  border-color: var(--cartoon-black);
+}
+
+.btn-secondary:hover {
+  background: var(--jetson-blue);
+  color: var(--cartoon-white);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--cartoon-white);
+  border-color: var(--cartoon-white);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+}
+
+.btn-ghost:hover {
+  background: var(--cartoon-white);
+  color: var(--cartoon-black);
+}
+
+.badge {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 3px solid var(--cartoon-black);
+  box-shadow: 3px 3px 0 var(--cartoon-black);
+  padding: 6px 14px;
+}
+
+.badge-pink {
+  background: var(--boom-red);
+  color: var(--cartoon-white);
+}
+
+.badge-cyan {
+  background: var(--jetson-blue);
+  color: var(--cartoon-white);
+}
+
+.badge-purple {
+  background: var(--mystery-purple);
+  color: var(--cartoon-white);
+}
+
+.section-title {
+  color: var(--pow-yellow);
+  border-bottom: 5px solid var(--cartoon-black);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 2rem;
+  position: relative;
+  display: inline-block;
+}
+
+/* POW! style accent */
+.section-title::after {
+  content: '!';
+  color: var(--boom-red);
+  margin-left: 0.2em;
+}
+
+.divider {
+  background: linear-gradient(90deg,
+    var(--boom-red),
+    var(--zap-orange),
+    var(--pow-yellow),
+    var(--mystery-green),
+    var(--jetson-blue),
+    var(--mystery-purple)
+  );
+  height: 6px;
+  border-radius: 3px;
+  box-shadow: 0 4px 0 var(--cartoon-black);
+}
+
+.card {
+  border-radius: 20px;
+  border: 4px solid var(--cartoon-black);
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-elevated) 100%);
+  box-shadow: 8px 8px 0 var(--cartoon-black);
+  transform: rotate(-0.5deg);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--pow-yellow);
+  box-shadow: 12px 12px 0 var(--cartoon-black);
+  transform: rotate(0.5deg) translateY(-5px);
+}
+
+a {
+  color: var(--pow-yellow);
+  text-decoration: underline wavy;
+  text-underline-offset: 4px;
+}
+
+a:hover {
+  color: var(--jetson-blue);
+  text-shadow: 0 0 10px var(--jetson-blue);
+}
+
+.input {
+  border-radius: 25px;
+  border: 4px solid var(--cartoon-black);
+  background: var(--speech-bubble);
+  font-family: var(--font-body);
+  color: var(--cartoon-black);
+  box-shadow: 4px 4px 0 var(--cartoon-black);
+}
+
+.input:focus {
+  border-color: var(--scooby-orange);
+  box-shadow: 6px 6px 0 var(--cartoon-black), 0 0 15px rgba(255, 140, 66, 0.4);
+}
+
+.input::placeholder {
+  color: #a0a0a0;
+}
+
+.font-sample {
+  border: 4px solid var(--cartoon-black);
+  border-radius: 15px;
+  background: var(--bg-deep);
+  box-shadow: 5px 5px 0 var(--cartoon-black);
+}
+
+.color-swatch {
+  border-radius: 15px;
+  border: 3px solid var(--cartoon-black);
+  box-shadow: 4px 4px 0 var(--cartoon-black);
+}
+
+/* Colorful grid background */
+.grid-bg {
+  background-image: none;
+}
+
+body {
+  background: var(--gradient-horizon);
+}
+
+/* Hero adjustments - Speech bubble style */
+.hero-container {
+  border: 5px solid var(--cartoon-black);
+  border-radius: 30px;
+  background: var(--speech-bubble);
+  color: var(--cartoon-black);
+  box-shadow: 10px 10px 0 var(--cartoon-black);
+  position: relative;
+}
+
+/* Speech bubble tail */
+.hero-container::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50px;
+  width: 40px;
+  height: 40px;
+  background: var(--speech-bubble);
+  border-right: 5px solid var(--cartoon-black);
+  border-bottom: 5px solid var(--cartoon-black);
+  transform: rotate(45deg);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.hero-container .gradient-text {
+  background: linear-gradient(135deg, var(--cartoon-black) 0%, var(--mystery-purple) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.blink {
+  color: var(--boom-red);
+  animation: cartoon-blink 0.8s ease-in-out infinite;
+}
+
+@keyframes cartoon-blink {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* CRT vignette */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* CRT scanline effect */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Theme switcher styling */
+.theme-switcher select {
+  font-family: var(--font-body);
+  border-radius: 20px;
+  border: 3px solid var(--cartoon-black);
+  box-shadow: 3px 3px 0 var(--cartoon-black);
+}

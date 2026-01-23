@@ -1,0 +1,343 @@
+/* ===========================================
+   THEME: ASCII ART
+   Terminal text art / Box drawing aesthetic
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS (Terminal dark) === */
+  --bg-void: #1a1b26;
+  --bg-deep: #1f2335;
+  --bg-surface: #24283b;
+  --bg-elevated: #292e42;
+  --bg-hover: #343a52;
+
+  /* === ACCENT COLORS (Terminal palette) === */
+  --neon-pink: #f7768e;
+  --neon-magenta: #bb9af7;
+  --neon-cyan: #7dcfff;
+  --neon-blue: #7aa2f7;
+  --neon-purple: #9d7cd8;
+  --neon-orange: #ff9e64;
+  --neon-yellow: #e0af68;
+
+  /* ASCII-specific colors */
+  --ascii-white: #c0caf5;
+  --ascii-gray: #565f89;
+  --ascii-bright: #ffffff;
+  --ascii-green: #9ece6a;
+  --ascii-cyan: #7dcfff;
+  --ascii-blue: #7aa2f7;
+  --ascii-magenta: #bb9af7;
+  --ascii-red: #f7768e;
+  --ascii-yellow: #e0af68;
+  --ascii-orange: #ff9e64;
+  --ascii-bg: #1a1b26;
+
+  /* === TEXT COLORS === */
+  --text-primary: #c0caf5;
+  --text-secondary: #a9b1d6;
+  --text-muted: #565f89;
+  --text-accent: var(--ascii-cyan);
+
+  /* === GRADIENTS (Minimal for ASCII) === */
+  --gradient-sunset: linear-gradient(135deg, #f7768e 0%, #bb9af7 50%, #7aa2f7 100%);
+  --gradient-ocean: linear-gradient(135deg, #7dcfff 0%, #7aa2f7 50%, #9d7cd8 100%);
+  --gradient-horizon: linear-gradient(180deg, #1a1b26 0%, #1f2335 40%, #24283b 100%);
+  --gradient-chrome: linear-gradient(135deg, #c0caf5 0%, #565f89 100%);
+
+  /* === GLOW EFFECTS (None - pure text) === */
+  --glow-pink: none;
+  --glow-cyan: none;
+  --glow-purple: none;
+  --glow-subtle-pink: none;
+  --glow-subtle-cyan: none;
+
+  /* === BORDERS (Box drawing style) === */
+  --border-subtle: 1px solid var(--ascii-gray);
+  --border-accent: 1px solid var(--ascii-cyan);
+  --border-glow: 1px solid var(--ascii-green);
+
+  /* === TYPOGRAPHY (Classic terminal/system fonts) === */
+  --font-display: 'Courier New', Courier, 'Lucida Console', Monaco, monospace;
+  --font-body: 'Courier New', Courier, 'Lucida Console', Monaco, monospace;
+  --font-mono: 'Courier New', Courier, 'Lucida Console', Monaco, monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--ascii-cyan);
+  --accent-secondary: var(--ascii-green);
+  --accent-tertiary: var(--ascii-magenta);
+}
+
+/* === ASCII OVERRIDES === */
+
+/* CRT text effect - chromatic aberration + glow */
+html {
+  text-shadow:
+    0.5px 0 0 rgba(255, 0, 0, 0.3),
+    -0.5px 0 0 rgba(0, 255, 255, 0.3),
+    0 0 2px rgba(192, 202, 245, 0.5);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow:
+    1px 0 0 rgba(255, 0, 0, 0.4),
+    -1px 0 0 rgba(0, 255, 255, 0.4),
+    0 0 5px rgba(192, 202, 245, 0.6);
+}
+
+.neon-pink {
+  color: var(--ascii-red);
+  text-shadow: none;
+}
+
+.neon-cyan {
+  color: var(--ascii-cyan);
+  text-shadow: none;
+}
+
+.neon-purple {
+  color: var(--ascii-magenta);
+  text-shadow: none;
+}
+
+.gradient-text {
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: var(--ascii-cyan);
+  background-clip: unset;
+  color: var(--ascii-cyan);
+}
+
+.btn {
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  border-radius: 0;
+  border: 1px solid var(--ascii-gray);
+  background: var(--bg-surface);
+  position: relative;
+}
+
+/* ASCII box-drawing button style */
+.btn::before {
+  content: '[ ';
+  color: var(--ascii-gray);
+}
+
+.btn::after {
+  content: ' ]';
+  color: var(--ascii-gray);
+}
+
+.btn-primary {
+  background: var(--ascii-cyan);
+  color: var(--ascii-bg);
+  border-color: var(--ascii-cyan);
+}
+
+.btn-primary::before,
+.btn-primary::after {
+  color: var(--ascii-bg);
+}
+
+.btn-primary:hover {
+  background: var(--ascii-green);
+  border-color: var(--ascii-green);
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ascii-cyan);
+  border-color: var(--ascii-cyan);
+}
+
+.btn-secondary:hover {
+  background: var(--ascii-cyan);
+  color: var(--ascii-bg);
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-ghost {
+  color: var(--ascii-gray);
+  border-color: var(--ascii-gray);
+  background: transparent;
+}
+
+.btn-ghost:hover {
+  color: var(--ascii-white);
+  border-color: var(--ascii-white);
+  background: transparent;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: none;
+  border-radius: 0;
+  font-size: var(--text-xs);
+  background: transparent;
+  padding: 0;
+}
+
+/* ASCII badge style with brackets */
+.badge::before {
+  content: '<';
+}
+
+.badge::after {
+  content: '>';
+}
+
+.badge-pink {
+  color: var(--ascii-red);
+  border: none;
+}
+
+.badge-cyan {
+  color: var(--ascii-cyan);
+  border: none;
+}
+
+.badge-purple {
+  color: var(--ascii-magenta);
+  border: none;
+}
+
+.section-title {
+  color: var(--ascii-green);
+  border-bottom: 1px dashed var(--ascii-gray);
+  text-transform: none;
+  letter-spacing: 0;
+  padding-bottom: var(--space-2);
+}
+
+/* ASCII section title with prefix */
+.section-title::before {
+  content: '## ';
+  color: var(--ascii-gray);
+}
+
+.divider {
+  background: none;
+  height: auto;
+  border: none;
+  text-align: center;
+  box-shadow: none;
+}
+
+/* ASCII divider with dashes */
+.divider::before {
+  content: '────────────────────────────────────────';
+  color: var(--ascii-gray);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.card {
+  border-radius: 0;
+  border: 1px solid var(--ascii-gray);
+  background: var(--bg-surface);
+  position: relative;
+}
+
+.card:hover {
+  border-color: var(--ascii-cyan);
+  box-shadow: none;
+  background: var(--bg-elevated);
+  transform: none;
+}
+
+a {
+  color: var(--ascii-cyan);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--ascii-green);
+  text-shadow: none;
+}
+
+.input {
+  border-radius: 0;
+  border: 1px solid var(--ascii-gray);
+  background: var(--bg-deep);
+  font-family: inherit;
+}
+
+.input:focus {
+  border-color: var(--ascii-cyan);
+  box-shadow: none;
+}
+
+.input::placeholder {
+  color: var(--ascii-gray);
+}
+
+.font-sample {
+  border: 1px dashed var(--ascii-gray);
+  border-radius: 0;
+  background: var(--bg-deep);
+}
+
+.color-swatch {
+  border-radius: 0;
+  border: 1px solid var(--ascii-gray);
+}
+
+/* Hide grid background */
+.grid-bg {
+  background-image: none;
+}
+
+/* ASCII hero with box drawing border */
+.hero-container {
+  border: 1px solid var(--ascii-gray);
+  border-radius: 0;
+  background: var(--bg-surface);
+  box-shadow: none;
+}
+
+.blink {
+  color: var(--ascii-green);
+  text-shadow:
+    1px 0 0 rgba(255, 0, 0, 0.4),
+    -1px 0 0 rgba(0, 255, 255, 0.4),
+    0 0 8px var(--ascii-green);
+}
+
+/* CRT scanlines + screen curve effect */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* CRT vignette / screen edge darkening */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 9999;
+}

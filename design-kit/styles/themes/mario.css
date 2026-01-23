@@ -1,0 +1,321 @@
+/* ===========================================
+   THEME: SUPER MARIO BROS
+   Classic NES Mario - World 1-1 vibes
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS (Mario sky & underground) === */
+  --bg-void: #5c94fc;        /* Mario sky blue */
+  --bg-deep: #4a7de0;        /* Darker sky */
+  --bg-surface: #3870d0;     /* Card surface */
+  --bg-elevated: #2860c0;    /* Elevated */
+  --bg-hover: #1850b0;       /* Hover */
+
+  /* === ACCENT COLORS (Mario palette) === */
+  --neon-pink: #e44028;      /* Mario red */
+  --neon-magenta: #f8b800;   /* Coin gold */
+  --neon-cyan: #00a800;      /* Pipe green */
+  --neon-blue: #5c94fc;      /* Sky blue */
+  --neon-purple: #ac7c00;    /* Brick brown */
+  --neon-orange: #f87800;    /* Fire flower */
+  --neon-yellow: #f8d800;    /* Star yellow */
+
+  /* Mario-specific colors */
+  --mario-red: #e44028;
+  --mario-skin: #fca044;
+  --mario-brown: #ac7c00;
+  --mario-blue-overalls: #0000a8;
+  --pipe-green: #00a800;
+  --pipe-green-light: #00e800;
+  --brick-brown: #c84c0c;
+  --brick-highlight: #fc9838;
+  --question-yellow: #f8b800;
+  --question-outline: #e4a000;
+  --coin-gold: #f8d800;
+  --sky-blue: #5c94fc;
+  --cloud-white: #fcfcfc;
+  --ground-brown: #e09050;
+  --goomba-brown: #c84c0c;
+  --underground-blue: #000058;
+
+  /* === TEXT COLORS === */
+  --text-primary: var(--cloud-white);
+  --text-secondary: #d0e0fc;
+  --text-muted: #90b0dc;
+  --text-accent: var(--coin-gold);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, var(--mario-red) 0%, var(--question-yellow) 100%);
+  --gradient-ocean: linear-gradient(135deg, var(--pipe-green) 0%, var(--pipe-green-light) 100%);
+  --gradient-horizon: linear-gradient(180deg, var(--sky-blue) 0%, #8cb8fc 50%, #b0d4fc 100%);
+  --gradient-chrome: linear-gradient(135deg, var(--coin-gold) 0%, var(--question-yellow) 100%);
+
+  /* === GLOW EFFECTS === */
+  --glow-pink: 0 0 8px var(--mario-red), 0 0 16px rgba(228, 64, 40, 0.5);
+  --glow-cyan: 0 0 8px var(--pipe-green), 0 0 16px rgba(0, 168, 0, 0.5);
+  --glow-purple: 0 0 8px var(--coin-gold), 0 0 16px rgba(248, 216, 0, 0.5);
+  --glow-subtle-pink: 0 0 4px rgba(228, 64, 40, 0.4);
+  --glow-subtle-cyan: 0 0 4px rgba(0, 168, 0, 0.4);
+
+  /* === BORDERS === */
+  --border-subtle: 3px solid var(--mario-brown);
+  --border-accent: 3px solid var(--mario-red);
+  --border-glow: 3px solid var(--coin-gold);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'VT323', 'Press Start 2P', monospace;
+  --font-body: 'VT323', 'Courier New', monospace;
+  --font-mono: 'VT323', 'Courier New', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--mario-red);
+  --accent-secondary: var(--pipe-green);
+  --accent-tertiary: var(--coin-gold);
+}
+
+/* === MARIO OVERRIDES === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cloud-white);
+  text-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+}
+
+.neon-pink {
+  color: var(--mario-red);
+  text-shadow:
+    3px 3px 0 rgba(0,0,0,0.4),
+    var(--glow-pink);
+}
+
+.neon-cyan {
+  color: var(--pipe-green);
+  text-shadow:
+    3px 3px 0 rgba(0,0,0,0.4),
+    var(--glow-cyan);
+}
+
+.neon-purple {
+  color: var(--coin-gold);
+  text-shadow:
+    3px 3px 0 rgba(0,0,0,0.4),
+    var(--glow-purple);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--cloud-white) 0%, var(--coin-gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.4));
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+  font-weight: 400;
+  border-radius: 0;
+  border: 3px solid var(--cloud-white);
+  background: var(--mario-red);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+}
+
+.btn-primary {
+  background: var(--mario-red);
+  color: var(--cloud-white);
+  border-color: var(--cloud-white);
+}
+
+.btn-primary:hover {
+  background: var(--question-yellow);
+  color: var(--mario-brown);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+}
+
+.btn-secondary {
+  background: var(--pipe-green);
+  color: var(--cloud-white);
+  border-color: var(--cloud-white);
+}
+
+.btn-secondary:hover {
+  background: var(--pipe-green-light);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--cloud-white);
+  border-color: var(--cloud-white);
+}
+
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translate(-2px, -2px);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: 0;
+  font-size: 0.75rem;
+  border-width: 2px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+}
+
+.badge-pink {
+  background: var(--mario-red);
+  color: var(--cloud-white);
+  border-color: var(--cloud-white);
+}
+
+.badge-cyan {
+  background: var(--pipe-green);
+  color: var(--cloud-white);
+  border-color: var(--cloud-white);
+}
+
+.badge-purple {
+  background: var(--question-yellow);
+  color: var(--mario-brown);
+  border-color: var(--question-outline);
+}
+
+.section-title {
+  color: var(--cloud-white);
+  border-bottom: 4px solid var(--coin-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+}
+
+.divider {
+  background: linear-gradient(90deg, var(--brick-brown), var(--brick-highlight), var(--brick-brown));
+  height: 8px;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+}
+
+.card {
+  border-radius: 0;
+  border: 4px solid var(--mario-brown);
+  background: rgba(0, 0, 88, 0.8);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+}
+
+.card:hover {
+  border-color: var(--coin-gold);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.4);
+  transform: translate(-2px, -2px);
+  background: rgba(0, 0, 120, 0.9);
+}
+
+a {
+  color: var(--coin-gold);
+}
+
+a:hover {
+  color: var(--cloud-white);
+  text-shadow: 0 0 8px var(--coin-gold);
+}
+
+.input {
+  border-radius: 0;
+  border: 3px solid var(--mario-brown);
+  background: rgba(0, 0, 88, 0.9);
+  font-family: var(--font-mono);
+  color: var(--cloud-white);
+  box-shadow: inset 3px 3px 0 rgba(0,0,0,0.3);
+}
+
+.input:focus {
+  border-color: var(--coin-gold);
+  box-shadow: inset 3px 3px 0 rgba(0,0,0,0.3), 0 0 10px rgba(248, 216, 0, 0.4);
+}
+
+.input::placeholder {
+  color: #6080b0;
+}
+
+.font-sample {
+  border: 4px solid var(--mario-brown);
+  border-radius: 0;
+  background: rgba(0, 0, 88, 0.8);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+}
+
+.color-swatch {
+  border-radius: 0;
+  border: 3px solid var(--mario-brown);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+}
+
+/* Hide default grid background */
+.grid-bg {
+  background-image: none;
+}
+
+/* Mario brick pattern background hint */
+body {
+  background: linear-gradient(180deg, var(--sky-blue) 0%, #8cb8fc 100%);
+}
+
+/* Hero adjustments - Question block style */
+.hero-container {
+  border: 4px solid var(--question-outline);
+  border-radius: 0;
+  background: var(--question-yellow);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+  color: var(--mario-brown);
+}
+
+.hero-container .gradient-text {
+  background: linear-gradient(135deg, var(--mario-brown) 0%, var(--mario-red) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.blink {
+  color: var(--coin-gold);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+  animation: coin-bounce 0.5s ease-in-out infinite;
+}
+
+@keyframes coin-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* CRT scanline effect */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* CRT vignette */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}

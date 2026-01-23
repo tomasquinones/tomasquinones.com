@@ -1,0 +1,131 @@
+/* ===========================================
+   THEME: SYNTHWAVE CYBERPUNK
+   Neon future aesthetic
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS === */
+  --bg-void: #0d0221;
+  --bg-deep: #150734;
+  --bg-surface: #1a0a3e;
+  --bg-elevated: #241254;
+  --bg-hover: #2d1866;
+
+  /* === NEON ACCENT COLORS === */
+  --neon-pink: #ff2a6d;
+  --neon-magenta: #d300c5;
+  --neon-cyan: #05d9e8;
+  --neon-blue: #0066ff;
+  --neon-purple: #7b2cbf;
+  --neon-orange: #ff6b35;
+  --neon-yellow: #f9f871;
+
+  /* === TEXT COLORS === */
+  --text-primary: #ffffff;
+  --text-secondary: #b8c0e0;
+  --text-muted: #6b7280;
+  --text-accent: var(--neon-cyan);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, #ff2a6d 0%, #d300c5 50%, #7b2cbf 100%);
+  --gradient-ocean: linear-gradient(135deg, #05d9e8 0%, #0066ff 50%, #7b2cbf 100%);
+  --gradient-horizon: linear-gradient(180deg, #150734 0%, #1a0a3e 40%, #2d1866 100%);
+  --gradient-chrome: linear-gradient(135deg, #434343 0%, #000000 100%);
+
+  /* === GLOW EFFECTS === */
+  --glow-pink: 0 0 10px #ff2a6d, 0 0 20px #ff2a6d, 0 0 40px #ff2a6d;
+  --glow-cyan: 0 0 10px #05d9e8, 0 0 20px #05d9e8, 0 0 40px #05d9e8;
+  --glow-purple: 0 0 10px #7b2cbf, 0 0 20px #7b2cbf, 0 0 40px #7b2cbf;
+  --glow-subtle-pink: 0 0 5px rgba(255, 42, 109, 0.5);
+  --glow-subtle-cyan: 0 0 5px rgba(5, 217, 232, 0.5);
+
+  /* === BORDERS === */
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.1);
+  --border-accent: 1px solid var(--neon-pink);
+  --border-glow: 1px solid var(--neon-cyan);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'Orbitron', 'Rajdhani', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--neon-pink);
+  --accent-secondary: var(--neon-cyan);
+  --accent-tertiary: var(--neon-purple);
+}
+
+/* Synthwave is the default - minimal overrides */
+
+/* Neon grid background */
+.grid-bg {
+  background-color: var(--bg-void);
+  background-image:
+    /* Horizontal lines */
+    linear-gradient(
+      0deg,
+      transparent 0%,
+      transparent calc(50px - 1px),
+      rgba(5, 217, 232, 0.15) calc(50px - 1px),
+      rgba(5, 217, 232, 0.15) 50px
+    ),
+    /* Vertical lines */
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent calc(50px - 1px),
+      rgba(5, 217, 232, 0.15) calc(50px - 1px),
+      rgba(5, 217, 232, 0.15) 50px
+    ),
+    /* Glow effect on horizontal lines */
+    linear-gradient(
+      0deg,
+      transparent 0%,
+      transparent calc(50px - 4px),
+      rgba(5, 217, 232, 0.05) calc(50px - 4px),
+      rgba(5, 217, 232, 0.05) calc(50px + 4px),
+      transparent calc(50px + 4px)
+    ),
+    /* Glow effect on vertical lines */
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent calc(50px - 4px),
+      rgba(5, 217, 232, 0.05) calc(50px - 4px),
+      rgba(5, 217, 232, 0.05) calc(50px + 4px),
+      transparent calc(50px + 4px)
+    ) !important;
+  background-size: 50px 50px !important;
+  background-position: center center;
+}
+
+/* CRT scanline effect */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* CRT vignette */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}

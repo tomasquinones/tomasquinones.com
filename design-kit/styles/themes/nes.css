@@ -1,0 +1,303 @@
+/* ===========================================
+   THEME: NINTENDO ENTERTAINMENT SYSTEM
+   8-bit glory, authentic NES palette
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS (NES dark grays) === */
+  --bg-void: #000000;
+  --bg-deep: #0f0f0f;
+  --bg-surface: #1d1d1d;
+  --bg-elevated: #2d2d2d;
+  --bg-hover: #3d3d3d;
+
+  /* === ACCENT COLORS (NES palette) === */
+  --neon-pink: #f83800;      /* NES red */
+  --neon-magenta: #f878f8;   /* NES pink */
+  --neon-cyan: #00b8f8;      /* NES light blue */
+  --neon-blue: #0058f8;      /* NES blue */
+  --neon-purple: #6844fc;    /* NES purple */
+  --neon-orange: #f87858;    /* NES coral */
+  --neon-yellow: #f8d878;    /* NES yellow */
+
+  /* NES-specific colors */
+  --nes-red: #f83800;
+  --nes-orange: #f87858;
+  --nes-yellow: #f8d878;
+  --nes-lime: #b8f818;
+  --nes-green: #00a844;
+  --nes-cyan: #00b8f8;
+  --nes-blue: #0058f8;
+  --nes-purple: #6844fc;
+  --nes-pink: #f878f8;
+  --nes-white: #fcfcfc;
+  --nes-light-gray: #bcbcbc;
+  --nes-dark-gray: #7c7c7c;
+  --nes-black: #000000;
+  --nes-skin: #fca044;
+
+  /* === TEXT COLORS === */
+  --text-primary: var(--nes-white);
+  --text-secondary: var(--nes-light-gray);
+  --text-muted: var(--nes-dark-gray);
+  --text-accent: var(--nes-cyan);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, var(--nes-red) 0%, var(--nes-orange) 50%, var(--nes-yellow) 100%);
+  --gradient-ocean: linear-gradient(135deg, var(--nes-cyan) 0%, var(--nes-blue) 50%, var(--nes-purple) 100%);
+  --gradient-horizon: linear-gradient(180deg, #000000 0%, #0f0f0f 50%, #1d1d1d 100%);
+  --gradient-chrome: linear-gradient(135deg, var(--nes-white) 0%, var(--nes-light-gray) 100%);
+
+  /* === GLOW EFFECTS === */
+  --glow-pink: 0 0 8px var(--nes-red), 0 0 16px rgba(248, 56, 0, 0.5);
+  --glow-cyan: 0 0 8px var(--nes-cyan), 0 0 16px rgba(0, 184, 248, 0.5);
+  --glow-purple: 0 0 8px var(--nes-purple), 0 0 16px rgba(104, 68, 252, 0.5);
+  --glow-subtle-pink: 0 0 4px rgba(248, 56, 0, 0.4);
+  --glow-subtle-cyan: 0 0 4px rgba(0, 184, 248, 0.4);
+
+  /* === BORDERS === */
+  --border-subtle: 3px solid var(--nes-dark-gray);
+  --border-accent: 3px solid var(--nes-red);
+  --border-glow: 3px solid var(--nes-cyan);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'VT323', 'Press Start 2P', monospace;
+  --font-body: 'VT323', 'Courier New', monospace;
+  --font-mono: 'VT323', 'Courier New', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--nes-red);
+  --accent-secondary: var(--nes-cyan);
+  --accent-tertiary: var(--nes-yellow);
+}
+
+/* === NES OVERRIDES === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.neon-pink {
+  color: var(--nes-red);
+  text-shadow: var(--glow-pink);
+}
+
+.neon-cyan {
+  color: var(--nes-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.neon-purple {
+  color: var(--nes-purple);
+  text-shadow: var(--glow-purple);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--nes-white) 0%, var(--nes-cyan) 50%, var(--nes-blue) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+  font-weight: 400;
+  border-radius: 0;
+  border: 3px solid var(--nes-white);
+  background: var(--nes-black);
+}
+
+.btn-primary {
+  background: var(--nes-red);
+  color: var(--nes-white);
+  border-color: var(--nes-white);
+  box-shadow:
+    3px 3px 0 var(--nes-dark-gray),
+    var(--glow-subtle-pink);
+}
+
+.btn-primary:hover {
+  background: var(--nes-orange);
+  transform: translate(-2px, -2px);
+  box-shadow:
+    5px 5px 0 var(--nes-dark-gray),
+    var(--glow-pink);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--nes-cyan);
+  border-color: var(--nes-cyan);
+  box-shadow: 3px 3px 0 var(--nes-dark-gray);
+}
+
+.btn-secondary:hover {
+  background: var(--nes-cyan);
+  color: var(--nes-black);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--nes-dark-gray);
+}
+
+.btn-ghost {
+  color: var(--nes-light-gray);
+  border-color: var(--nes-dark-gray);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+}
+
+.btn-ghost:hover {
+  color: var(--nes-white);
+  border-color: var(--nes-white);
+  background: transparent;
+  transform: translate(-2px, -2px);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: 0;
+  font-size: 0.75rem;
+  border-width: 2px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+}
+
+.badge-pink {
+  background: var(--nes-red);
+  color: var(--nes-white);
+  border-color: var(--nes-white);
+}
+
+.badge-cyan {
+  background: var(--nes-cyan);
+  color: var(--nes-black);
+  border-color: var(--nes-white);
+}
+
+.badge-purple {
+  background: var(--nes-purple);
+  color: var(--nes-white);
+  border-color: var(--nes-white);
+}
+
+.section-title {
+  color: var(--nes-white);
+  border-bottom: 3px solid var(--nes-red);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.divider {
+  background: var(--nes-red);
+  height: 3px;
+  box-shadow: 0 3px 0 var(--nes-dark-gray);
+}
+
+.card {
+  border-radius: 0;
+  border: 3px solid var(--nes-dark-gray);
+  background: var(--bg-surface);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+}
+
+.card:hover {
+  border-color: var(--nes-red);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+  transform: translate(-2px, -2px);
+}
+
+a {
+  color: var(--nes-cyan);
+}
+
+a:hover {
+  color: var(--nes-yellow);
+  text-shadow: var(--glow-subtle-cyan);
+}
+
+.input {
+  border-radius: 0;
+  border: 3px solid var(--nes-dark-gray);
+  background: var(--bg-void);
+  font-family: var(--font-mono);
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.3);
+}
+
+.input:focus {
+  border-color: var(--nes-cyan);
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.3), 0 0 8px rgba(0, 184, 248, 0.4);
+}
+
+.input::placeholder {
+  color: var(--nes-dark-gray);
+}
+
+.font-sample {
+  border: 3px solid var(--nes-dark-gray);
+  border-radius: 0;
+  background: var(--bg-deep);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+}
+
+.color-swatch {
+  border-radius: 0;
+  border: 3px solid var(--nes-dark-gray);
+}
+
+/* Hide grid background */
+.grid-bg {
+  background-image: none;
+}
+
+/* Hero adjustments */
+.hero-container {
+  border: 3px solid var(--nes-red);
+  border-radius: 0;
+  background: var(--bg-surface);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+}
+
+.blink {
+  color: var(--nes-yellow);
+  text-shadow: var(--glow-subtle-pink);
+}
+
+/* CRT scanline effect */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* CRT vignette */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 60%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Pixel shadow effect on headings */
+h1, h2, h3 {
+  text-shadow:
+    3px 3px 0 var(--nes-dark-gray),
+    1px 0 0 rgba(255, 0, 0, 0.2),
+    -1px 0 0 rgba(0, 255, 255, 0.2);
+}

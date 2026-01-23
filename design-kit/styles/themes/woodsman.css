@@ -1,0 +1,313 @@
+/* ===========================================
+   THEME: WOODSMAN
+   Outdoor nature aesthetic - earth tones & buffalo plaid
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS === */
+  --bg-void: #1a1612;
+  --bg-deep: #221d18;
+  --bg-surface: #2a241e;
+  --bg-elevated: #342d25;
+  --bg-hover: #3e362c;
+
+  /* === ACCENT COLORS === */
+  --neon-pink: #c41e3a;      /* Buffalo red */
+  --neon-magenta: #8b2942;   /* Deep berry */
+  --neon-cyan: #4a7c59;      /* Forest green */
+  --neon-blue: #5d7a8c;      /* Slate blue */
+  --neon-purple: #6b5b4f;    /* Warm gray */
+  --neon-orange: #c9713d;    /* Rust orange */
+  --neon-yellow: #d4a84b;    /* Goldenrod */
+
+  /* Woodsman-specific colors */
+  --buffalo-red: #c41e3a;
+  --buffalo-black: #1a1a1a;
+  --forest-green: #4a7c59;
+  --pine-green: #2d5a3d;
+  --moss-green: #6b8e5e;
+  --rust-orange: #c9713d;
+  --bark-brown: #5c4a3a;
+  --tan: #c4a77d;
+  --cream: #f0e6d3;
+  --charcoal: #2d2926;
+  --campfire-orange: #e87a3d;
+  --golden-hour: #d4a84b;
+
+  /* === TEXT COLORS === */
+  --text-primary: var(--cream);
+  --text-secondary: #b8a892;
+  --text-muted: #7a6f62;
+  --text-accent: var(--golden-hour);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, var(--campfire-orange) 0%, var(--rust-orange) 50%, var(--buffalo-red) 100%);
+  --gradient-ocean: linear-gradient(135deg, var(--moss-green) 0%, var(--forest-green) 50%, var(--pine-green) 100%);
+  --gradient-horizon: linear-gradient(180deg, #1a1612 0%, #221d18 40%, #2a241e 100%);
+  --gradient-chrome: linear-gradient(135deg, var(--tan) 0%, var(--bark-brown) 100%);
+
+  /* === GLOW EFFECTS (subtle, warm) === */
+  --glow-pink: 0 2px 10px rgba(196, 30, 58, 0.3);
+  --glow-cyan: 0 2px 10px rgba(74, 124, 89, 0.3);
+  --glow-purple: 0 2px 10px rgba(212, 168, 75, 0.3);
+  --glow-subtle-pink: 0 1px 5px rgba(196, 30, 58, 0.2);
+  --glow-subtle-cyan: 0 1px 5px rgba(74, 124, 89, 0.2);
+
+  /* === BORDERS === */
+  --border-subtle: 1px solid rgba(196, 167, 125, 0.2);
+  --border-accent: 2px solid var(--forest-green);
+  --border-glow: 2px solid var(--rust-orange);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'Bitter', 'Rockwell', Georgia, serif;
+  --font-body: 'Source Sans Pro', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--forest-green);
+  --accent-secondary: var(--rust-orange);
+  --accent-tertiary: var(--buffalo-red);
+}
+
+/* === WOODSMAN OVERRIDES === */
+
+/* Import Google Fonts for this theme */
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap');
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.neon-pink {
+  color: var(--buffalo-red);
+  text-shadow: none;
+}
+
+.neon-cyan {
+  color: var(--forest-green);
+  text-shadow: none;
+}
+
+.neon-purple {
+  color: var(--golden-hour);
+  text-shadow: none;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--cream) 0%, var(--tan) 50%, var(--golden-hour) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Buffalo plaid background pattern */
+body {
+  background-color: var(--bg-void);
+  background-image:
+    /* Buffalo plaid pattern - subtle */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 20px,
+      rgba(196, 30, 58, 0.03) 20px,
+      rgba(196, 30, 58, 0.03) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 20px,
+      rgba(26, 26, 26, 0.15) 20px,
+      rgba(26, 26, 26, 0.15) 40px
+    );
+  background-size: 40px 40px;
+}
+
+.btn {
+  text-transform: none;
+  letter-spacing: 0.03em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  border-radius: 4px;
+  border: 2px solid var(--forest-green);
+  background: var(--forest-green);
+}
+
+.btn-primary {
+  background: var(--forest-green);
+  color: var(--cream);
+  border-color: var(--forest-green);
+}
+
+.btn-primary:hover {
+  background: var(--pine-green);
+  border-color: var(--pine-green);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--rust-orange);
+  border-color: var(--rust-orange);
+}
+
+.btn-secondary:hover {
+  background: var(--rust-orange);
+  color: var(--cream);
+  box-shadow: var(--glow-purple);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--tan);
+  border-color: var(--bark-brown);
+}
+
+.btn-ghost:hover {
+  color: var(--cream);
+  border-color: var(--tan);
+  background: rgba(196, 167, 125, 0.1);
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.badge-pink {
+  background: rgba(196, 30, 58, 0.15);
+  color: var(--buffalo-red);
+  border: 1px solid var(--buffalo-red);
+}
+
+.badge-cyan {
+  background: rgba(74, 124, 89, 0.15);
+  color: var(--forest-green);
+  border: 1px solid var(--forest-green);
+}
+
+.badge-purple {
+  background: rgba(212, 168, 75, 0.15);
+  color: var(--golden-hour);
+  border: 1px solid var(--golden-hour);
+}
+
+.section-title {
+  color: var(--cream);
+  border-bottom: 2px solid var(--bark-brown);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+.divider {
+  background: linear-gradient(90deg,
+    transparent,
+    var(--bark-brown) 20%,
+    var(--bark-brown) 80%,
+    transparent
+  );
+  height: 2px;
+}
+
+.card {
+  border-radius: 6px;
+  border: 1px solid var(--bark-brown);
+  background: var(--bg-surface);
+}
+
+.card:hover {
+  border-color: var(--forest-green);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+a {
+  color: var(--rust-orange);
+}
+
+a:hover {
+  color: var(--campfire-orange);
+}
+
+.input {
+  border-radius: 4px;
+  border: 2px solid var(--bark-brown);
+  background: var(--bg-deep);
+}
+
+.input:focus {
+  border-color: var(--forest-green);
+  box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.2);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.font-sample {
+  border: 1px solid var(--bark-brown);
+  border-radius: 4px;
+  background: var(--bg-deep);
+}
+
+.color-swatch {
+  border-radius: 4px;
+  border: 1px solid var(--bark-brown);
+}
+
+/* Hide default grid background */
+.grid-bg {
+  background-image: none !important;
+}
+
+/* Hero adjustments - log cabin feel */
+.hero-container {
+  border: 2px solid var(--bark-brown);
+  border-radius: 6px;
+  background:
+    linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-elevated) 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.blink {
+  color: var(--campfire-orange);
+  animation: campfire-flicker 1.5s ease-in-out infinite;
+}
+
+@keyframes campfire-flicker {
+  0%, 100% { opacity: 1; }
+  25% { opacity: 0.9; }
+  50% { opacity: 1; }
+  75% { opacity: 0.85; }
+}
+
+/* Subtle texture overlay */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Warm vignette */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 50%,
+    rgba(15, 10, 5, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}

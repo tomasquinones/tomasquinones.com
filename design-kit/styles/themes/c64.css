@@ -1,0 +1,254 @@
+/* ===========================================
+   THEME: COMMODORE 64
+   Classic C64 blue on blue
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS === */
+  --bg-void: #1a1a4e;
+  --bg-deep: #24246a;
+  --bg-surface: #2e2e7a;
+  --bg-elevated: #38388a;
+  --bg-hover: #42429a;
+
+  /* === ACCENT COLORS === */
+  --neon-pink: #8b8bff;
+  --neon-magenta: #6c6cf0;
+  --neon-cyan: #a0a0ff;
+  --neon-blue: #5050d0;
+  --neon-purple: #70a4b2;
+  --neon-orange: #d09040;
+  --neon-yellow: #b8d060;
+
+  /* C64-specific colors */
+  --c64-blue: #8b8bff;
+  --c64-blue-dim: #6c6cf0;
+  --c64-blue-bright: #a0a0ff;
+  --c64-cyan: #70a4b2;
+  --c64-brown: #9c6844;
+  --c64-red: #b04040;
+  --c64-green: #68a840;
+  --c64-bg: #24246a;
+  --c64-border: #8b8bff;
+
+  /* === TEXT COLORS === */
+  --text-primary: #a0a0ff;
+  --text-secondary: #8b8bff;
+  --text-muted: #5858b0;
+  --text-accent: var(--c64-blue-bright);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, #a0a0ff 0%, #8b8bff 50%, #5050d0 100%);
+  --gradient-ocean: linear-gradient(135deg, #8b8bff 0%, #70a4b2 50%, #68a840 100%);
+  --gradient-horizon: linear-gradient(180deg, #1a1a4e 0%, #24246a 40%, #2e2e7a 100%);
+  --gradient-chrome: linear-gradient(135deg, #a0a0ff 0%, #8b8bff 100%);
+
+  /* === GLOW EFFECTS === */
+  --glow-pink: 0 0 5px #8b8bff, 0 0 15px rgba(139, 139, 255, 0.4);
+  --glow-cyan: 0 0 5px #70a4b2, 0 0 15px rgba(112, 164, 178, 0.4);
+  --glow-purple: 0 0 5px #a0a0ff, 0 0 15px rgba(160, 160, 255, 0.4);
+  --glow-subtle-pink: 0 0 8px rgba(139, 139, 255, 0.3);
+  --glow-subtle-cyan: 0 0 8px rgba(112, 164, 178, 0.3);
+
+  /* === BORDERS === */
+  --border-subtle: 1px solid rgba(139, 139, 255, 0.3);
+  --border-accent: 1px solid var(--c64-blue);
+  --border-glow: 1px solid var(--c64-blue-bright);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'VT323', 'Courier New', monospace;
+  --font-body: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--c64-blue);
+  --accent-secondary: var(--c64-blue-bright);
+  --accent-tertiary: var(--c64-cyan);
+}
+
+/* === C64 OVERRIDES === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.neon-pink {
+  color: var(--c64-blue);
+  text-shadow: var(--glow-pink);
+}
+
+.neon-cyan {
+  color: var(--c64-blue-bright);
+  text-shadow: var(--glow-cyan);
+}
+
+.neon-purple {
+  color: var(--c64-cyan);
+  text-shadow: var(--glow-purple);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--c64-blue-bright) 0%, var(--c64-blue) 50%, var(--c64-blue-dim) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: none;
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+  font-weight: 400;
+  border-radius: 0;
+  border: 2px solid var(--c64-blue);
+}
+
+.btn-primary {
+  background: var(--c64-blue);
+  color: var(--c64-bg);
+  box-shadow: var(--glow-subtle-pink);
+}
+
+.btn-primary:hover {
+  background: var(--c64-blue-bright);
+  box-shadow: var(--glow-pink);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--c64-blue);
+  border-color: var(--c64-blue);
+}
+
+.btn-secondary:hover {
+  background: var(--c64-blue);
+  color: var(--c64-bg);
+  box-shadow: var(--glow-pink);
+}
+
+.btn-ghost {
+  color: var(--c64-blue-dim);
+  border-color: var(--c64-blue-dim);
+}
+
+.btn-ghost:hover {
+  color: var(--c64-blue);
+  border-color: var(--c64-blue);
+  background: transparent;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: 0;
+  font-size: 0.7rem;
+}
+
+.badge-pink {
+  background: rgba(139, 139, 255, 0.15);
+  color: var(--c64-blue);
+  border-color: var(--c64-blue);
+}
+
+.badge-cyan {
+  background: rgba(160, 160, 255, 0.15);
+  color: var(--c64-blue-bright);
+  border-color: var(--c64-blue-bright);
+}
+
+.badge-purple {
+  background: rgba(112, 164, 178, 0.15);
+  color: var(--c64-cyan);
+  border-color: var(--c64-cyan);
+}
+
+.section-title {
+  color: var(--c64-blue-bright);
+  border-bottom-color: var(--c64-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.divider {
+  background: var(--c64-blue);
+  height: 2px;
+  box-shadow: var(--glow-subtle-pink);
+}
+
+.card {
+  border-radius: 0;
+  border: 2px solid var(--c64-blue-dim);
+}
+
+.card:hover {
+  border-color: var(--c64-blue);
+  box-shadow: 0 0 15px rgba(139, 139, 255, 0.25);
+  transform: none;
+}
+
+a {
+  color: var(--c64-blue-bright);
+}
+
+a:hover {
+  color: var(--c64-cyan);
+  text-shadow: var(--glow-subtle-pink);
+}
+
+.input {
+  border-radius: 0;
+  border: 2px solid var(--c64-blue-dim);
+  background: var(--bg-void);
+}
+
+.input:focus {
+  border-color: var(--c64-blue);
+  box-shadow: 0 0 10px rgba(139, 139, 255, 0.3);
+}
+
+.input::placeholder {
+  color: var(--c64-blue-dim);
+}
+
+.font-sample {
+  border: 2px solid var(--c64-blue-dim);
+  border-radius: 0;
+}
+
+.color-swatch {
+  border-radius: 0;
+}
+
+/* Hide grid background */
+.grid-bg {
+  background-image: none;
+}
+
+/* Hero adjustments */
+.hero-container {
+  border: 3px solid var(--c64-blue);
+  border-radius: 0;
+  box-shadow: 0 0 30px rgba(139, 139, 255, 0.15);
+}
+
+.blink {
+  color: var(--c64-blue-bright);
+  text-shadow: var(--glow-subtle-pink);
+}
+
+/* CRT scanline effect */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}

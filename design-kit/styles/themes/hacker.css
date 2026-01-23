@@ -1,0 +1,253 @@
+/* ===========================================
+   THEME: 80s HACKER MAN
+   Wargames / green phosphor terminal aesthetic
+   =========================================== */
+
+:root {
+  /* === BACKGROUNDS === */
+  --bg-void: #0a0a0a;
+  --bg-deep: #0d0d0d;
+  --bg-surface: #141414;
+  --bg-elevated: #1a1a1a;
+  --bg-hover: #222222;
+
+  /* === ACCENT COLORS === */
+  --neon-pink: #00ff41;
+  --neon-magenta: #00cc33;
+  --neon-cyan: #33ff77;
+  --neon-blue: #00aa00;
+  --neon-purple: #ffb000;
+  --neon-orange: #ff6600;
+  --neon-yellow: #ffff00;
+
+  /* Hacker-specific colors */
+  --phosphor: #00ff41;
+  --phosphor-dim: #00cc33;
+  --phosphor-bright: #33ff77;
+  --amber: #ffb000;
+  --amber-dim: #cc8800;
+  --red-alert: #ff3333;
+  --terminal-black: #0a0a0a;
+  --terminal-gray: #333333;
+
+  /* === TEXT COLORS === */
+  --text-primary: #00ff41;
+  --text-secondary: #00cc33;
+  --text-muted: #007722;
+  --text-accent: var(--phosphor);
+
+  /* === GRADIENTS === */
+  --gradient-sunset: linear-gradient(135deg, #00ff41 0%, #00aa00 50%, #005500 100%);
+  --gradient-ocean: linear-gradient(135deg, #00ff41 0%, #00cc33 50%, #ffb000 100%);
+  --gradient-horizon: linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 40%, #141414 100%);
+  --gradient-chrome: linear-gradient(135deg, #00ff41 0%, #00aa00 100%);
+
+  /* === GLOW EFFECTS === */
+  --glow-pink: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 20px rgba(0, 255, 65, 0.5);
+  --glow-cyan: 0 0 5px #33ff77, 0 0 10px #33ff77, 0 0 20px rgba(51, 255, 119, 0.5);
+  --glow-purple: 0 0 5px #ffb000, 0 0 10px #ffb000, 0 0 20px rgba(255, 176, 0, 0.5);
+  --glow-subtle-pink: 0 0 5px rgba(0, 255, 65, 0.4);
+  --glow-subtle-cyan: 0 0 5px rgba(51, 255, 119, 0.4);
+
+  /* === BORDERS === */
+  --border-subtle: 1px solid rgba(0, 255, 65, 0.2);
+  --border-accent: 1px solid var(--phosphor);
+  --border-glow: 1px solid var(--phosphor-bright);
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'VT323', 'Courier New', monospace;
+  --font-body: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  /* === THEME-AGNOSTIC ALIASES === */
+  --accent-primary: var(--phosphor);
+  --accent-secondary: var(--phosphor-bright);
+  --accent-tertiary: var(--amber);
+}
+
+/* === HACKER OVERRIDES === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.neon-pink {
+  color: var(--phosphor);
+  text-shadow: var(--glow-pink);
+}
+
+.neon-cyan {
+  color: var(--phosphor-bright);
+  text-shadow: var(--glow-cyan);
+}
+
+.neon-purple {
+  color: var(--amber);
+  text-shadow: var(--glow-purple);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--phosphor-bright) 0%, var(--phosphor) 50%, var(--phosphor-dim) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: none;
+}
+
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+  font-weight: 400;
+  border-radius: 0;
+  border: 1px solid var(--phosphor);
+}
+
+.btn-primary {
+  background: var(--phosphor);
+  color: var(--terminal-black);
+  box-shadow: var(--glow-subtle-pink);
+}
+
+.btn-primary:hover {
+  background: var(--phosphor-bright);
+  box-shadow: var(--glow-pink);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--phosphor);
+  border-color: var(--phosphor);
+}
+
+.btn-secondary:hover {
+  background: var(--phosphor);
+  color: var(--terminal-black);
+  box-shadow: var(--glow-pink);
+}
+
+.btn-ghost {
+  color: var(--phosphor-dim);
+  border-color: var(--phosphor-dim);
+}
+
+.btn-ghost:hover {
+  color: var(--phosphor);
+  border-color: var(--phosphor);
+  background: transparent;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-radius: 0;
+  font-size: 0.7rem;
+}
+
+.badge-pink {
+  background: rgba(0, 255, 65, 0.1);
+  color: var(--phosphor);
+  border-color: var(--phosphor);
+}
+
+.badge-cyan {
+  background: rgba(51, 255, 119, 0.1);
+  color: var(--phosphor-bright);
+  border-color: var(--phosphor-bright);
+}
+
+.badge-purple {
+  background: rgba(255, 176, 0, 0.1);
+  color: var(--amber);
+  border-color: var(--amber);
+}
+
+.section-title {
+  color: var(--phosphor);
+  border-bottom-color: var(--phosphor);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.divider {
+  background: var(--phosphor);
+  height: 1px;
+  box-shadow: var(--glow-subtle-pink);
+}
+
+.card {
+  border-radius: 0;
+  border-color: var(--phosphor-dim);
+}
+
+.card:hover {
+  border-color: var(--phosphor);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+  transform: none;
+}
+
+a {
+  color: var(--phosphor);
+}
+
+a:hover {
+  color: var(--phosphor-bright);
+  text-shadow: var(--glow-subtle-pink);
+}
+
+.input {
+  border-radius: 0;
+  border-color: var(--phosphor-dim);
+  background: var(--terminal-black);
+}
+
+.input:focus {
+  border-color: var(--phosphor);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+.input::placeholder {
+  color: var(--phosphor-dim);
+}
+
+.font-sample {
+  border: 1px solid var(--phosphor-dim);
+  border-radius: 0;
+}
+
+.color-swatch {
+  border-radius: 0;
+}
+
+/* Hide grid background */
+.grid-bg {
+  background-image: none;
+}
+
+/* Hero adjustments */
+.hero-container {
+  border: 1px solid var(--phosphor);
+  border-radius: 0;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+}
+
+.blink {
+  color: var(--phosphor);
+  text-shadow: var(--glow-subtle-pink);
+}
+
+/* CRT scanline effect */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}

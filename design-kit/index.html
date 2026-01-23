@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synthwave Cyberpunk Design Kit | tomasquinones.com</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Synthwave fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Renaissance fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <!-- Hacker fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+  <!-- Base styles (always loaded) -->
+  <link rel="stylesheet" href="styles/base.css">
+  <!-- Theme styles (lazy-loaded) -->
+  <link rel="stylesheet" href="styles/themes/synthwave.css" id="theme-stylesheet">
+</head>
+<body class="grid-bg">
+  <!-- Tron Grid (only visible in Tron theme) -->
+  <div class="tron-grid" aria-hidden="true">
+    <svg class="tron-grid-svg" viewBox="0 0 1000 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gridFade" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:rgb(0,223,252);stop-opacity:0.6" />
+          <stop offset="100%" style="stop-color:rgb(0,223,252);stop-opacity:0.15" />
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <g filter="url(#glow)" stroke="url(#gridFade)" stroke-width="1" fill="none">
+        <!-- Horizontal lines -->
+        <line x1="0" y1="0" x2="1000" y2="0"/>
+        <line x1="0" y1="8" x2="1000" y2="8"/>
+        <line x1="0" y1="20" x2="1000" y2="20"/>
+        <line x1="0" y1="36" x2="1000" y2="36"/>
+        <line x1="0" y1="58" x2="1000" y2="58"/>
+        <line x1="0" y1="86" x2="1000" y2="86"/>
+        <line x1="0" y1="122" x2="1000" y2="122"/>
+        <line x1="0" y1="168" x2="1000" y2="168"/>
+        <line x1="0" y1="226" x2="1000" y2="226"/>
+        <line x1="0" y1="300" x2="1000" y2="300"/>
+        <line x1="0" y1="400" x2="1000" y2="400"/>
+        <!-- Vertical lines converging to center -->
+        <line x1="500" y1="0" x2="500" y2="400"/>
+        <line x1="500" y1="0" x2="440" y2="400"/>
+        <line x1="500" y1="0" x2="560" y2="400"/>
+        <line x1="500" y1="0" x2="380" y2="400"/>
+        <line x1="500" y1="0" x2="620" y2="400"/>
+        <line x1="500" y1="0" x2="320" y2="400"/>
+        <line x1="500" y1="0" x2="680" y2="400"/>
+        <line x1="500" y1="0" x2="260" y2="400"/>
+        <line x1="500" y1="0" x2="740" y2="400"/>
+        <line x1="500" y1="0" x2="200" y2="400"/>
+        <line x1="500" y1="0" x2="800" y2="400"/>
+        <line x1="500" y1="0" x2="140" y2="400"/>
+        <line x1="500" y1="0" x2="860" y2="400"/>
+        <line x1="500" y1="0" x2="80" y2="400"/>
+        <line x1="500" y1="0" x2="920" y2="400"/>
+        <line x1="500" y1="0" x2="20" y2="400"/>
+        <line x1="500" y1="0" x2="980" y2="400"/>
+        <line x1="500" y1="0" x2="-40" y2="400"/>
+        <line x1="500" y1="0" x2="1040" y2="400"/>
+        <line x1="500" y1="0" x2="-100" y2="400"/>
+        <line x1="500" y1="0" x2="1100" y2="400"/>
+        <line x1="500" y1="0" x2="-160" y2="400"/>
+        <line x1="500" y1="0" x2="1160" y2="400"/>
+        <line x1="500" y1="0" x2="-220" y2="400"/>
+        <line x1="500" y1="0" x2="1220" y2="400"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Theme Switcher -->
+  <div class="theme-switcher">
+    <label for="theme-select">Theme:</label>
+    <select id="theme-select">
+      <option value="synthwave">Synthwave Cyberpunk</option>
+      <option value="renaissance">Renaissance Man</option>
+      <option value="hacker">80s Hacker Man</option>
+      <option value="c64">Commodore 64</option>
+      <option value="vector">Vector Arcade</option>
+      <option value="ascii">ASCII Art</option>
+      <option value="atari2600">Atari 2600</option>
+      <option value="nes">NES</option>
+      <option value="mario">Super Mario</option>
+      <option value="hannabarbera">Hanna-Barbera</option>
+      <option value="tron">Tron (1982)</option>
+      <option value="woodsman">Woodsman</option>
+      <option value="jurassicpark">Jurassic Park (1993)</option>
+      <option value="ghostbusters">Ghostbusters (1984)</option>
+      <option value="sevensamurai">Seven Samurai (1954)</option>
+      <option value="godzilla">Godzilla (1954)</option>
+    </select>
+    <span id="crt-toggle-container">
+      <input type="checkbox" id="crt-toggle" checked>
+      <label for="crt-toggle">CRT</label>
+    </span>
+  </div>
+
+  <div class="style-guide">
+
+    <!-- Header -->
+    <header class="text-center" style="margin-bottom: var(--space-16);">
+      <h1 class="gradient-text" style="font-size: var(--text-6xl); margin-bottom: var(--space-4);">
+        <span id="theme-title">SYNTHWAVE</span>
+      </h1>
+      <p style="font-family: var(--font-display); font-size: var(--text-xl); color: var(--text-accent); letter-spacing: 0.2em;">
+        <span id="theme-subtitle">Cyberpunk Design Kit</span>
+      </p>
+      <p style="color: var(--text-secondary); margin-top: var(--space-4);">
+        Design tokens and components for tomasquinones.com
+      </p>
+    </header>
+
+    <hr class="divider">
+
+    <!-- Color Palette -->
+    <section class="section">
+      <h2 class="section-title">Color Palette</h2>
+
+      <h3 style="color: var(--text-secondary); margin-bottom: var(--space-4);">Backgrounds</h3>
+      <div class="color-grid" style="margin-bottom: var(--space-8);">
+        <div class="color-swatch" style="background: var(--bg-void);">
+          <span>--bg-void<br>#0d0221</span>
+        </div>
+        <div class="color-swatch" style="background: var(--bg-deep);">
+          <span>--bg-deep<br>#150734</span>
+        </div>
+        <div class="color-swatch" style="background: var(--bg-surface);">
+          <span>--bg-surface<br>#1a0a3e</span>
+        </div>
+        <div class="color-swatch" style="background: var(--bg-elevated);">
+          <span>--bg-elevated<br>#241254</span>
+        </div>
+        <div class="color-swatch" style="background: var(--bg-hover);">
+          <span>--bg-hover<br>#2d1866</span>
+        </div>
+      </div>
+
+      <h3 style="color: var(--text-secondary); margin-bottom: var(--space-4);">Neon Accents</h3>
+      <div class="color-grid">
+        <div class="color-swatch" style="background: var(--neon-pink);">
+          <span style="color: #000;">--neon-pink<br>#ff2a6d</span>
+        </div>
+        <div class="color-swatch" style="background: var(--neon-magenta);">
+          <span>--neon-magenta<br>#d300c5</span>
+        </div>
+        <div class="color-swatch" style="background: var(--neon-cyan);">
+          <span style="color: #000;">--neon-cyan<br>#05d9e8</span>
+        </div>
+        <div class="color-swatch" style="background: var(--neon-blue);">
+          <span>--neon-blue<br>#0066ff</span>
+        </div>
+        <div class="color-swatch" style="background: var(--neon-purple);">
+          <span>--neon-purple<br>#7b2cbf</span>
+        </div>
+        <div class="color-swatch" style="background: var(--neon-orange);">
+          <span style="color: #000;">--neon-orange<br>#ff6b35</span>
+        </div>
+        <div class="color-swatch" style="background: var(--neon-yellow);">
+          <span style="color: #000;">--neon-yellow<br>#f9f871</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Typography -->
+    <section class="section">
+      <h2 class="section-title">Typography</h2>
+
+      <div class="font-sample">
+        <p style="color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-2);">
+          Display Font: Orbitron
+        </p>
+        <p style="font-family: var(--font-display); font-size: var(--text-4xl);">
+          ABCDEFGHIJKLMNOPQRSTUVWXYZ
+        </p>
+        <p style="font-family: var(--font-display); font-size: var(--text-2xl);">
+          abcdefghijklmnopqrstuvwxyz 0123456789
+        </p>
+      </div>
+
+      <div class="font-sample">
+        <p style="color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-2);">
+          Body Font: Inter
+        </p>
+        <p style="font-family: var(--font-body); font-size: var(--text-lg);">
+          The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.
+        </p>
+      </div>
+
+      <div class="font-sample">
+        <p style="color: var(--text-muted); font-size: var(--text-sm); margin-bottom: var(--space-2);">
+          Monospace Font: JetBrains Mono
+        </p>
+        <p style="font-family: var(--font-mono); font-size: var(--text-base);">
+          const hello = () => console.log("Hello, Cyberpunk!");
+        </p>
+      </div>
+
+      <h3 style="color: var(--text-secondary); margin-top: var(--space-8); margin-bottom: var(--space-4);">Heading Scale</h3>
+      <div class="font-sample">
+        <h1>Heading 1 - 3rem</h1>
+        <h2>Heading 2 - 2.25rem</h2>
+        <h3>Heading 3 - 1.875rem</h3>
+        <h4>Heading 4 - 1.5rem</h4>
+        <h5>Heading 5 - 1.25rem</h5>
+        <h6>Heading 6 - 1.125rem</h6>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Neon Text Effects -->
+    <section class="section">
+      <h2 class="section-title">Neon Text Effects</h2>
+
+      <div class="flex flex-wrap gap-8" style="font-family: var(--font-display); font-size: var(--text-4xl);">
+        <span class="neon-pink">NEON PINK</span>
+        <span class="neon-cyan">NEON CYAN</span>
+        <span class="neon-purple">NEON PURPLE</span>
+      </div>
+
+      <div style="margin-top: var(--space-8);">
+        <span class="gradient-text" style="font-family: var(--font-display); font-size: var(--text-5xl);">
+          GRADIENT TEXT
+        </span>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Buttons -->
+    <section class="section">
+      <h2 class="section-title">Buttons</h2>
+
+      <div class="flex flex-wrap gap-4 items-center">
+        <button class="btn btn-primary">Primary Button</button>
+        <button class="btn btn-secondary">Secondary Button</button>
+        <button class="btn btn-ghost">Ghost Button</button>
+      </div>
+
+      <h3 style="color: var(--text-secondary); margin-top: var(--space-8); margin-bottom: var(--space-4);">Button as Links</h3>
+      <div class="flex flex-wrap gap-4 items-center">
+        <a href="#" class="btn btn-primary">Link Primary</a>
+        <a href="#" class="btn btn-secondary">Link Secondary</a>
+        <a href="#" class="btn btn-ghost">Link Ghost</a>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Cards -->
+    <section class="section">
+      <h2 class="section-title">Cards</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-6);">
+        <div class="card">
+          <h4 style="color: var(--neon-pink);">Basic Card</h4>
+          <p style="color: var(--text-secondary);">
+            A simple card component with hover effects. The border glows pink on hover.
+          </p>
+          <div class="flex gap-4 mt-4">
+            <span class="badge badge-pink">React</span>
+            <span class="badge badge-cyan">TypeScript</span>
+          </div>
+        </div>
+
+        <div class="card card-glow">
+          <h4 style="color: var(--neon-cyan);">Glow Card</h4>
+          <p style="color: var(--text-secondary);">
+            This card has an animated gradient border glow effect on hover.
+          </p>
+          <div class="flex gap-4 mt-4">
+            <span class="badge badge-purple">Next.js</span>
+            <span class="badge badge-pink">Tailwind</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4 style="color: var(--neon-purple);">Project Card</h4>
+          <p style="color: var(--text-secondary);">
+            Example of how a project card might look with action buttons.
+          </p>
+          <div class="flex gap-4 mt-4">
+            <a href="#" class="btn btn-primary" style="flex: 1;">View Demo</a>
+            <a href="#" class="btn btn-ghost" style="flex: 1;">Source</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Badges -->
+    <section class="section">
+      <h2 class="section-title">Badges / Tags</h2>
+
+      <div class="flex flex-wrap gap-4">
+        <span class="badge badge-pink">Pink Badge</span>
+        <span class="badge badge-cyan">Cyan Badge</span>
+        <span class="badge badge-purple">Purple Badge</span>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Form Inputs -->
+    <section class="section">
+      <h2 class="section-title">Form Inputs</h2>
+
+      <div style="max-width: 400px;">
+        <div style="margin-bottom: var(--space-4);">
+          <label style="display: block; color: var(--text-secondary); margin-bottom: var(--space-2); font-size: var(--text-sm);">
+            Text Input
+          </label>
+          <input type="text" class="input" placeholder="Enter your name...">
+        </div>
+
+        <div style="margin-bottom: var(--space-4);">
+          <label style="display: block; color: var(--text-secondary); margin-bottom: var(--space-2); font-size: var(--text-sm);">
+            Email Input
+          </label>
+          <input type="email" class="input" placeholder="you@example.com">
+        </div>
+
+        <div>
+          <label style="display: block; color: var(--text-secondary); margin-bottom: var(--space-2); font-size: var(--text-sm);">
+            Search
+          </label>
+          <input type="search" class="input" placeholder="Search projects...">
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Links -->
+    <section class="section">
+      <h2 class="section-title">Links</h2>
+
+      <p>
+        This is a paragraph with an <a href="#">inline link</a> that glows on hover.
+        Links use cyan by default and shift to pink on hover for that classic synthwave feel.
+      </p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Gradients -->
+    <section class="section">
+      <h2 class="section-title">Gradients</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-4);">
+        <div style="background: var(--gradient-sunset); height: 100px; border-radius: var(--radius-md); display: flex; align-items: flex-end; padding: var(--space-3);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-xs); background: rgba(0,0,0,0.5); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm);">
+            --gradient-sunset
+          </span>
+        </div>
+        <div style="background: var(--gradient-ocean); height: 100px; border-radius: var(--radius-md); display: flex; align-items: flex-end; padding: var(--space-3);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-xs); background: rgba(0,0,0,0.5); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm);">
+            --gradient-ocean
+          </span>
+        </div>
+        <div style="background: var(--gradient-horizon); height: 100px; border-radius: var(--radius-md); display: flex; align-items: flex-end; padding: var(--space-3);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-xs); background: rgba(0,0,0,0.5); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm);">
+            --gradient-horizon
+          </span>
+        </div>
+        <div style="background: var(--gradient-chrome); height: 100px; border-radius: var(--radius-md); display: flex; align-items: flex-end; padding: var(--space-3);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-xs); background: rgba(0,0,0,0.5); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm);">
+            --gradient-chrome
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Sample Hero Section -->
+    <section class="section">
+      <h2 class="section-title">Sample Hero Layout</h2>
+
+      <div class="hero-container" style="background: var(--gradient-horizon); border-radius: var(--radius-lg); padding: var(--space-16); text-align: center; position: relative; overflow: hidden;">
+        <!-- Grid overlay (visible in synthwave) -->
+        <div class="hero-grid" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(5, 217, 232, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(5, 217, 232, 0.05) 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+        <div style="position: relative; z-index: 1;">
+          <p class="hero-tagline" style="font-family: var(--font-mono); color: var(--text-accent); font-size: var(--text-sm); margin-bottom: var(--space-4);">
+            <span class="tagline-synthwave">&lt;Hello World /&gt;</span>
+            <span class="tagline-renaissance" style="display: none;">Multidisciplinary Creator</span>
+            <span class="tagline-hacker" style="display: none;">GREETINGS PROFESSOR FALKEN</span>
+            <span class="tagline-c64" style="display: none;">**** COMMODORE 64 BASIC V2 ****</span>
+            <span class="tagline-vector" style="display: none;">PLAYER 1 READY</span>
+            <span class="tagline-ascii" style="display: none;">┌──────────────────────┐</span>
+            <span class="tagline-atari2600" style="display: none;">GAME SELECT</span>
+            <span class="tagline-nes" style="display: none;">PRESS START</span>
+            <span class="tagline-mario" style="display: none;">WORLD 1-1</span>
+            <span class="tagline-hannabarbera" style="display: none;">ZOINKS!</span>
+            <span class="tagline-tron" style="display: none;">GREETINGS, PROGRAM</span>
+            <span class="tagline-woodsman" style="display: none;">THE MOUNTAINS ARE CALLING</span>
+            <span class="tagline-jurassicpark" style="display: none;">WELCOME TO JURASSIC PARK</span>
+            <span class="tagline-ghostbusters" style="display: none;">BUSTIN' MAKES ME FEEL GOOD</span>
+            <span class="tagline-sevensamurai" style="display: none;">七人の侍</span>
+            <span class="tagline-godzilla" style="display: none;">ゴジラ</span>
+          </p>
+          <h1 class="gradient-text" style="font-size: var(--text-6xl); margin-bottom: var(--space-4);">
+            TOMAS QUINONES
+          </h1>
+          <p style="font-family: var(--font-display); color: var(--text-secondary); font-size: var(--text-xl); letter-spacing: 0.05em; margin-bottom: var(--space-8);">
+            <span class="tagline-synthwave">DEVELOPER // CREATOR // EXPLORER</span>
+            <span class="tagline-renaissance" style="display: none;">Code &middot; Art &middot; Music &middot; Science</span>
+            <span class="tagline-hacker" style="display: none;">LOGIN: ROOT // ACCESS: GRANTED<span class="blink">_</span></span>
+            <span class="tagline-c64" style="display: none;">READY.<span class="blink">_</span></span>
+            <span class="tagline-vector" style="display: none;">HIGH SCORE: 999999</span>
+            <span class="tagline-ascii" style="display: none;">$ cat ./about.txt<span class="blink">_</span></span>
+            <span class="tagline-atari2600" style="display: none;">SCORE: 000000</span>
+            <span class="tagline-nes" style="display: none;">PLAYER 1 &times; 03</span>
+            <span class="tagline-mario" style="display: none;">MARIO &times; 03 &nbsp; COINS &times; 00</span>
+            <span class="tagline-hannabarbera" style="display: none;">JINKIES! LET'S SOLVE THIS MYSTERY!</span>
+            <span class="tagline-tron" style="display: none;">I FIGHT FOR THE USERS</span>
+            <span class="tagline-woodsman" style="display: none;">EXPLORE // BUILD // DISCOVER</span>
+            <span class="tagline-jurassicpark" style="display: none;">SPARED NO EXPENSE</span>
+            <span class="tagline-ghostbusters" style="display: none;">WE'RE READY TO BELIEVE YOU</span>
+            <span class="tagline-sevensamurai" style="display: none;">A KUROSAWA FILM</span>
+            <span class="tagline-godzilla" style="display: none;">TOHO STUDIOS PRESENTS</span>
+          </p>
+          <div class="flex justify-center gap-4">
+            <a href="#" class="btn btn-primary">View Projects</a>
+            <a href="#" class="btn btn-secondary">Get In Touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: var(--space-8); color: var(--text-muted);">
+      <p style="font-family: var(--font-mono); font-size: var(--text-sm);">
+        tomasquinones.com Design Kit v1.0
+      </p>
+    </footer>
+
+  </div>
+
+  <script>
+    // Theme configuration
+    const themes = {
+      synthwave: {
+        title: 'SYNTHWAVE',
+        subtitle: 'Cyberpunk Design Kit',
+        bodyClass: 'grid-bg',
+        hasCRT: true
+      },
+      renaissance: {
+        title: 'RENAISSANCE',
+        subtitle: 'Refined Minimalism',
+        bodyClass: '',
+        hasCRT: true
+      },
+      hacker: {
+        title: 'HACKERMAN',
+        subtitle: 'Shall We Play A Game?',
+        bodyClass: '',
+        hasCRT: true
+      },
+      c64: {
+        title: 'COMMODORE 64',
+        subtitle: '64K RAM SYSTEM  38911 BASIC BYTES FREE',
+        bodyClass: '',
+        hasCRT: true
+      },
+      vector: {
+        title: 'VECTOR',
+        subtitle: 'INSERT COIN',
+        bodyClass: '',
+        hasCRT: true
+      },
+      ascii: {
+        title: '░▒▓ ASCII ▓▒░',
+        subtitle: 'txt > *',
+        bodyClass: '',
+        hasCRT: true
+      },
+      atari2600: {
+        title: 'ATARI 2600',
+        subtitle: 'Combat Ready',
+        bodyClass: '',
+        hasCRT: true
+      },
+      nes: {
+        title: 'NES',
+        subtitle: '8-Bit Entertainment',
+        bodyClass: '',
+        hasCRT: true
+      },
+      mario: {
+        title: 'SUPER MARIO',
+        subtitle: "It's-a Me!",
+        bodyClass: '',
+        hasCRT: true
+      },
+      hannabarbera: {
+        title: 'HANNA-BARBERA',
+        subtitle: 'Saturday Morning Cartoons',
+        bodyClass: '',
+        hasCRT: true
+      },
+      tron: {
+        title: 'TRON',
+        subtitle: 'End of Line',
+        bodyClass: '',
+        hasCRT: true
+      },
+      woodsman: {
+        title: 'WOODSMAN',
+        subtitle: 'Into the Wild',
+        bodyClass: '',
+        hasCRT: true
+      },
+      jurassicpark: {
+        title: 'JURASSIC PARK',
+        subtitle: 'Life Finds a Way',
+        bodyClass: '',
+        hasCRT: true
+      },
+      ghostbusters: {
+        title: 'GHOSTBUSTERS',
+        subtitle: "Who You Gonna Call?",
+        bodyClass: '',
+        hasCRT: true
+      },
+      sevensamurai: {
+        title: 'SEVEN SAMURAI',
+        subtitle: 'Kurosawa, 1954',
+        bodyClass: '',
+        hasCRT: true
+      },
+      godzilla: {
+        title: 'GODZILLA',
+        subtitle: 'King of the Monsters',
+        bodyClass: '',
+        hasCRT: true
+      }
+    };
+
+    // DOM elements
+    const themeSelect = document.getElementById('theme-select');
+    const themeTitle = document.getElementById('theme-title');
+    const themeSubtitle = document.getElementById('theme-subtitle');
+    const themeStylesheet = document.getElementById('theme-stylesheet');
+    const crtToggle = document.getElementById('crt-toggle');
+    const crtToggleContainer = document.getElementById('crt-toggle-container');
+
+
+    // CRT toggle functionality
+    function updateCRTState() {
+      if (crtToggle.checked) {
+        document.documentElement.classList.remove('crt-disabled');
+      } else {
+        document.documentElement.classList.add('crt-disabled');
+      }
+      localStorage.setItem('crt-enabled', crtToggle.checked);
+    }
+
+    // Show/hide CRT toggle based on theme
+    function updateCRTToggleVisibility(themeName) {
+      const theme = themes[themeName];
+      if (!crtToggleContainer) {
+        console.error('CRT toggle container not found!');
+        return;
+      }
+      if (theme && theme.hasCRT) {
+        crtToggleContainer.style.display = 'inline-flex';
+      } else {
+        crtToggleContainer.style.display = 'none';
+      }
+    }
+
+    // Load and apply theme
+    function applyTheme(themeName) {
+      const theme = themes[themeName];
+
+      // Swap the theme stylesheet (lazy-load)
+      const newHref = `styles/themes/${themeName}.css`;
+      if (themeStylesheet.getAttribute('href') !== newHref) {
+        themeStylesheet.setAttribute('href', newHref);
+      }
+
+      // Update header text
+      themeTitle.textContent = theme.title;
+      themeSubtitle.textContent = theme.subtitle;
+
+      // Update body class for theme-specific backgrounds
+      document.body.className = theme.bodyClass;
+
+      // Update CRT toggle visibility
+      updateCRTToggleVisibility(themeName);
+
+      // Toggle theme-specific content - hide all first
+      const allThemeNames = Object.keys(themes);
+      allThemeNames.forEach(name => {
+        document.querySelectorAll(`.tagline-${name}`).forEach(el => {
+          el.style.display = name === themeName ? 'inline' : 'none';
+        });
+      });
+
+      // Toggle hero grid
+      const heroGrid = document.querySelector('.hero-grid');
+      if (heroGrid) {
+        heroGrid.style.opacity = themeName === 'synthwave' ? '1' : '0';
+      }
+
+      // Save preference
+      localStorage.setItem('preferred-theme', themeName);
+    }
+
+    // Initialize with saved preferences
+    const savedTheme = localStorage.getItem('preferred-theme') || 'synthwave';
+    const savedCRT = localStorage.getItem('crt-enabled');
+
+    // Set the stylesheet immediately to prevent flash
+    themeStylesheet.setAttribute('href', `styles/themes/${savedTheme}.css`);
+    themeSelect.value = savedTheme;
+
+    // Initialize CRT toggle state
+    if (savedCRT !== null) {
+      crtToggle.checked = savedCRT === 'true';
+    }
+    updateCRTState();
+
+    // Apply theme
+    applyTheme(savedTheme);
+
+    // Listen for theme changes
+    themeSelect.addEventListener('change', (e) => {
+      applyTheme(e.target.value);
+    });
+
+    // Listen for CRT toggle changes
+    crtToggle.addEventListener('change', updateCRTState);
+  </script>
+</body>
+</html>
