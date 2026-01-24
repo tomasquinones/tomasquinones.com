@@ -3,3 +3,11 @@ credentials.json
 *.swo
 .DS_Store
 .vscode
+
+# Node.js
+node_modules/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
