@@ -1,5 +1,54 @@
 # tomasquinones.com - New Personal Website Plan
 
+---
+
+## Completed: Playwright Testing Infrastructure
+
+Added end-to-end testing with Playwright for the design-kit page. This can grow with the site.
+
+### What Was Done
+
+- [x] Initialized npm project at root level
+- [x] Installed `@playwright/test` and `serve` as dev dependencies
+- [x] Created `playwright.config.ts` with webServer auto-start on port 3000
+- [x] Created `tests/design-kit.spec.ts` with 15 functional tests
+  - Theme switching and CSS stylesheet changes
+  - localStorage persistence for theme and CRT preferences
+  - CRT toggle functionality
+  - Component rendering (buttons, cards, badges, forms, gradients)
+  - Hero section and tagline switching
+- [x] Created `tests/design-kit.visual.spec.ts` with 20 visual regression tests
+  - Full page screenshots for all 16 themes
+  - Component-level screenshots (hero, buttons, cards sections)
+- [x] Updated `.gitignore` for Node.js/Playwright artifacts
+- [x] Updated Synthwave theme typography to use JetBrains Mono (monospace body text)
+
+### Commands
+
+```bash
+npm test                    # Run all tests
+npm run test:ui             # Open Playwright UI for interactive testing
+npm run test:update-snapshots  # Update visual regression baselines
+npx playwright show-report  # View HTML report after test run
+```
+
+### Files Added
+
+```
+package.json              # npm project with test scripts
+playwright.config.ts      # Playwright configuration
+tests/
+├── design-kit.spec.ts           # 15 functional tests
+├── design-kit.visual.spec.ts    # 20 visual regression tests
+└── design-kit.visual.spec.ts-snapshots/  # Baseline screenshots
+```
+
+### Current Status
+
+35 tests total, all passing. Visual baselines established for all themes.
+
+---
+
 ## Overview
 Rebuild your personal portfolio as a modern Next.js 14 site with TypeScript and Tailwind CSS. Features a dark mode developer aesthetic, self-hosted photo gallery, integrated interactive projects, and deploys statically to your existing cPanel hosting.
 
