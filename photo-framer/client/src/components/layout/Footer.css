@@ -1,0 +1,28 @@
+.footer {
+  background-color: var(--card-bg-light);
+  border-top: 1px solid var(--card-border);
+  padding: var(--spacing-lg) 0;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+  text-align: center;
+}
+
+.footer-copyright {
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-info {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.footer-info a {
+  color: var(--link-color);
+}
