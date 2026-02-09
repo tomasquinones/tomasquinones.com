@@ -1,5 +1,15 @@
 body {
-    background-color: gray;
+    /* Fallback for very old browsers */
+    background-color: #666666; /* slightly darker top gray */
+    /* Vertical gradient: darker gray at top to very dark gray at bottom */
+    background-image: linear-gradient(
+        to bottom,
+        #666666 0%,
+        #666666 40%,
+        #0b0f12 100%
+    );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -27,6 +37,24 @@ body {
     border-radius: 10px;
     border: 1px solid black;
     text-align: center;
+}
+
+/* Interactive hover/focus: enlarge ~15% and float above other cards */
+.card {
+    transition: transform 180ms ease, box-shadow 180ms ease;
+    will-change: transform, box-shadow;
+}
+
+.card:hover,
+.card:focus-within {
+    transform: scale(1.15);
+    z-index: 5; /* raise above neighbors */
+    box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+}
+
+/* Ensure the card's text scales with it */
+.card * {
+    transition: inherit;
 }
 
 #footer {

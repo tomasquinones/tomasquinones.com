@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/tomasquinones/My_Dev/tomasquinones.com log --oneline -20)"
+    ]
+  }
+}

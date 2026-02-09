@@ -3,3 +3,25 @@ credentials.json
 *.swo
 .DS_Store
 .vscode
+
+# Node.js
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Photo-Framer uploads (stored outside repo)
+photo-framer/uploads/
+
+# Build outputs
+photo-framer/client/dist/
+
+# Test outputs
+playwright-report/
+test-results/
+
+# Logs
+*.log
+npm-debug.log*

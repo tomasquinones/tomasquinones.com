@@ -1,0 +1,7 @@
+.albums-page .page-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.albums-page .page-header h1 {
+  margin-bottom: 0;
+}
