@@ -8,9 +8,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const ORIGINALS_DIR = path.join(__dirname, '../../uploads/originals');
-const THUMBNAILS_DIR = path.join(__dirname, '../../uploads/thumbnails');
-const TEMP_DIR = path.join(__dirname, '../../uploads/temp');
+const ORIGINALS_DIR = path.join(__dirname, '../uploads/originals');
+const THUMBNAILS_DIR = path.join(__dirname, '../uploads/thumbnails');
+const TEMP_DIR = path.join(__dirname, '../uploads/temp');
 
 const THUMBNAIL_MAX_SIZE = 800;
 

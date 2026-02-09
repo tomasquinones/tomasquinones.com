@@ -17,7 +17,7 @@ const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
 
 const storage = diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../../uploads/temp'));
+    cb(null, path.join(__dirname, '../uploads/temp'));
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();

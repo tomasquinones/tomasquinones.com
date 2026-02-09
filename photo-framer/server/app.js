@@ -26,6 +26,16 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Strip /photos prefix in production (Passenger doesn't strip PassengerBaseURI)
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.url.startsWith('/photos')) {
+      req.url = req.url.slice(7) || '/';
+    }
+    next();
+  });
+}
+
 // Security headers
 app.use(helmet({
   contentSecurityPolicy: {
@@ -68,15 +78,12 @@ app.use(blockBadBots);
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-// Session validation for protected routes
-app.use(sessionMiddleware);
-
-// Hotlink protection for photos
-app.use('/photos', hotlinkProtection);
+// Session validation for API routes only
+app.use('/api', sessionMiddleware);
 
 // Serve thumbnails statically with protection (under /api for Vite proxy)
 app.use('/api/photos/thumb', express.static(
-  path.join(__dirname, '../uploads/thumbnails'),
+  path.join(__dirname, 'uploads/thumbnails'),
   { maxAge: '1y' }
 ));
 
@@ -91,6 +98,26 @@ app.use('/api/admin', adminRoutes);
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
+
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+  const clientPath = path.join(__dirname, 'client');
+
+  // Serve static assets
+  app.use(express.static(clientPath, {
+    maxAge: '1y',
+    index: false // Don't serve index.html for directory requests
+  }));
+
+  // SPA fallback - serve index.html for all non-API routes
+  app.get('*', (req, res, next) => {
+    // Skip API routes
+    if (req.path.startsWith('/api/')) {
+      return next();
+    }
+    res.sendFile(path.join(clientPath, 'index.html'));
+  });
+}
 
 // Error handler
 app.use(errorHandler);
