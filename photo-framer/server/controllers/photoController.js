@@ -8,9 +8,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function getImageTokenSecret() {
-  const secret = process.env.getImageTokenSecret();
+  const secret = process.env.IMAGE_TOKEN_SECRET;
   if (!secret && process.env.NODE_ENV === 'production') {
-    throw new Error('getImageTokenSecret() must be set in production');
+    throw new Error('IMAGE_TOKEN_SECRET must be set in production');
   }
   return secret || 'dev-only-secret-do-not-use-in-production';
 }

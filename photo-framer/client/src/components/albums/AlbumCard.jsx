@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import './AlbumCard.css';
 
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 function AlbumCard({ album }) {
-  const coverImage = album.cover_photo?.thumbnail_path || '/placeholder-album.jpg';
   const photoCount = album.photo_count || album.photos?.length || 0;
 
   return (
@@ -10,7 +11,7 @@ function AlbumCard({ album }) {
       <div className="album-cover">
         {album.cover_photo ? (
           <img
-            src={`/api/photos/thumb/${album.cover_photo.filename}`}
+            src={`${baseUrl}/api/photos/thumb/${album.cover_photo.filename}`}
             alt={album.name}
             loading="lazy"
           />

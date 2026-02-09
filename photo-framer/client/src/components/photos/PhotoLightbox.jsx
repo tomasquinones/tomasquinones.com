@@ -3,6 +3,8 @@ import { photoService } from '../../services/photos';
 import { useAuth } from '../../context/AuthContext';
 import './PhotoLightbox.css';
 
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 function PhotoLightbox({ photos, currentIndex, onClose, onNavigate }) {
   const [fullResUrl, setFullResUrl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -20,7 +22,7 @@ function PhotoLightbox({ photos, currentIndex, onClose, onNavigate }) {
       setLoading(true);
       photoService.getFullResToken(photo.id)
         .then(token => {
-          setFullResUrl(`/api/photos/full/${token}/${photo.filename}`);
+          setFullResUrl(`${baseUrl}/api/photos/full/${token}/${photo.filename}`);
         })
         .catch(err => {
           console.error('Failed to load full-res:', err);
@@ -121,7 +123,7 @@ function PhotoLightbox({ photos, currentIndex, onClose, onNavigate }) {
           ) : (
             <>
               <img
-                src={fullResUrl || `/api/photos/thumb/${photo.filename}`}
+                src={fullResUrl || `${baseUrl}/api/photos/thumb/${photo.filename}`}
                 alt={photo.alt_text || photo.title || 'Photo'}
                 className={`lightbox-image ${fullResUrl ? 'full-res' : ''}`}
                 draggable="false"
