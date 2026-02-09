@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { photoService } from '../../services/photos';
 import './PhotoCard.css';
 
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 function PhotoCard({ photo, onClick, onDelete }) {
   const [deleting, setDeleting] = useState(false);
 
@@ -42,7 +44,7 @@ function PhotoCard({ photo, onClick, onDelete }) {
     >
       <div className="photo-image-wrapper">
         <img
-          src={`/api/photos/thumb/${photo.filename}`}
+          src={`${baseUrl}/api/photos/thumb/${photo.filename}`}
           alt={photo.alt_text || photo.title || 'Photo'}
           loading="lazy"
           draggable="false"

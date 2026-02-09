@@ -7,11 +7,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const IMAGE_TOKEN_SECRET = process.env.IMAGE_TOKEN_SECRET || (
-  process.env.NODE_ENV === 'production'
-    ? (() => { throw new Error('IMAGE_TOKEN_SECRET must be set in production'); })()
-    : 'dev-only-secret-do-not-use-in-production'
-);
+function getImageTokenSecret() {
+  const secret = process.env.IMAGE_TOKEN_SECRET;
+  if (!secret && process.env.NODE_ENV === 'production') {
+    throw new Error('IMAGE_TOKEN_SECRET must be set in production');
+  }
+  return secret || 'dev-only-secret-do-not-use-in-production';
+}
 const TOKEN_EXPIRY = '5m'; // 5 minutes
 
 // Input length limits
@@ -99,7 +101,7 @@ export async function getFullResToken(req, res, next) {
         filename: photo.filename,
         userId: req.user.id
       },
-      IMAGE_TOKEN_SECRET,
+      getImageTokenSecret(),
       { expiresIn: TOKEN_EXPIRY }
     );
 
@@ -116,7 +118,7 @@ export async function serveFullRes(req, res, next) {
     // Verify token
     let decoded;
     try {
-      decoded = jwt.verify(token, IMAGE_TOKEN_SECRET);
+      decoded = jwt.verify(token, getImageTokenSecret());
     } catch (err) {
       return res.status(401).json({ error: 'Invalid or expired token' });
     }

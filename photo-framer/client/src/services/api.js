@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// Use the Vite base URL to construct API path (handles /photos/ prefix in production)
+const baseURL = import.meta.env.BASE_URL.replace(/\/$/, '') + '/api';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
