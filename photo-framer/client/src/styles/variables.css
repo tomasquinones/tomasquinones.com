@@ -5,11 +5,14 @@
   --bg-gradient: linear-gradient(140deg, #666666, #0b0f12);
 
   --card-bg: rgb(219, 219, 219);
-  --card-bg-light: whitesmoke;
+  --card-bg-light: #f0f0f0;
   --card-border: #333333;
 
   --text-dark: #333333;
-  --text-light: #f5f5f5;
+  --text-light: #e8e8e8;
+
+  --btn-primary-bg: #a8d8ea;
+  --btn-primary-hover: #89c4d8;
   --text-muted: #666666;
 
   --link-color: darkblue;
