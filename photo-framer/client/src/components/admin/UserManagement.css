@@ -35,7 +35,7 @@
 
 .form-error {
   background-color: var(--danger);
-  color: white;
+  color: var(--text-light);
   padding: var(--spacing-md);
   border-radius: var(--border-radius-sm);
   margin-bottom: var(--spacing-md);
@@ -77,7 +77,7 @@
   padding: var(--spacing-xs) var(--spacing-sm);
   border: 1px solid var(--card-border);
   border-radius: var(--border-radius-sm);
-  background: white;
+  background: var(--card-bg-light);
 }
 
 .status-badge {
@@ -90,12 +90,12 @@
 
 .status-badge.active {
   background: var(--success);
-  color: white;
+  color: var(--text-light);
 }
 
 .status-badge.inactive {
   background: var(--text-muted);
-  color: white;
+  color: var(--text-light);
 }
 
 .btn-sm {

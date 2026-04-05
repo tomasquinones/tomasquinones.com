@@ -66,17 +66,17 @@
 }
 
 .btn-primary {
-  background-color: var(--link-color);
-  color: white;
+  background-color: var(--btn-primary-bg);
+  color: var(--text-dark);
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-purple);
+  background-color: var(--btn-primary-hover);
 }
 
 .btn-secondary {
   background-color: var(--text-muted);
-  color: white;
+  color: var(--text-light);
 }
 
 .btn-secondary:hover {
@@ -85,7 +85,7 @@
 
 .btn-danger {
   background-color: var(--danger);
-  color: white;
+  color: var(--text-light);
 }
 
 .btn-danger:hover {

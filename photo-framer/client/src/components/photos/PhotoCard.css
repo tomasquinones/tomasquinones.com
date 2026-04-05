@@ -65,7 +65,7 @@
   border: none;
   border-radius: 50%;
   background: var(--danger);
-  color: white;
+  color: var(--text-light);
   font-weight: bold;
   font-size: var(--font-size-sm);
   cursor: pointer;

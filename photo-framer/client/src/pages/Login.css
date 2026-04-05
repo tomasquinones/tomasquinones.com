@@ -23,7 +23,7 @@
 
 .login-error {
   background-color: var(--danger);
-  color: white;
+  color: var(--text-light);
   padding: var(--spacing-md);
   border-radius: var(--border-radius-sm);
   margin-bottom: var(--spacing-md);

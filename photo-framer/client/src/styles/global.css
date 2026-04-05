@@ -145,10 +145,10 @@ input, textarea, select {
   animation: slideIn var(--transition-speed) var(--transition-ease);
 }
 
-.toast-success { background: var(--success); color: white; }
-.toast-error { background: var(--danger); color: white; }
+.toast-success { background: var(--success); color: var(--text-light); }
+.toast-error { background: var(--danger); color: var(--text-light); }
 .toast-warning { background: var(--warning); color: var(--text-dark); }
-.toast-info { background: var(--info); color: white; }
+.toast-info { background: var(--info); color: var(--text-light); }
 
 @keyframes slideIn {
   from {
@@ -188,13 +188,13 @@ input, textarea, select {
 /* Protection notice */
 .protection-notice {
   background: var(--info);
-  color: white;
+  color: var(--text-light);
   padding: var(--spacing-md);
   border-radius: var(--border-radius);
   margin-bottom: var(--spacing-md);
 }
 
 .protection-notice a {
-  color: white;
+  color: var(--text-light);
   font-weight: bold;
 }
